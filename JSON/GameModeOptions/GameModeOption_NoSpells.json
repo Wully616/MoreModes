@@ -1,0 +1,15 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"id": "no_spells",
+	"version": 3,
+	"excludeLevelIds": [],
+	"excludeGameModeNames":  ["Survival"],
+	"levelOption": {          
+		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"name": "no_spells",
+		"displayName": "NoSpells",
+		"description": "Disables the Players Spells",
+		"type": "Toggle",
+		"levelModule": { "$type": "GameModeLoader.Component.NoSpells, GameModeLoader" }
+	}
+}

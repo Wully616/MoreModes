@@ -1,0 +1,21 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"id": "respawns",
+	"version": 3,
+	"excludeLevelIds": [],
+	"excludeGameModeNames":  [],
+	"levelOption": {          
+		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"name": "respawns",
+		"displayName": "Respawns",
+		"description": "Gives you lives! Respawn instead of dying",
+		"type": "Toggle",
+		"levelModule": {
+			"$type": "GameModeLoader.Component.Respawn, GameModeLoader",
+			"lives":  3,
+			"behaviour": "ShowScores",
+			"delayBeforeLoad": 10.0,
+			"disablePlayerLocomotion": true
+		}
+	}
+}

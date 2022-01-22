@@ -1,0 +1,15 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"id": "disable_healthpotions_inventory",
+	"version": 3,
+	"excludeLevelIds": [],
+	"excludeGameModeNames":  ["Survival"],
+	"levelOption": {          
+		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"name": "disable_healthpotions_inventory",
+		"displayName": "RemovePotionPlayer",
+		"description": "Remove Health Potions from the players inventory",
+		"type": "Toggle",
+		"levelModule": { "$type": "GameModeLoader.Component.RemoveHealthPotionsInventory, GameModeLoader" }
+	}
+}
