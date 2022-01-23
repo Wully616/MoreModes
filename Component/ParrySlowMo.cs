@@ -1,19 +1,21 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class ParrySlowMo : LevelModule {
+	public class ParrySlowMo : LevelModuleOptional {
 		public int slowMoTime = 1;
 
 		public override IEnumerator OnLoadCoroutine() {
-			if (Level.current.GetOptionAsBool("parryslowmo", true)) {
+			SetId();
+			if ( IsEnabled() ) {
 				EventManager.onCreatureParry += EventManager_onCreatureParry;
 			}
 
-			yield return base.OnLoadCoroutine();
+			yield break;
 		}
 
 		private void EventManager_onCreatureParry(Creature creature, CollisionInstance collisionInstance) {
@@ -23,7 +25,7 @@ namespace GameModeLoader.Component {
 		}
 
 		public override void OnUnload() {
-			if (Level.current.GetOptionAsBool("parryslowmo", true)) {
+			if ( IsEnabled() ) {
 				EventManager.onCreatureParry -= EventManager_onCreatureParry;
 			}
 

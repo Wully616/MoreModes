@@ -1,31 +1,35 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class BigHead : LevelModule {
-		public int headScale = 2;
+	public class BigHead : LevelModuleOptional {
+		public float headScale = 2f;
+		private List<Ragdoll> ragdolls;
 		public override IEnumerator OnLoadCoroutine() {
-			if ( Level.current.GetOptionAsBool("bighead", true) ) {
+			SetId();
+			if ( IsEnabled() ) { 
 				EventManager.onCreatureSpawn += EventManager_onCreatureSpawn;
+				
 				foreach (Creature creature in Creature.all) {
-					if ( creature.ragdoll.headPart.transform.localScale.x < 2.0f ) {
-						creature.ragdoll.headPart.transform.localScale *= headScale;
+					if ( creature.ragdoll.headPart.transform.parent.localScale == Vector3.one ) {
+						creature.ragdoll.headPart.transform.parent.SetGlobalScale(Vector3.one * headScale);
 					}
 				}
 			}
-
-			yield return base.OnLoadCoroutine();
+			yield break;
 		}
 
 		private void EventManager_onCreatureSpawn( Creature creature ) {
 			if ( creature != Player.currentCreature ) {
 
-				if ( creature.ragdoll.headPart.transform.localScale.x <= 2.0f ) {
-					creature.ragdoll.headPart.transform.localScale *= headScale;
+				if ( creature.ragdoll.headPart.transform.parent.localScale == Vector3.one ) {
+					creature.ragdoll.headPart.transform.parent.SetGlobalScale(Vector3.one * headScale);
 				}
-
+				ragdolls.Add(creature.ragdoll);
 				creature.ragdoll.OnStateChange += (( state, newState, change, time ) => Ragdoll_OnStateChange(creature.ragdoll, state, newState, change, time));
 
 			}
@@ -33,15 +37,17 @@ namespace GameModeLoader.Component {
 
 		private void Ragdoll_OnStateChange( Ragdoll ragdoll, Ragdoll.State previousState, Ragdoll.State newState, Ragdoll.PhysicStateChange physicStateChange, EventTime eventTime ) {
 			if ( eventTime == EventTime.OnEnd ) {
-				if ( ragdoll.headPart.transform.localScale.x <= 2.0f ) {
-					ragdoll.headPart.transform.localScale *= headScale;
+				if (IsEnabled()) {
+					if (ragdoll.headPart.transform.localScale == Vector3.one) {
+						ragdoll.headPart.transform.SetGlobalScale(Vector3.one * headScale);
+					}
 				}
 			}
 		}
 
 		public override void OnUnload() {
-			if ( Level.current.GetOptionAsBool("bighead", true) ) {
-				EventManager.onCreatureSpawn += EventManager_onCreatureSpawn;
+			if (IsEnabled()) {
+				EventManager.onCreatureSpawn -= EventManager_onCreatureSpawn;
 			}
 
 			base.OnUnload();

@@ -5,11 +5,11 @@
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "parryslowmo",
 		"displayName": "ParrySlowmo",
 		"description": "Go Slow Motion when parrying!",
 		"type": "Toggle",
-		"levelModule": { "$type": "GameModeLoader.Component.ParrySlowMo, GameModeLoader" }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.ParrySlowMo, GameModeLoader" }
 	}
 }

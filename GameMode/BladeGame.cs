@@ -1,23 +1,26 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
 
-namespace GameModeLoader.Component {
+namespace GameModeLoader.GameMode {
 	/// <summary>
 	///     This survival mode inherits from the base games survival game mode
 	/// </summary>
-	public class BladeGame : LevelModule {
+	public class BladeGame : LevelModuleOptional {
 		protected Coroutine waveEndedCoroutine;
 		protected WaveSpawner waveSpawner;
 
 		public override void Update() { }
 
 		public override IEnumerator OnLoadCoroutine() {
-			if (WaveSpawner.instances.Count > 0) {
-				waveSpawner = WaveSpawner.instances[0];
-				waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
-				level.StartCoroutine(LevelLoadedCoroutine());
-				yield break;
+			if (IsEnabled()) {
+				if (WaveSpawner.instances.Count > 0) {
+					waveSpawner = WaveSpawner.instances[0];
+					waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
+					level.StartCoroutine(LevelLoadedCoroutine());
+					yield break;
+				}
 			}
 
 			Debug.LogError("No wave spawner available for Blade Game module!");

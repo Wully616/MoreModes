@@ -31,11 +31,12 @@
 				"disablePlayerLocomotion": true
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
-			{ "$type": "GameModeLoader.Component.RemoveWaveBook, GameModeLoader" },
-			{ "$type": "GameModeLoader.Component.RemoveWeaponBook, GameModeLoader" },
-			{ "$type": "GameModeLoader.Component.RemoveWeaponRack, GameModeLoader" },
+			{ "$type": "GameModeLoader.Component.RemoveWaveBook, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.RemoveWeaponBook, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.RemoveWeaponRack, GameModeLoader", "enable":  true },
 			{
-				"$type": "GameModeLoader.Component.SurvivalMode, GameModeLoader",
+				"$type": "GameModeLoader.GameMode.SurvivalMode, GameModeLoader",
+				"enable":  true,
 				"waves": [
 					{
 						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",

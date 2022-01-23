@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using ThunderRoad;
 using UnityEngine;
 
-namespace GameModeLoader.Component {
+namespace GameModeLoader.GameMode {
 	/// <summary>
 	///     This survival mode inherits from the base games survival game mode
 	/// </summary>
+	//TODO: switch to LevelModuleOptional
 	public class SurvivalMode : LevelModuleSurvival {
 		private EffectData rewardFxData;
 
@@ -16,10 +17,10 @@ namespace GameModeLoader.Component {
 			if (!(Player.currentCreature != null))
 				return;
 
-			var frontEyes = Player.local.head.transform.position + Player.local.head.transform.forward * 0.5f;
-			rewardsSpawnPosition[0].position = frontEyes + -Player.local.head.transform.right * 0.5f;
+			var frontEyes = Player.local.head.transform.position + Player.local.head.transform.forward * 1.25f;
+			rewardsSpawnPosition[0].position = frontEyes + -Player.local.head.transform.right * 0.15f;
 			rewardsSpawnPosition[1].position = frontEyes;
-			rewardsSpawnPosition[2].position = frontEyes + Player.local.head.transform.right * 0.5f;
+			rewardsSpawnPosition[2].position = frontEyes + Player.local.head.transform.right * 0.15f;
 		}
 
 		public override IEnumerator OnLoadCoroutine() {

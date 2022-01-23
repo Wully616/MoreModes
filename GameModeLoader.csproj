@@ -35,6 +35,7 @@
     <Compile Include="Component\BigHead.cs" />
     <Compile Include="Component\HpOnKill.cs" />
     <Compile Include="Component\KillSlowMo.cs" />
+    <Compile Include="Component\NoTk.cs" />
     <Compile Include="Component\ParrySlowMo.cs" />
     <Compile Include="Component\FreeClimb.cs" />
     <Compile Include="Component\SuperHot.cs" />
@@ -43,15 +44,16 @@
     <Compile Include="Component\RemoveHealthPotionsInventory.cs" />
     <Compile Include="Component\RemoveSpawnedHealthPotions.cs" />
     <Compile Include="Component\RemoveHealthPotionsBook.cs" />
-    <Compile Include="Component\BladeGame.cs" />
-    <Compile Include="Component\SurvivalMode.cs" />
+    <Compile Include="GameMode\BladeGame.cs" />
+    <Compile Include="GameMode\SurvivalMode.cs" />
+    <Compile Include="Data\LevelModuleOptional.cs" />
     <Compile Include="Data\LevelOptionCatalog.cs" />
     <Compile Include="Data\LevelDataModeCatalog.cs" />
     <Compile Include="Component\RemoveWaveBook.cs" />
     <Compile Include="Component\RemoveWeaponRack.cs" />
     <Compile Include="Component\RemoveWeaponBook.cs" />
     <Compile Include="Module\GameModeLoader.cs" />
-    <Compile Include="Module\LevelOption.cs" />
+    <Compile Include="Data\LevelOption.cs" />
     <Compile Include="Patch\ToggleOptionPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Extensions.cs" />
@@ -113,12 +115,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON\Effects\Effect_Reward.json" />
+    <None Include="JSON\GameModeOptions\GameModeOption_NoTk.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_HpOnKill.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_KillSlowMo.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_BigHead.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_ParrySlowMo.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsSpawn.json" />
-    <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json" />
+    <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json_buggy" />
     <None Include="JSON\GameModeOptions\GameModeOption_SuperHot.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_Respawn.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoSpells.json" />

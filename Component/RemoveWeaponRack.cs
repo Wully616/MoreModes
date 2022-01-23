@@ -1,16 +1,20 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
 
 namespace GameModeLoader.Component {
-	public class RemoveWeaponRack : LevelModule {
+	public class RemoveWeaponRack : LevelModuleOptional {
 		public override IEnumerator OnLoadCoroutine() {
-			var weaponRacks = Object.FindObjectsOfType<WeaponRack>();
-			foreach (var weaponRack in weaponRacks) {
-				weaponRack.transform.gameObject.SetActive(false);
+			SetId();
+			if (IsEnabled()) {
+				var weaponRacks = Object.FindObjectsOfType<WeaponRack>();
+				foreach (var weaponRack in weaponRacks) {
+					weaponRack.transform.gameObject.SetActive(false);
+				}
 			}
 
-			return base.OnLoadCoroutine();
+			yield break;
 		}
 	}
 }

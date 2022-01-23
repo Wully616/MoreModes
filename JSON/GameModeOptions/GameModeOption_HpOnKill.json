@@ -5,11 +5,11 @@
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "hponkill",
 		"displayName": "Hp4Kill",
 		"description": "Get healed when you kill!",
 		"type": "Toggle",
-		"levelModule": { "$type": "GameModeLoader.Component.HpOnKill, GameModeLoader" }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.HpOnKill, GameModeLoader" }
 	}
 }

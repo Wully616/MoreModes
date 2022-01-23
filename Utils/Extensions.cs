@@ -7,6 +7,20 @@ using Object = UnityEngine.Object;
 
 namespace Wully.Utils {
 	public static class Extensions {
+
+		public static bool GetOptionAsBool( this Level level, string optionId ) {
+			if (string.IsNullOrEmpty(optionId)) {
+				Debug.Log("Option id is null");
+				return false;
+			}
+			//if the config option is there,  enable/disable based on its value
+			if ( level.options != null && level.options.TryGetValue(optionId, out double num) ) {
+				return num > 0; //0 is off, 1 is on
+			}
+
+			return false;
+		}
+
 		public static bool GetOptionAsBool(this Level level, string optionId, bool defaultValue) {
 			//if the config option is there,  enable/disable based on its value
 			if (level.options != null && level.options.TryGetValue(optionId, out double num)) {

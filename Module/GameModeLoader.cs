@@ -41,9 +41,20 @@ namespace GameModeLoader.Module {
 			if (eventTime == EventTime.OnEnd) {
 				string modules =
 					$"Level loaded. Map: {Level.current.data.id}. Mode: {Level.current.mode.name}\nModules:";
-				foreach (LevelModule levelModule in Level.current.mode.modules) {
+
+				if ( Level.current.options == null ) {
+					Level.current.options = new Dictionary<string, double>();
+				}
+
+				foreach ( LevelModule levelModule in Level.current.mode.modules ) {
 					modules += $"{levelModule.type}, ";
 				}
+
+				modules += $"\nOptions:";
+				foreach (var currentOption in Level.current.options) {
+					modules += $"{currentOption.Key}:{currentOption.Value}, ";
+				}
+				
 
 				Debug.Log(modules);
 			}
@@ -98,8 +109,8 @@ namespace GameModeLoader.Module {
 			}
 
 			//Add the level module for this option to the gamemode, but not if it already has it
-			if (!DoesModuleExist(gameMode.mode.modules, option.levelOption.levelModule)) {
-				gameMode.mode.modules.Add(option.levelOption.levelModule);
+			if (!DoesModuleExist(gameMode.mode.modules, option.levelOption.levelModuleOptional)) {
+				gameMode.mode.modules.Add(option.levelOption.levelModuleOptional);
 			}
 
 			return gameMode;
@@ -168,8 +179,8 @@ namespace GameModeLoader.Module {
 						}
 
 						//Add the level module for this option to the gamemode, but not if it already has it
-						if (!DoesModuleExist(mode.modules, option.levelOption.levelModule)) {
-							mode.modules.Add(option.levelOption.levelModule);
+						if (!DoesModuleExist(mode.modules, option.levelOption.levelModuleOptional)) {
+							mode.modules.Add(option.levelOption.levelModuleOptional);
 						}
 					}
 				}

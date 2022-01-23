@@ -1,16 +1,18 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class RemoveHealthPotionsBook : LevelModule {
+	public class RemoveHealthPotionsBook : LevelModuleOptional {
 		public override IEnumerator OnLoadCoroutine() {
-			if (Level.current.GetOptionAsBool("disable_healthpotions_book", true)) {
+			SetId();
+			if ( IsEnabled() ) {
 				Utilities.RemoveHealthPotionsFromBook();
 			}
 
-			return base.OnLoadCoroutine();
+			yield break;
 		}
 	}
 }

@@ -1,19 +1,21 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class SuperHot : LevelModule {
+	public class SuperHot : LevelModuleOptional {
 		//If you are rotating and moving in a direction, this value will scale back how much your movement affects speeding up time
 
-		private bool enable;
+		private bool enableSloMo;
 		private SpellPowerSlowTime spellPowerSlowTime;
 		protected Coroutine waveEndedCoroutine;
 		private WaveSpawner waveSpawner;
 
 		public override IEnumerator OnLoadCoroutine() {
-			if (Level.current.GetOptionAsBool("superhot", true)) {
+			SetId();
+			if ( IsEnabled() ) {
 				spellPowerSlowTime = Catalog.GetData<SpellPowerSlowTime>("SlowTime");
 				EventManager.onPossess += EventManager_onPossess;
 				EventManager.onUnpossess += EventManager_onUnpossess;
@@ -24,19 +26,19 @@ namespace GameModeLoader.Component {
 				}
 			}
 
-			return base.OnLoadCoroutine();
+			yield break;
 		}
 
 		private void EventManager_onPossess(Creature creature, EventTime eventTime) {
 			if (eventTime == EventTime.OnEnd) {
 				creature.mana.RemoveSpell("SlowTime");
-				enable = true;
+				enableSloMo = true;
 			}
 		}
 
 		private void EventManager_onUnpossess(Creature creature, EventTime eventTime) {
 			if (eventTime == EventTime.OnStart) {
-				enable = false;
+				enableSloMo = false;
 				GameManager.SetSlowMotion(false, 1, spellPowerSlowTime.exitCurve);
 			}
 		}
@@ -58,11 +60,11 @@ namespace GameModeLoader.Component {
 		}
 
 		public override void OnUnload() {
-			if (Level.current.GetOptionAsBool("superhot", true)) {
+			if ( IsEnabled() ) {
 				GameManager.SetSlowMotion(false, 1, spellPowerSlowTime.exitCurve);
 				EventManager.onPossess -= EventManager_onPossess;
 				EventManager.onUnpossess -= EventManager_onUnpossess;
-				enable = false;
+				enableSloMo = false;
 				if (waveSpawner) {
 					waveSpawner.OnWaveEndEvent.RemoveListener(OnWaveEnded);
 				}
@@ -74,7 +76,7 @@ namespace GameModeLoader.Component {
 
 		public override void Update() {
 			base.Update();
-			if (!enable) {
+			if (!enableSloMo) {
 				return;
 			}
 

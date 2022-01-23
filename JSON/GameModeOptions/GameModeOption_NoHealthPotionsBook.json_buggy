@@ -5,11 +5,11 @@
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  ["Survival Anywhere","Survival"],
 	"levelOption": {          
-		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "disable_healthpotions_book",
 		"displayName": "RemovePotionBook",
 		"description": "Remove Health Potions from the book",
 		"type": "Toggle",
-		"levelModule": { "$type": "GameModeLoader.Component.RemoveHealthPotionsBook, GameModeLoader" }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.RemoveHealthPotionsBook, GameModeLoader" }
 	}
 }

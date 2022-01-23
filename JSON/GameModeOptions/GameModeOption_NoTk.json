@@ -1,15 +1,15 @@
 ﻿{
 	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
-	"id": "superhot",
+	"id": "notk",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
 		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
-		"name": "superhot",
-		"displayName": "SuperHot",
-		"description": "Time moves when you move!",
+		"name": "notk",
+		"displayName": "No TK",
+		"description": "Disables Telekinesis",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.SuperHot, GameModeLoader"}
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.NoTk, GameModeLoader" }
 	}
 }

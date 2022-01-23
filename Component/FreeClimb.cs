@@ -1,19 +1,21 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using ThunderRoad;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class FreeClimb : LevelModule {
+	public class FreeClimb : LevelModuleOptional {
 		public override IEnumerator OnLoadCoroutine() {
-			if (Level.current.GetOptionAsBool("freeclimb", true)) {
+			SetId();
+			if ( IsEnabled() ) {
 				RagdollHandClimb.climbFree = true;
 			}
 
-			yield return base.OnLoadCoroutine();
+			yield break;
 		}
 
 		public override void OnUnload() {
-			if (Level.current.GetOptionAsBool("freeclimb", true)) {
+			if ( IsEnabled() ) {
 				RagdollHandClimb.climbFree = false;
 			}
 

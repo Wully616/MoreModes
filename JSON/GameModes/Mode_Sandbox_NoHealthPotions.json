@@ -27,9 +27,9 @@
 				"disablePlayerLocomotion": true
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
-			{ "$type": "GameModeLoader.Component.RemoveSpawnedHealthPotions, GameModeLoader" },
-			{ "$type": "GameModeLoader.Component.RemoveHealthPotionsBook, GameModeLoader" },
-			{ "$type": "GameModeLoader.Component.RemoveHealthPotionsInventory, GameModeLoader" }
+			{ "$type": "GameModeLoader.Component.RemoveSpawnedHealthPotions, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.RemoveHealthPotionsBook, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.RemoveHealthPotionsInventory, GameModeLoader", "enable":  true }
 		],
 		"availableOptions": []
 	}

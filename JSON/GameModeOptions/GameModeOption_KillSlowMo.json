@@ -5,11 +5,11 @@
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "killslowmo",
 		"displayName": "KillSlowmo",
 		"description": "Go Slow Motion when you kill!",
 		"type": "Toggle",
-		"levelModule": { "$type": "GameModeLoader.Component.KillSlowMo, GameModeLoader" }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.KillSlowMo, GameModeLoader" }
 	}
 }

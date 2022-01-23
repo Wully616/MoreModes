@@ -1,35 +1,32 @@
 ﻿using System.Collections;
+using GameModeLoader.Data;
 using ThunderRoad;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class HpOnKill : LevelModule {
+	public class HpOnKill : LevelModuleOptional {
 		public int hpAmount = 10;
 
 		public override IEnumerator OnLoadCoroutine() {
-			if (Level.current.GetOptionAsBool("hponkill", true)) {
+			SetId();
+			if ( IsEnabled() ) {
 				EventManager.onCreatureKill += EventManager_onCreatureKill;
 			}
 
-			yield return base.OnLoadCoroutine();
+			yield break;
 		}
 
 		private void EventManager_onCreatureKill(Creature creature, Player player, CollisionInstance collisionInstance,
 			EventTime eventTime) {
-			if ( eventTime == EventTime.OnStart || player || !collisionInstance.sourceColliderGroup )
+			if ( eventTime == EventTime.OnStart || player || !collisionInstance.IsDoneByPlayer() )
 				return;
-			if ( collisionInstance.sourceColliderGroup.collisionHandler.item?.lastHandler?.creature.player ) {
-				player.creature.Heal(hpAmount, player.creature);
-			} else {
-				if ( !collisionInstance.sourceColliderGroup.collisionHandler.ragdollPart?.ragdoll.creature.player )
-					return;
-				player.creature.Heal(hpAmount, player.creature);
+			if (Player.currentCreature.currentHealth != Player.currentCreature.maxHealth) {
+				Player.currentCreature.Heal(hpAmount, Player.currentCreature);
 			}
-			
 		}
 
 		public override void OnUnload() {
-			if (Level.current.GetOptionAsBool("hponkill", true)) {
+			if ( IsEnabled() ) {
 				EventManager.onCreatureKill -= EventManager_onCreatureKill;
 			}
 

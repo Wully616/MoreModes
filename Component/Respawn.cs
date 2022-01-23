@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Linq;
+using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class Respawn : LevelModule {
+	public class Respawn : LevelModuleOptional {
 		private int _lives = 3;
 		public LevelModuleDeath.Behaviour behaviour = LevelModuleDeath.Behaviour.ShowScores;
 		private Coroutine deathCoroutine;
@@ -16,7 +17,8 @@ namespace GameModeLoader.Component {
 		private Coroutine slowMotionDurationCoroutine;
 
 		public override IEnumerator OnLoadCoroutine() {
-			if (Level.current.GetOptionAsBool("respawns", true)) {
+			SetId();
+			if ( IsEnabled() ) {
 				_lives = lives;
 
 				EventManager.onCreatureKill += EventManager_onCreatureKill;
@@ -24,11 +26,11 @@ namespace GameModeLoader.Component {
 				level.OnLevelEvent += Level_OnLevelEvent;
 			}
 
-			return base.OnLoadCoroutine();
+			yield break;
 		}
 
 		private void Level_OnLevelEvent() {
-			if (Level.current.GetOptionAsBool("respawns", true)) {
+			if ( IsEnabled() ) {
 				//Unload LevelModuleDeath
 				var levelModuleDeath = level?.mode?.modules?.First(d => d.type == typeof(LevelModuleDeath));
 				if (levelModuleDeath != null) {
@@ -132,7 +134,7 @@ namespace GameModeLoader.Component {
 		}
 
 		public override void OnUnload() {
-			if (Level.current.GetOptionAsBool("respawns", true)) {
+			if ( IsEnabled() ) {
 				level.OnLevelEvent -= Level_OnLevelEvent;
 				EventManager.onCreatureKill -= EventManager_onCreatureKill;
 				EventManager.onPossess -= EventManager_onPossess;

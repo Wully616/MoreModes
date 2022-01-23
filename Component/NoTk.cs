@@ -5,7 +5,7 @@ using ThunderRoad;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
-	public class NoSpells : LevelModuleOptional {
+	public class NoTk : LevelModuleOptional {
 		public override IEnumerator OnLoadCoroutine() {
 			SetId();
 			if ( IsEnabled() ) {
@@ -21,20 +21,17 @@ namespace GameModeLoader.Component {
 			}
 
 			if ( IsEnabled() ) {
-				creature.handLeft.caster.allowCasting = false;
-				creature.handLeft.caster.allowSpellWheel = false;
 				creature.handLeft.caster.telekinesis.Unload();
 				creature.handLeft.caster.telekinesis = null;
-				creature.handRight.caster.allowCasting = false;
-				creature.handRight.caster.allowSpellWheel = false;
 				creature.handRight.caster.telekinesis.Unload();
 				creature.handRight.caster.telekinesis = null;
 			}
 		}
 
+
 		public override void OnUnload() {
 			if ( IsEnabled() ) {
-				EventManager.onPossess += EventManager_onPossess;
+				EventManager.onPossess -= EventManager_onPossess;
 			}
 		}
 	}

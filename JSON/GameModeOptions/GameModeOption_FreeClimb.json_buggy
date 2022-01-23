@@ -5,11 +5,11 @@
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "freeclimb",
 		"displayName": "FreeClimb",
 		"description": "Lets you climb anything!",
 		"type": "Toggle",
-		"levelModule": { "$type": "GameModeLoader.Component.FreeClimb, GameModeLoader" }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.FreeClimb, GameModeLoader" }
 	}
 }

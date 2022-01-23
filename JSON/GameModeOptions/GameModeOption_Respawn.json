@@ -5,12 +5,12 @@
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Module.LevelOption, GameModeLoader",
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "respawns",
 		"displayName": "Respawns",
 		"description": "Gives you lives! Respawn instead of dying",
 		"type": "Toggle",
-		"levelModule": {
+		"levelModuleOptional": {
 			"$type": "GameModeLoader.Component.Respawn, GameModeLoader",
 			"lives":  3,
 			"behaviour": "ShowScores",
