@@ -3,6 +3,15 @@ using UnityEngine;
 
 namespace GameModeLoader.Utils {
 	public class Utilities {
+
+		public static bool DidPlayerParry(CollisionInstance collisionInstance) {
+			if (collisionInstance.sourceColliderGroup?.collisionHandler.item?.mainHandler?.creature.player &&
+			    collisionInstance.sourceColliderGroup.collisionHandler.item.data.type == ItemData.Type.Weapon)
+				return true;
+			if ( !collisionInstance.targetColliderGroup?.collisionHandler.item?.mainHandler?.creature.player || collisionInstance.targetColliderGroup.collisionHandler.item.data.type != ItemData.Type.Weapon )
+				return false;
+			return true;
+		}
 		public static void RemoveHealthPotionsFromBook() {
 			foreach (UIItemSpawner uiItemSpawner in Object.FindObjectsOfType<UIItemSpawner>()) {
 				for (int index = uiItemSpawner.container.contents.Count - 1; index >= 0; --index) {
