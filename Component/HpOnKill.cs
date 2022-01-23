@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using GameModeLoader.Data;
 using ThunderRoad;
+using UnityEngine;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
@@ -20,9 +21,15 @@ namespace GameModeLoader.Component {
 			EventTime eventTime) {
 			if ( eventTime == EventTime.OnStart || player || !collisionInstance.IsDoneByPlayer() )
 				return;
-			if (Player.currentCreature.currentHealth != Player.currentCreature.maxHealth) {
-				Player.currentCreature.Heal(hpAmount, Player.currentCreature);
-			}
+			Heal(Player.currentCreature, hpAmount);
+		}
+
+		public void Heal( Creature healee, float heal ) {
+			if ( (double)healee.currentHealth == (double)healee.maxHealth )
+				return;
+			healee.currentHealth += heal;
+			if ( healee.currentHealth >= (double)healee.maxHealth )
+				healee.currentHealth = healee.maxHealth;
 		}
 
 		public override void OnUnload() {

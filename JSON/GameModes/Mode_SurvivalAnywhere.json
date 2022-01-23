@@ -3,11 +3,8 @@
 	"id": "survivalanywhere",
 	"version": 3,
 	"excludeLevelIds": ["Arena", "Market", "Ruins"],
-	"explicitOptions":  true,
-	"gameModeOptionIds": [
-		"disable_healthpotions_inventory",
-		"disable_healthpotions_spawn"
-	],
+	"explicitOptions":  false,
+	"gameModeOptionIds": [],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Survival Anywhere",

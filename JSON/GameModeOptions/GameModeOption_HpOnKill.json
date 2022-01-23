@@ -10,6 +10,6 @@
 		"displayName": "Hp4Kill",
 		"description": "Get healed when you kill!",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.HpOnKill, GameModeLoader" }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.HpOnKill, GameModeLoader", "hpAmount":  10 }
 	}
 }
