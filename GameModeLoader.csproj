@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Component\HpOnKill.cs" />
     <Compile Include="Component\ParrySlowMo.cs" />
     <Compile Include="Component\FreeClimb.cs" />
     <Compile Include="Component\SuperHot.cs" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON\Effects\Effect_Reward.json" />
+    <None Include="JSON\GameModeOptions\GameModeOption_HpOnKill.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_ParrySlowMo.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsSpawn.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json" />
