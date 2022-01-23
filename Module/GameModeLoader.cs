@@ -2,16 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using GameModeLoader.Component;
 using GameModeLoader.Data;
 using HarmonyLib;
 using ThunderRoad;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-
+using Extensions = Wully.Utils.Extensions;
 
 namespace GameModeLoader.Module {
 	public class GameModeLoader : LevelModule {
@@ -20,9 +15,9 @@ namespace GameModeLoader.Module {
 
 		private void Setup() {
 			try {
-				if (GameModeLoader.local == null) {
-					GameModeLoader.local = this;
-					Debug.Log("Manifest: " + Wully.Utils.Extensions.GetManifest(typeof(GameModeLoader)));
+				if (local == null) {
+					local = this;
+					Debug.Log("Manifest: " + Extensions.GetManifest(typeof(GameModeLoader)));
 					Debug.Log("Enabling GameModeLoader");
 					Patch = new Harmony("Wully.GameModeLoader");
 					Patch.PatchAll();
@@ -42,9 +37,10 @@ namespace GameModeLoader.Module {
 			yield return base.OnLoadCoroutine();
 		}
 
-		private void EventManager_onLevelLoad( LevelData levelData, EventTime eventTime ) {
+		private void EventManager_onLevelLoad(LevelData levelData, EventTime eventTime) {
 			if (eventTime == EventTime.OnEnd) {
-				string modules = $"Level loaded. Map: {Level.current.data.id}. Mode: {Level.current.mode.name}\nModules:";
+				string modules =
+					$"Level loaded. Map: {Level.current.data.id}. Mode: {Level.current.mode.name}\nModules:";
 				foreach (LevelModule levelModule in Level.current.mode.modules) {
 					modules += $"{levelModule.type}, ";
 				}
@@ -52,7 +48,6 @@ namespace GameModeLoader.Module {
 				Debug.Log(modules);
 			}
 		}
-
 
 
 		private bool DoesOptionExist(List<LevelData.Option> options, string optionName) {
@@ -70,7 +65,7 @@ namespace GameModeLoader.Module {
 		private bool DoesModuleExist(List<LevelModule> modules, LevelModule searchModule) {
 			if (modules != null) {
 				foreach (var module in modules) {
-					if (module.GetType() == searchModule.GetType() ) {
+					if (module.GetType() == searchModule.GetType()) {
 						return true;
 					}
 				}
@@ -128,7 +123,7 @@ namespace GameModeLoader.Module {
 			//Get the gamemodes from the catalog
 			var gameModes = GetLevelDataModeList();
 			var options = GetLevelOptionList();
-			
+
 			List<LevelData> levelList = GetLevelDataList();
 
 			//Add customOptions to our custom gamemodes
@@ -143,7 +138,7 @@ namespace GameModeLoader.Module {
 				if (levelData.id.ToLower() != "master" &&
 				    levelData.id.ToLower() != "characterselection" &&
 				    //levelData.id.ToLower() != "dungeon" &&
-					levelData.id.ToLower() != "home") {
+				    levelData.id.ToLower() != "home") {
 					//Add all options to the basegame gamemodes
 					AddOptionsToLevelDataModes(levelData, options);
 
@@ -173,7 +168,7 @@ namespace GameModeLoader.Module {
 						}
 
 						//Add the level module for this option to the gamemode, but not if it already has it
-						if ( !DoesModuleExist(mode.modules, option.levelOption.levelModule) ) {
+						if (!DoesModuleExist(mode.modules, option.levelOption.levelModule)) {
 							mode.modules.Add(option.levelOption.levelModule);
 						}
 					}
@@ -184,21 +179,21 @@ namespace GameModeLoader.Module {
 		public static List<LevelData> GetLevelDataList() {
 			return (
 				from item in Catalog.GetDataList(Catalog.Category.Level)
-				select ((LevelData) item)).ToList<LevelData>();
+				select (LevelData) item).ToList();
 		}
 
 		public static List<LevelDataModeCatalog> GetLevelDataModeList() {
 			return (
 				from interactable in Catalog.GetDataList(Catalog.Category.Interactable)
 				where interactable is LevelDataModeCatalog
-				select ((LevelDataModeCatalog) interactable)).ToList<LevelDataModeCatalog>();
+				select (LevelDataModeCatalog) interactable).ToList();
 		}
 
 		public static List<LevelOptionCatalog> GetLevelOptionList() {
 			return (
 				from interactable in Catalog.GetDataList(Catalog.Category.Interactable)
 				where interactable is LevelOptionCatalog
-				select ((LevelOptionCatalog) interactable)).ToList<LevelOptionCatalog>();
+				select (LevelOptionCatalog) interactable).ToList();
 		}
 	}
 }

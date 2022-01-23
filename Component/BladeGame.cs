@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using ThunderRoad;
 using UnityEngine;
 
@@ -8,15 +7,12 @@ namespace GameModeLoader.Component {
 	///     This survival mode inherits from the base games survival game mode
 	/// </summary>
 	public class BladeGame : LevelModule {
-		protected WaveSpawner waveSpawner;
 		protected Coroutine waveEndedCoroutine;
+		protected WaveSpawner waveSpawner;
 
-		public override void Update() {
-
-		}
+		public override void Update() { }
 
 		public override IEnumerator OnLoadCoroutine() {
-
 			if (WaveSpawner.instances.Count > 0) {
 				waveSpawner = WaveSpawner.instances[0];
 				waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
@@ -27,7 +23,7 @@ namespace GameModeLoader.Component {
 			Debug.LogError("No wave spawner available for Blade Game module!");
 		}
 
-		protected new void OnWaveEnded() {
+		protected void OnWaveEnded() {
 			waveEndedCoroutine = level.StartCoroutine(WaveEndedCoroutine());
 		}
 

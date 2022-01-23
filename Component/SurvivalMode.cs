@@ -11,7 +11,7 @@ namespace GameModeLoader.Component {
 		private EffectData rewardFxData;
 
 		public string rewardFxId = "SurvivalMode.RewardFx";
-		
+
 		public override void Update() {
 			if (!(Player.currentCreature != null))
 				return;
@@ -23,9 +23,9 @@ namespace GameModeLoader.Component {
 		}
 
 		public override IEnumerator OnLoadCoroutine() {
-			this.spawnPositionHeight = 0f;
+			spawnPositionHeight = 0f;
 			rewardFxData = Catalog.GetData<EffectData>(rewardFxId);
-			
+
 			rewardsSpawnPosition = new List<Transform> {
 				new GameObject().transform,
 				new GameObject().transform,

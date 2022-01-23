@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using GameModeLoader.Module;
 using ThunderRoad;
 using UnityEngine;
-using UnityEngine.Events;
-using GameModeLoader.Utils;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
 	public class Respawn : LevelModule {
+		private int _lives = 3;
 		public LevelModuleDeath.Behaviour behaviour = LevelModuleDeath.Behaviour.ShowScores;
-		public int lives = 3;
+		private Coroutine deathCoroutine;
 		public float delayBeforeLoad = 10f;
 		public bool disablePlayerLocomotion = true;
-		private Coroutine deathCoroutine;
+		public int lives = 3;
 
 		private Coroutine slowMotionDurationCoroutine;
-		private int _lives = 3;
 
 		public override IEnumerator OnLoadCoroutine() {
 			if (Level.current.GetOptionAsBool("respawns", true)) {
@@ -66,16 +58,16 @@ namespace GameModeLoader.Component {
 			EventTime eventTime) {
 			if (eventTime != EventTime.OnEnd || !player)
 				return;
-			if (this.disablePlayerLocomotion)
+			if (disablePlayerLocomotion)
 				player.locomotion.enabled = false;
-			if (this.slowMotionDurationCoroutine != null)
-				this.level.StopCoroutine(this.slowMotionDurationCoroutine);
-			this.slowMotionDurationCoroutine = this.level.StartCoroutine(this.SlowMotionDurationCoroutine());
+			if (slowMotionDurationCoroutine != null)
+				level.StopCoroutine(slowMotionDurationCoroutine);
+			slowMotionDurationCoroutine = level.StartCoroutine(SlowMotionDurationCoroutine());
 			if (_lives > 1) {
 				_lives--;
-				this.deathCoroutine = this.level.StartCoroutine(this.OnRespawnCoroutine(player, creature));
+				deathCoroutine = level.StartCoroutine(OnRespawnCoroutine(player, creature));
 			} else {
-				this.deathCoroutine = this.level.StartCoroutine(this.OnDeathCoroutine());
+				deathCoroutine = level.StartCoroutine(OnDeathCoroutine());
 			}
 		}
 
@@ -84,16 +76,16 @@ namespace GameModeLoader.Component {
 			GameManager.SetSlowMotion(true, Catalog.gameData.deathSlowMoRatio, Catalog.gameData.deathSlowMoEnterCurve,
 				Catalog.gameData.deathEffectData);
 			float t = Time.unscaledTime;
-			while ((double) Time.unscaledTime - (double) t < (double) Catalog.gameData.deathSlowMoDuration)
+			while (Time.unscaledTime - (double) t < Catalog.gameData.deathSlowMoDuration)
 				yield return null;
 			GameManager.SetSlowMotion(false, Catalog.gameData.deathSlowMoRatio, Catalog.gameData.deathSlowMoExitCurve);
 		}
 
 		protected virtual IEnumerator OnDeathCoroutine() {
 			float killTime = Time.unscaledTime;
-			if (this.behaviour != LevelModuleDeath.Behaviour.ShowScores)
-				CameraEffects.DoTimedEffect(UnityEngine.Color.black, CameraEffects.TimedEffect.FadeIn,
-					this.delayBeforeLoad);
+			if (behaviour != LevelModuleDeath.Behaviour.ShowScores)
+				CameraEffects.DoTimedEffect(Color.black, CameraEffects.TimedEffect.FadeIn,
+					delayBeforeLoad);
 			CameraEffects.SetSepia(1f);
 			yield return null;
 			WaveSpawner waveSpawner;
@@ -101,14 +93,14 @@ namespace GameModeLoader.Component {
 				waveSpawner.CancelWave();
 			MenuBook.ShowToPlayer(true, false);
 			MenuBook.SetPage("Scores");
-			if (this.behaviour != LevelModuleDeath.Behaviour.ShowScores) {
-				while ((double) Time.unscaledTime - (double) killTime < (double) this.delayBeforeLoad &&
-				       ((double) Time.unscaledTime - (double) killTime <= 2.0 || !PlayerControl.uiClickDown))
+			if (behaviour != LevelModuleDeath.Behaviour.ShowScores) {
+				while (Time.unscaledTime - (double) killTime < delayBeforeLoad &&
+				       (Time.unscaledTime - (double) killTime <= 2.0 || !PlayerControl.uiClickDown))
 					yield return null;
-				if (this.behaviour == LevelModuleDeath.Behaviour.LoadHome)
+				if (behaviour == LevelModuleDeath.Behaviour.LoadHome)
 					GameManager.LoadLevel(Player.characterData.gameMode.levelHome,
 						Player.characterData.gameMode.levelHomeModeName);
-				if (this.behaviour == LevelModuleDeath.Behaviour.ReloadLevel)
+				if (behaviour == LevelModuleDeath.Behaviour.ReloadLevel)
 					GameManager.LoadLevel(GameManager.GetCurrentLevel());
 			}
 		}
@@ -116,20 +108,20 @@ namespace GameModeLoader.Component {
 		protected virtual IEnumerator OnRespawnCoroutine(Player player, Creature creature) {
 			float killTime = Time.unscaledTime;
 
-			CameraEffects.DoTimedEffect(UnityEngine.Color.black, CameraEffects.TimedEffect.FadeIn,
-				this.delayBeforeLoad * 0.5f);
+			CameraEffects.DoTimedEffect(Color.black, CameraEffects.TimedEffect.FadeIn,
+				delayBeforeLoad * 0.5f);
 			CameraEffects.SetSepia(1f);
-			DisplayText.ShowText(new DisplayText.TextPriority($"You have died.", 10, TutorialData.TextType.INFORMATION,
+			DisplayText.ShowText(new DisplayText.TextPriority("You have died.", 10, TutorialData.TextType.INFORMATION,
 				5f));
 			yield return new WaitForSeconds(2f);
 
-			while (Time.unscaledTime - killTime < this.delayBeforeLoad &&
-			       (Time.unscaledTime - killTime <= 2.0)) {
+			while (Time.unscaledTime - killTime < delayBeforeLoad &&
+			       Time.unscaledTime - killTime <= 2.0) {
 				yield return null;
 			}
 
-			CameraEffects.DoTimedEffect(UnityEngine.Color.black, CameraEffects.TimedEffect.FadeOut,
-				this.delayBeforeLoad * 0.1f);
+			CameraEffects.DoTimedEffect(Color.black, CameraEffects.TimedEffect.FadeOut,
+				delayBeforeLoad * 0.1f);
 			creature.Resurrect(creature.data.health * 0.5f, creature);
 			player.SetCreature(creature);
 			player.locomotion.enabled = true;
@@ -144,10 +136,10 @@ namespace GameModeLoader.Component {
 				level.OnLevelEvent -= Level_OnLevelEvent;
 				EventManager.onCreatureKill -= EventManager_onCreatureKill;
 				EventManager.onPossess -= EventManager_onPossess;
-				if (this.deathCoroutine != null)
-					this.level.StopCoroutine(this.deathCoroutine);
-				if (this.slowMotionDurationCoroutine != null)
-					this.level.StopCoroutine(this.slowMotionDurationCoroutine);
+				if (deathCoroutine != null)
+					level.StopCoroutine(deathCoroutine);
+				if (slowMotionDurationCoroutine != null)
+					level.StopCoroutine(slowMotionDurationCoroutine);
 				CameraEffects.SetSepia(0.0f);
 			}
 		}

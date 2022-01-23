@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using GameModeLoader.Module;
+﻿using System.Collections;
+using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
-using UnityEngine.Events;
-using GameModeLoader.Utils;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
 	public class RemoveSpawnedHealthPotions : LevelModule {
-		
-		private int lastActiveItemCount = 0;
+		private int lastActiveItemCount;
+
 		public override IEnumerator OnLoadCoroutine() {
 			if (Level.current.GetOptionAsBool("disable_healthpotions_spawn", true)) {
 				Utilities.RemoveActiveHealthPotions();
@@ -24,7 +16,7 @@ namespace GameModeLoader.Component {
 			return base.OnLoadCoroutine();
 		}
 
-		
+
 		public override void Update() {
 			base.Update();
 			//run every 60 frames
@@ -35,12 +27,9 @@ namespace GameModeLoader.Component {
 						Utilities.RemoveActiveHealthPotions();
 					}
 				}
+
 				lastActiveItemCount = Item.allActive.Count;
 			}
-			
-
 		}
-
-
 	}
 }

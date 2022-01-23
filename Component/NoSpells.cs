@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using GameModeLoader.Module;
 using ThunderRoad;
-using UnityEngine;
-using UnityEngine.Events;
-using GameModeLoader.Utils;
 using Wully.Utils;
 
 namespace GameModeLoader.Component {
@@ -31,11 +22,11 @@ namespace GameModeLoader.Component {
 				creature.handLeft.caster.allowCasting = false;
 				creature.handLeft.caster.allowSpellWheel = false;
 				creature.handLeft.caster.telekinesis.Unload();
-				creature.handLeft.caster.telekinesis = (SpellTelekinesis) null;
+				creature.handLeft.caster.telekinesis = null;
 				creature.handRight.caster.allowCasting = false;
 				creature.handRight.caster.allowSpellWheel = false;
 				creature.handRight.caster.telekinesis.Unload();
-				creature.handRight.caster.telekinesis = (SpellTelekinesis) null;
+				creature.handRight.caster.telekinesis = null;
 			}
 		}
 

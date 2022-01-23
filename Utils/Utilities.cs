@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ThunderRoad;
-using Wully.Utils;
+﻿using ThunderRoad;
+using UnityEngine;
 
 namespace GameModeLoader.Utils {
 	public class Utilities {
 		public static void RemoveHealthPotionsFromBook() {
-			foreach (UIItemSpawner uiItemSpawner in UnityEngine.Object.FindObjectsOfType<UIItemSpawner>()) {
+			foreach (UIItemSpawner uiItemSpawner in Object.FindObjectsOfType<UIItemSpawner>()) {
 				for (int index = uiItemSpawner.container.contents.Count - 1; index >= 0; --index) {
 					var content = uiItemSpawner.container.contents[index];
 					if (content.itemData.type == ItemData.Type.Potion &&
