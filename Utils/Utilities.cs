@@ -1,8 +1,19 @@
-﻿using ThunderRoad;
+﻿using System.Collections;
+using ThunderRoad;
 using UnityEngine;
 
 namespace GameModeLoader.Utils {
 	public class Utilities {
+
+		public static IEnumerator SlowMo( float slowMoTime ) {
+			var spellPowerSlowTime = Catalog.GetData<SpellPowerSlowTime>("SlowTime");
+			GameManager.SetSlowMotion(true, spellPowerSlowTime.scale, spellPowerSlowTime.enterCurve,
+				spellPowerSlowTime.effectData);
+			yield return new WaitForSeconds(slowMoTime);
+			if ( GameManager.slowMotionState == GameManager.SlowMotionState.Running ) {
+				GameManager.SetSlowMotion(false, spellPowerSlowTime.scale, spellPowerSlowTime.exitCurve);
+			}
+		}
 
 		public static bool DidPlayerParry(CollisionInstance collisionInstance) {
 			if (collisionInstance.sourceColliderGroup?.collisionHandler.item?.mainHandler?.creature.player &&

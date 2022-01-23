@@ -7,12 +7,10 @@ using Wully.Utils;
 namespace GameModeLoader.Component {
 	public class ParrySlowMo : LevelModule {
 		public int slowMoTime = 1;
-		private SpellPowerSlowTime spellPowerSlowTime;
 
 		public override IEnumerator OnLoadCoroutine() {
 			if (Level.current.GetOptionAsBool("parryslowmo", true)) {
 				EventManager.onCreatureParry += EventManager_onCreatureParry;
-				spellPowerSlowTime = Catalog.GetData<SpellPowerSlowTime>("SlowTime");
 			}
 
 			yield return base.OnLoadCoroutine();
@@ -20,7 +18,7 @@ namespace GameModeLoader.Component {
 
 		private void EventManager_onCreatureParry(Creature creature, CollisionInstance collisionInstance) {
 			if (Utilities.DidPlayerParry(collisionInstance)) {
-				level.StartCoroutine(SlowMo());
+				level.StartCoroutine(Utilities.SlowMo(slowMoTime));
 			}
 		}
 
@@ -32,13 +30,5 @@ namespace GameModeLoader.Component {
 			base.OnUnload();
 		}
 
-		private IEnumerator SlowMo() {
-			GameManager.SetSlowMotion(true, spellPowerSlowTime.scale, spellPowerSlowTime.enterCurve,
-				spellPowerSlowTime.effectData);
-			yield return new WaitForSeconds(slowMoTime);
-			if (GameManager.slowMotionState == GameManager.SlowMotionState.Running) {
-				GameManager.SetSlowMotion(false, spellPowerSlowTime.scale, spellPowerSlowTime.exitCurve);
-			}
-		}
 	}
 }
