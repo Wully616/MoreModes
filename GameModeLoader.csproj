@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Component\FreeClimb.cs" />
     <Compile Include="Component\SuperHot.cs" />
     <Compile Include="Component\Respawn.cs" />
     <Compile Include="Component\NoSpells.cs" />
@@ -109,6 +110,7 @@
   <ItemGroup>
     <None Include="JSON\Effects\Effect_Reward.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsSpawn.json" />
+    <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_SuperHot.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_Respawn.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoSpells.json" />
