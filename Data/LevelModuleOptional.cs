@@ -12,6 +12,11 @@ namespace GameModeLoader.Data {
 		public string id;
 		public bool enable;
 
+		public virtual IEnumerator OnLoadCoroutine() {
+			SetId();
+			yield return base.OnLoadCoroutine();
+		}
+
 		public virtual void SetId() {
 			//get the id of this LevelModuleOptionals Option data.
 			var options = Module.GameModeLoader.GetLevelOptionList();

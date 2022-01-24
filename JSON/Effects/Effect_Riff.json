@@ -1,6 +1,6 @@
 ﻿{
 	"$type": "ThunderRoad.EffectData, Assembly-CSharp",
-	"id": "SurvivalMode.RewardFx",
+	"id": "AirGuitar.Riff",
 	"saveFolder": "Bas",
 	"version": 0,
 	"groupId": "Material",
@@ -9,7 +9,7 @@
 		{
 			"$type": "ThunderRoad.EffectModuleAudio, Assembly-CSharp",
 			"effectLink": "Intensity",
-			"audioContainerAddress": "GameModeLoader.Survival.Audio.Reward",
+			"audioContainerAddress": "GameModeLoader.AirGuitar.Audio.Riff",
 			"loopFadeDelay": 0.0,
 			"audioMixer": "Effect",
 			"volumeDb": 0.0,

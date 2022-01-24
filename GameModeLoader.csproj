@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\BigHead.cs" />
+    <Compile Include="Component\ExampleOption.cs" />
     <Compile Include="Component\HpOnKill.cs" />
     <Compile Include="Component\KillSlowMo.cs" />
     <Compile Include="Component\NoTk.cs" />
@@ -114,7 +115,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="JSON\Effects\Effect_Reward.json" />
+    <None Include="JSON\Effects\Effect_Riff.json" />
+    <None Include="JSON\GameModeOptions\GameModeOption_ExampleOption.json_example" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoTk.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_HpOnKill.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_KillSlowMo.json" />

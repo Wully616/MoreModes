@@ -8,6 +8,13 @@ using Object = UnityEngine.Object;
 namespace Wully.Utils {
 	public static class Extensions {
 
+		public static string GetModPath( this Object thisObject ) {
+			Type type = thisObject.GetType();
+			string assemblyFullName = type.Assembly.GetName().Name;
+			return FileManager.GetFullPath(FileManager.Type.JSONCatalog,
+				FileManager.Source.Mods, assemblyFullName);
+		}
+
 		public static bool GetOptionAsBool( this Level level, string optionId ) {
 			if (string.IsNullOrEmpty(optionId)) {
 				Debug.Log("Option id is null");
