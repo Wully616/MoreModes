@@ -1,0 +1,15 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"id": "exampleoption",
+	"version": 3,
+	"excludeLevelIds": ["Canyon"],
+	"excludeGameModeNames":  ["Survival"],
+	"levelOption": {          
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"name": "exampleoption",
+		"displayName": "Example",
+		"description": "An Example Option",
+		"type": "Toggle",
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.ExampleOption, GameModeLoader" }
+	}
+}
