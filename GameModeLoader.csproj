@@ -115,7 +115,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="JSON\Effects\Effect_Riff.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_ExampleOption.json_example" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoTk.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_HpOnKill.json" />
@@ -136,7 +135,9 @@
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="JSON\Effects\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir  $(ProjectDir)\..\..\Catalog\$(ProjectName)
