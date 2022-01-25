@@ -17,7 +17,7 @@ namespace Wully.Utils {
 
 		public static bool GetOptionAsBool( this Level level, string optionId ) {
 			if (string.IsNullOrEmpty(optionId)) {
-				Debug.Log("Option id is null");
+				Debug.LogWarning("Option id is null - make sure SetId() is called on LevelModuleOptional");
 				return false;
 			}
 			//if the config option is there,  enable/disable based on its value

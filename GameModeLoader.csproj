@@ -115,7 +115,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="JSON\GameModeOptions\GameModeOption_ExampleOption.json_example" />
+    <None Include="JSON\GameModeOptions\GameModeOption_ExampleOption.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoTk.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_HpOnKill.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_KillSlowMo.json" />

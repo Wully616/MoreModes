@@ -81,9 +81,8 @@ namespace GameModeLoader.Component {
 			}
 
 			//check if the players moving.
-			//float vel = GetPlayerVelocity();
-			float vel = Mathf.Clamp01(GetPlayerInput());
 
+			float vel = Mathf.Clamp01(GetPlayerInput());
 
 			float lerp = Mathf.Clamp01(vel);
 
@@ -105,34 +104,5 @@ namespace GameModeLoader.Component {
 			return movement + hands;
 		}
 
-		private float GetPlayerVelocity() {
-			var creature = Player.currentCreature;
-			if (creature == null) {
-				return 0;
-			}
-
-
-			var leftHand = creature.handLeft;
-			var rightHand = creature.handRight;
-			var head = creature.ragdoll.headPart;
-
-			var vel = head.rb.angularVelocity
-			          + head.rb.velocity
-			          + leftHand.rb.angularVelocity
-			          + leftHand.rb.velocity
-			          + rightHand.rb.angularVelocity
-			          + rightHand.rb.velocity
-			          + Player.local.locomotion.rb.velocity
-			          + Player.local.locomotion.rb.angularVelocity;
-			if (leftHand.grabbedHandle) {
-				vel += leftHand.grabbedHandle.rb.velocity;
-			}
-
-			if (rightHand.grabbedHandle) {
-				vel += rightHand.grabbedHandle.rb.velocity;
-			}
-
-			return vel.magnitude / 10f;
-		}
 	}
 }

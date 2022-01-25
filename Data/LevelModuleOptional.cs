@@ -11,13 +11,8 @@ namespace GameModeLoader.Data {
 	public class LevelModuleOptional : LevelModule {
 		public string id;
 		public bool enable;
-
-		public virtual IEnumerator OnLoadCoroutine() {
-			SetId();
-			yield return base.OnLoadCoroutine();
-		}
-
-		public virtual void SetId() {
+		
+		public void SetId() {
 			//get the id of this LevelModuleOptionals Option data.
 			var options = Module.GameModeLoader.GetLevelOptionList();
 			foreach (var option in options) {

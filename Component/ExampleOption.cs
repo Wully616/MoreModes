@@ -15,7 +15,7 @@ namespace GameModeLoader.Component {
 		/// </summary>
 		public override IEnumerator OnLoadCoroutine() {
 			//You must always call the following, so the IDs are setup for this LevelModuleOptional
-			yield return base.OnLoadCoroutine();
+			SetId();
 			
 			//Use IsEnabled around functionality so it only runs if this LevelModuleOptional is enabled
 			if ( IsEnabled() ) {
