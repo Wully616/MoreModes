@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
+using Wully.Utils;
 
 namespace GameModeLoader.GameMode {
 	/// <summary>
 	///     This survival mode inherits from the base games survival game mode
 	/// </summary>
-	//TODO: switch to LevelModuleOptional
-	public class SurvivalMode : LevelModuleSurvival {
+	public class SurvivalMode : LevelModuleSurvival, IOption {
+		public string id;
+		public bool enable;
 		private EffectData rewardFxData;
 
 		public string rewardFxId = "SurvivalMode.RewardFx";
 
 		public override void Update() {
-			if (!(Player.currentCreature != null))
-				return;
+			if (!IsEnabled()) { return;}
+			if (!(Player.currentCreature != null)) { return; }
 
 			var frontEyes = Player.local.head.transform.position + Player.local.head.transform.forward * 1.25f;
 			rewardsSpawnPosition[0].position = frontEyes + -Player.local.head.transform.right * 0.15f;
@@ -24,6 +27,8 @@ namespace GameModeLoader.GameMode {
 		}
 
 		public override IEnumerator OnLoadCoroutine() {
+			SetId();
+			if ( !IsEnabled() ) { yield break; }
 			spawnPositionHeight = 0f;
 			rewardFxData = Catalog.GetData<EffectData>(rewardFxId);
 
@@ -199,6 +204,23 @@ namespace GameModeLoader.GameMode {
 							Catalog.GetTextData().GetString(textGroupId, textWaveId) + " " + (waveIndex + 1), 10,
 							TutorialData.TextType.INFORMATION, 3f));
 					}
+				}
+			}
+		}
+
+		public bool IsEnabled() {
+			//the enable bool is like the master switch, so it can be forcefully enabled for gamemodes
+			//the option check is to check if it should be enabled or not on a per map/gamemode basis
+			return enable || Level.current.GetOptionAsBool(id);
+		}
+
+		public void SetId() {
+			//get the id of this LevelModuleOptionals Option data.
+			var options = Module.GameModeLoader.GetLevelOptionList();
+			foreach ( var option in options ) {
+				if ( option.levelOption.levelModuleOptional.GetType() == this.GetType() ) {
+					this.id = option.levelOption.name;
+					break;
 				}
 			}
 		}

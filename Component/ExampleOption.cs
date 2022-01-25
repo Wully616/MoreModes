@@ -27,6 +27,7 @@ namespace GameModeLoader.Component {
 
 		public override void Update() {
 			base.Update();
+
 			//Update runs all the time, so make sure you wrap your logic in IsEnabled
 			if ( IsEnabled() ) {
 				///Debug.Log($"This levelModuleOption is updating - {id}");

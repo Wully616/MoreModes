@@ -45,9 +45,10 @@
     <Compile Include="Component\RemoveHealthPotionsInventory.cs" />
     <Compile Include="Component\RemoveSpawnedHealthPotions.cs" />
     <Compile Include="Component\RemoveHealthPotionsBook.cs" />
+    <Compile Include="Data\IOption.cs" />
+    <Compile Include="Data\LevelModuleOptional.cs" />
     <Compile Include="GameMode\BladeGame.cs" />
     <Compile Include="GameMode\SurvivalMode.cs" />
-    <Compile Include="Data\LevelModuleOptional.cs" />
     <Compile Include="Data\LevelOptionCatalog.cs" />
     <Compile Include="Data\LevelDataModeCatalog.cs" />
     <Compile Include="Component\RemoveWaveBook.cs" />
