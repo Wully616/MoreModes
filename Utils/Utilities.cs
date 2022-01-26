@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using ThunderRoad;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -54,6 +55,29 @@ namespace GameModeLoader.Utils {
 				return false;
 			return true;
 		}
+
+		public static void AddSpellContentsToPlayer( ContainerData.Content content) {
+			Player.characterData.inventory.Add(content);
+		}
+
+		/// <summary>
+		/// Should be called before the player loads at all, so ideally on level load.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Returns the removed contents, so they may be added back later</returns>
+		public static List<ContainerData.Content> RemoveSpellFromPlayer(string id) {
+			List<ContainerData.Content> removedContents = new List<ContainerData.Content>();
+			for ( int i = Player.characterData.inventory.Count - 1; i >= 0; i-- ) {
+				var content = Player.characterData.inventory[i];
+				if ( content.itemData.type == ItemData.Type.Spell && content.itemData.id.Equals(id,StringComparison.OrdinalIgnoreCase) ) {
+					removedContents.Add(content);
+					Player.characterData.inventory.RemoveAt(i);
+				}
+			}
+
+			return removedContents;
+		}
+
 		public static void RemoveHealthPotionsFromBook() {
 			foreach (UIItemSpawner uiItemSpawner in Object.FindObjectsOfType<UIItemSpawner>()) {
 				for (int index = uiItemSpawner.container.contents.Count - 1; index >= 0; --index) {
@@ -69,8 +93,38 @@ namespace GameModeLoader.Utils {
 			}
 		}
 
+		public static void RemoveItemTypeFromBook(ItemData.Type type) {
+			foreach ( UIItemSpawner uiItemSpawner in Object.FindObjectsOfType<UIItemSpawner>() ) {
+				for ( int index = uiItemSpawner.container.contents.Count - 1; index >= 0; --index ) {
+					var content = uiItemSpawner.container.contents[index];
+					if ( content.itemData.type == type ) {
+						uiItemSpawner.container.contents.RemoveAt(index);
+					}
+				}
+				uiItemSpawner.RefreshCategories();
+				uiItemSpawner.RefreshItems(uiItemSpawner.container);
+			}
+		}
+
+		public static void RemoveAllExceptItemTypeFromPlayerInventory( ItemData.Type type ) {
+			for ( int index = Player.characterData.inventory.Count - 1; index >= 0; --index ) {
+				var content = Player.characterData.inventory[index];
+				if ( content.itemData.type != type ) {
+					Player.characterData.inventory.RemoveAt(index);
+				}
+			}
+		}
+
+		public static void RemoveItemTypeFromPlayerInventory(ItemData.Type type) {
+			for ( int index = Player.characterData.inventory.Count - 1; index >= 0; --index ) {
+				var content = Player.characterData.inventory[index];
+				if ( content.itemData.type == type ) {
+					Player.characterData.inventory.RemoveAt(index);
+				}
+			}
+		}
 		public static void RemoveHealthPotionsFromPlayerInventory() {
-			//enable by default
+
 			for (int index = Player.characterData.inventory.Count - 1; index >= 0; --index) {
 				var content = Player.characterData.inventory[index];
 				if (content.itemData.type == ItemData.Type.Potion && content.itemData.id.Equals("PotionHealth")) {
