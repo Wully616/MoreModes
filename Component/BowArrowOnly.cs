@@ -12,9 +12,8 @@ namespace GameModeLoader.Component
 {
 	public class BowArrowOnly : LevelModuleOptional
 	{
-		private List<string> allowedItemIds = new List<string> { "Arrow", "Bow", "Quiver" };
-
 		private List<ItemData.Type> allowedItemTypes = new List<ItemData.Type> { ItemData.Type.Quiver, ItemData.Type.Prop };
+		private bool showHighlighterTK;
 		public override IEnumerator OnLoadCoroutine()
 		{
 			//You must always call the following, so the IDs are setup for this LevelModuleOptional
@@ -23,10 +22,10 @@ namespace GameModeLoader.Component
 			//Use IsEnabled around functionality so it only runs if this LevelModuleOptional is enabled
 			if (IsEnabled())
 			{
-				Debug.Log($"This levelModuleOption is enabled - {id}");
 				Utilities.BowArrowOnlyItem();
 				EventManager.onPossess += EventManager_onPossess;
                 EventManager.onUnpossess += EventManager_onUnpossess;
+				showHighlighterTK = SpellTelekinesis.showHighlighter;
 			}
 			yield break;
 		}
@@ -74,23 +73,14 @@ namespace GameModeLoader.Component
 			UngrabUnallowedItems(handle, eventTime);
 		}
 
-		public override void Update()
-		{
-			base.Update();
-
-			//Update runs all the time, so make sure you wrap your logic in IsEnabled
-			if (IsEnabled())
-			{
-				//Debug.Log($"This levelModuleOption is updating - {id}");
-			}
-		}
 		public override void OnUnload()
 		{
 			base.OnUnload();
 			//Remember to unsubscribe to any events you might be listening to
 			if (IsEnabled())
 			{
-				Debug.Log($"This levelModuleOption is unloaded - {id}");
+				// Revert back to the original showHighlighter
+				SpellTelekinesis.showHighlighter = showHighlighterTK;
 			}
 		}
 
@@ -103,7 +93,7 @@ namespace GameModeLoader.Component
 			{
 				//if the item isn't a bow/arrow/quiver
 				//or the player didn't pick up an allowed type, Quiver / Prop
-				if (!itemInHand.itemId.Contains("Arrow") && !itemInHand.itemId.Contains("Bow") && !itemInHand.itemId.Contains("Quiver") && !allowedItemTypes.Contains(itemInHand.data.type))
+				if (!itemInHand.itemId.Contains("Arrow") && !itemInHand.itemId.Contains("Bow") && !itemInHand.itemId.Contains("Quiver") && !itemInHand.itemId.Contains("Lantern") && !allowedItemTypes.Contains(itemInHand.data.type))
 				{
 					for (int i = itemInHand.handlers.Count() - 1; i >= 0; --i)
 					{

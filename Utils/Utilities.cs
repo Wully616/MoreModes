@@ -168,7 +168,6 @@ namespace GameModeLoader.Utils {
 					&& content.itemData.type != ItemData.Type.Wardrobe
 					&& !content.itemData.id.Contains("SpellTelekinesis"))
 				{
-					Debug.Log("Bow Arrow Only : Item inventory : " + Player.characterData.inventory[index].referenceID + "  : INDEX : " + index);
 					Player.characterData.inventory.RemoveAt(index);
 				}
 			}

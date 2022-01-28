@@ -9,7 +9,7 @@ namespace GameModeLoader.Component
 {
     public class LunarGravity : LevelModuleOptional
 	{
-
+		private Vector3 gravityForce;
 		/// <summary>
 		/// You should always have an OnLoadCoroutine
 		/// </summary>
@@ -21,22 +21,10 @@ namespace GameModeLoader.Component
 			//Use IsEnabled around functionality so it only runs if this LevelModuleOptional is enabled
 			if (IsEnabled())
 			{
-				Debug.Log($"This levelModuleOption is enabled - {id}");
+				gravityForce = Physics.gravity;
 				Utilities.LunarGravity();
 			}
-
 			yield break;
-		}
-
-		public override void Update()
-		{
-			base.Update();
-
-			//Update runs all the time, so make sure you wrap your logic in IsEnabled
-			if (IsEnabled())
-			{
-				///Debug.Log($"This levelModuleOption is updating - {id}");
-			}
 		}
 
 		public override void OnUnload()
@@ -45,9 +33,8 @@ namespace GameModeLoader.Component
 			//Remember to unsubscribe to any events you might be listening to
 			if (IsEnabled())
 			{
-				Debug.Log($"This levelModuleOption is unloaded - {id}");
+				Physics.gravity = gravityForce;
 			}
-
 		}
 	}
 }

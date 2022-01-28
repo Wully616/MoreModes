@@ -3,7 +3,7 @@
 	"id": "only_bow_arrow",
 	"version": 3,
 	"excludeLevelIds": [],
-	"excludeGameModeNames":  ["Survival"],
+	"excludeGameModeNames":  [],
 	"levelOption": {          
 		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "only_bow_arrow",

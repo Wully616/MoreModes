@@ -6,10 +6,12 @@ using Wully.Utils;
 
 namespace GameModeLoader.Component {
 	public class NoSpells : LevelModuleOptional {
+		private bool showHighlighterTK;
 		public override IEnumerator OnLoadCoroutine() {
 			SetId();
 			if ( IsEnabled() ) {
 				EventManager.onPossess += EventManager_onPossess;
+				showHighlighterTK = SpellTelekinesis.showHighlighter;
 			}
 
 			yield break;
@@ -39,6 +41,8 @@ namespace GameModeLoader.Component {
 		public override void OnUnload() {
 			if ( IsEnabled() ) {
 				EventManager.onPossess += EventManager_onPossess;
+				// Revert back to the original showHighlighter
+				SpellTelekinesis.showHighlighter = showHighlighterTK;
 			}
 		}
 	}
