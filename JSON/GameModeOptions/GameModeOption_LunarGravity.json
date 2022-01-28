@@ -1,0 +1,15 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"id": "lunargravity",
+	"version": 3,
+	"excludeLevelIds": [],
+	"excludeGameModeNames":  [],
+	"levelOption": {          
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"name": "lunargravity",
+		"displayName": "LunarGravity",
+		"description": "You're on the moon now !",
+		"type": "Toggle",
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.LunarGravity, GameModeLoader" }
+	}
+}

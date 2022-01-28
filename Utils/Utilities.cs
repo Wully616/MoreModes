@@ -141,5 +141,57 @@ namespace GameModeLoader.Utils {
 				}
 			}
 		}
+		public static void BowArrowOnlyItem()
+		{
+			for (int index = Item.allActive.Count - 1; index >= 0; --index)
+			{
+				var item = Item.allActive[index];
+				if (!item.itemId.Contains("Arrow")
+					&& !item.itemId.Contains("Bow")
+					&& !item.itemId.Contains("Quiver")
+					&& !(bool)item.holder
+					&& (!item.isTelekinesisGrabbed
+					&& !item.isThrowed)
+					&& (!item.IsHanded()
+					&& !item.isGripped)
+					&& (double)item.spawnTime != 0.0)
+				{
+					item.Despawn();
+				}
+			}
+			for (int index = Player.characterData.inventory.Count - 1; index >= 0; --index)
+			{
+				var content = Player.characterData.inventory[index];
+				if (!content.itemData.id.Contains("Arrow")
+					&& !content.itemData.id.Contains("Bow")
+					&& !content.itemData.id.Contains("Quiver")
+					&& content.itemData.type != ItemData.Type.Wardrobe
+					&& !content.itemData.id.Contains("SpellTelekinesis"))
+				{
+					Debug.Log("Bow Arrow Only : Item inventory : " + Player.characterData.inventory[index].referenceID + "  : INDEX : " + index);
+					Player.characterData.inventory.RemoveAt(index);
+				}
+			}
+		}
+		public static void BowArrowOnlyUIItemSpawner()
+		{
+			foreach (UIItemSpawner uiItemSpawner in Object.FindObjectsOfType<UIItemSpawner>())
+			{
+				for (int index = uiItemSpawner.container.contents.Count - 1; index >= 0; --index)
+				{
+					var content = uiItemSpawner.container.contents[index];
+					if (!content.itemData.id.Contains("Arrow") && !content.itemData.id.Contains("Bow") && !content.itemData.id.Contains("Quiver"))
+					{
+						uiItemSpawner.container.contents.RemoveAt(index);
+					}
+				}
+				uiItemSpawner.RefreshCategories();
+				uiItemSpawner.RefreshItems(uiItemSpawner.container);
+			}
+		}
+		public static void LunarGravity()
+		{
+			Physics.gravity = new Vector3(0f, -1.625f, 0f);
+		}
 	}
 }

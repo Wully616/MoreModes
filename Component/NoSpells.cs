@@ -23,12 +23,16 @@ namespace GameModeLoader.Component {
 			if ( IsEnabled() ) {
 				creature.handLeft.caster.allowCasting = false;
 				creature.handLeft.caster.allowSpellWheel = false;
-				creature.handLeft.caster.telekinesis.Unload();
-				creature.handLeft.caster.telekinesis = null;
+				SpellTelekinesis.showHighlighter = false;
+				creature.handLeft.caster.telekinesis.maxCatchDistance = 0.0f;
+				creature.handLeft.caster.telekinesis.radius = 0.0f;
+				creature.handLeft.caster.telekinesis.maxAngle = 0.0f;
+
 				creature.handRight.caster.allowCasting = false;
 				creature.handRight.caster.allowSpellWheel = false;
-				creature.handRight.caster.telekinesis.Unload();
-				creature.handRight.caster.telekinesis = null;
+				creature.handRight.caster.telekinesis.maxCatchDistance = 0.0f;
+				creature.handRight.caster.telekinesis.radius = 0.0f;
+				creature.handRight.caster.telekinesis.maxAngle = 0.0f;
 			}
 		}
 
