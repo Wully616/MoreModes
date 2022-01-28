@@ -20,7 +20,7 @@ namespace GameModeLoader.GameMode {
 			if (!IsEnabled()) { return;}
 			if (!(Player.currentCreature != null)) { return; }
 
-			var frontEyes = Player.local.head.transform.position + Player.local.head.transform.forward * 1.25f;
+			var frontEyes = Player.local.head.transform.position + Player.local.head.transform.forward * 0.5f + Player.local.head.transform.up * -0.1f;
 			rewardsSpawnPosition[0].position = frontEyes + -Player.local.head.transform.right * 0.15f;
 			rewardsSpawnPosition[1].position = frontEyes;
 			rewardsSpawnPosition[2].position = frontEyes + Player.local.head.transform.right * 0.15f;

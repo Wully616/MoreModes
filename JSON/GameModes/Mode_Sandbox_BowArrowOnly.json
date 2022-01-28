@@ -1,0 +1,34 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"id": "SandboxBowArrowOnly",
+	"version": 3,
+	"excludeLevelIds": [],
+	"explicitOptions":  true,
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Sandbox - Bow Arrow Only",
+		"displayName": "Sandbox - Bow Arrows Only",
+		"description": "Bow and Arrows only!",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 1,
+		"difficultyMultipliers": [],
+		"modules": [
+			{
+				"$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad",
+				"cleanerRate": 5.0
+			},
+			{
+				"$type": "ThunderRoad.LevelModuleDeath, ThunderRoad",
+				"behaviour": "ShowScores",
+				"delayBeforeLoad": 20.0,
+				"disablePlayerLocomotion": true
+			},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{ "$type": "GameModeLoader.Component.BowArrowOnly, GameModeLoader", "enable":  true }
+		],
+		"availableOptions": []
+	}
+}
