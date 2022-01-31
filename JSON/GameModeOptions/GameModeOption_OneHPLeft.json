@@ -1,0 +1,15 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"id": "one_hp_left",
+	"version": 3,
+	"excludeLevelIds": [],
+	"excludeGameModeNames":  [],
+	"levelOption": {          
+		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"name": "one_hp_left",
+		"displayName": "OneHPLeft",
+		"description": "Make no mistake, you only have 1 HP left !",
+		"type": "Toggle",
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.OneHPLeft, GameModeLoader" }
+	}
+}
