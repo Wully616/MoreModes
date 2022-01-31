@@ -26,10 +26,7 @@ namespace GameModeLoader.Component
         {
 			if (eventTime == EventTime.OnStart)
 			{
-				Debug.Log("UnPossess : ");
-				Debug.Log("healthOri : " + healthOri);
 				Player.local.creature.data.health = healthOri;
-				Debug.Log("dataHealth : " + Player.local.creature.data.health);
 			}
 		}
 
@@ -37,10 +34,7 @@ namespace GameModeLoader.Component
 		{
 			if (eventTime == EventTime.OnEnd)
 			{
-				Debug.Log("Possess : ");
-				Debug.Log("dataHealth : " + Player.local.creature.data.health);
 				healthOri = Player.local.creature.data.health;
-				Debug.Log("healthOri : " + healthOri);
 				Player.local.creature.data.health = 1;
 				Player.local.creature.maxHealth = 1f;
 				Player.local.creature.currentHealth = 1f;
