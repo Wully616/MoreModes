@@ -1,15 +1,15 @@
 ﻿{
 	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
-	"id": "lunargravity",
+	"id": "no_spell_wheel",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
 		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
-		"name": "lunargravity",
-		"displayName": "LunarGravity",
-		"description": "You're on the moon now !",
+		"name": "no_spell_wheel",
+		"displayName": "NoSpellWheel",
+		"description": "Disables the Players Spell Wheel",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.Gravity, GameModeLoader", "gravity": -1.625 }
+		"levelModuleOptional": { "$type": "GameModeLoader.Component.NoSpellWheel, GameModeLoader" }
 	}
 }

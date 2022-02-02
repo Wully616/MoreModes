@@ -82,10 +82,8 @@ namespace GameModeLoader.Component {
 
 			//check if the players moving.
 
-			float vel = Mathf.Clamp01(GetPlayerInput());
-
-			float lerp = Mathf.Clamp01(vel);
-
+			float lerp = Mathf.Clamp01(GetPlayerInput());
+			
 			GameManager.SetTimeScale(lerp);
 		}
 

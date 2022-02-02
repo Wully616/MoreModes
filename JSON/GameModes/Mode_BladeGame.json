@@ -1,0 +1,37 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"id": "bladegame",
+	"version": 3,
+	"excludeLevelIds": [],
+	"explicitOptions":  false,
+	"gameModeOptionIds": [],
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Blade Game",
+		"displayName": "Blade Game",
+		"description": "Gun Game? Now its time for Blade Game! Melee only. Each kill levels up your weapon. Can you survive?",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 1,
+		"difficultyMultipliers": [],
+		"modules": [
+			{
+				"$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad",
+				"cleanerRate": 5.0
+			},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{ "$type": "GameModeLoader.Component.RemoveWaveBook, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.RemoveWeaponBook, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.RemoveWeaponRack, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.NoSpellWheel, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.NoTk, GameModeLoader", "enable":  true },
+			{ "$type": "GameModeLoader.Component.StartWave, GameModeLoader", "enable":  true, "waveId":  "MixedMeleeSpecial" },
+			{ "$type": "GameModeLoader.Component.Respawn, GameModeLoader", "enable":  true, "lives":  3, "behaviour": "ShowScores",
+				"delayBeforeLoad": 10.0, "disablePlayerLocomotion": true},
+			{ "$type": "GameModeLoader.GameMode.BladeGame, GameModeLoader", "enable":  true }
+		],
+		"availableOptions": []
+	}
+}

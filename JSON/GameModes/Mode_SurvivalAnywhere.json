@@ -2,7 +2,7 @@
 	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
 	"id": "survivalanywhere",
 	"version": 3,
-	"excludeLevelIds": ["Arena", "Market", "Ruins"],
+	"excludeLevelIds": ["Dungeon"],
 	"explicitOptions":  false,
 	"gameModeOptionIds": [],
 	"mode": {

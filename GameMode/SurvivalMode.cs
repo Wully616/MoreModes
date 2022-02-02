@@ -55,8 +55,7 @@ namespace GameModeLoader.GameMode {
 			if (WaveSpawner.instances.Count > 0) {
 				waveSpawner = WaveSpawner.instances[0];
 				waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
-				levelModuleTutorial = level.mode.GetModule<LevelModuleTutorial>();
-				level.StartCoroutine(LevelLoadedCoroutine());
+                level.StartCoroutine(LevelLoadedCoroutine());
 				yield break;
 			}
 

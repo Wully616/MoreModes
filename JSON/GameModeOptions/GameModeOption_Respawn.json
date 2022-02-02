@@ -2,7 +2,7 @@
 	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
 	"id": "respawns",
 	"version": 3,
-	"excludeLevelIds": [],
+	"excludeLevelIds": ["Dungeon"],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
 		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",

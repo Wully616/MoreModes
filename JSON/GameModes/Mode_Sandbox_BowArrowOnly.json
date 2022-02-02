@@ -27,7 +27,7 @@
 				"disablePlayerLocomotion": true
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
-			{ "$type": "GameModeLoader.Component.BowArrowOnly, GameModeLoader", "enable":  true }
+			{ "$type": "GameModeLoader.GameMode.BowArrowOnly, GameModeLoader", "enable":  true }
 		],
 		"availableOptions": []
 	}

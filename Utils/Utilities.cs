@@ -188,9 +188,5 @@ namespace GameModeLoader.Utils {
 				uiItemSpawner.RefreshItems(uiItemSpawner.container);
 			}
 		}
-		public static void LunarGravity()
-		{
-			Physics.gravity = new Vector3(0f, -1.625f, 0f);
-		}
-	}
+    }
 }
