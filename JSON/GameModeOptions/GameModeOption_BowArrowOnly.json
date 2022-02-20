@@ -3,7 +3,7 @@
 	"id": "only_bow_arrow",
 	"version": 3,
 	"excludeLevelIds": [],
-	"excludeGameModeNames":  [],
+	"excludeGameModeNames": [ "Blade Game" ],
 	"levelOption": {          
 		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
 		"name": "only_bow_arrow",
