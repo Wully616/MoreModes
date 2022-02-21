@@ -102,8 +102,19 @@ namespace GameModeLoader.Module {
 			    option.excludeGameModeNames.Contains(gameMode.mode.name, StringComparer.OrdinalIgnoreCase)) {
 				return gameMode;
 			}
+			//dont add the option to the gamemode if it includes it in its modules
+            foreach (LevelModule levelModule in gameMode.mode.modules)
+            {
+                if (levelModule is LevelModuleOptional levelModuleOptional)
+                {
+                    if (levelModuleOptional.type == option.levelOption.levelModuleOptional.type)
+                    {
+                        return gameMode;
+                    }
+                }
+            }
 
-			//add the option to the gameMode, but not if it already has it
+            //add the option to the gameMode, but not if it already has it
 			if (!DoesOptionExist(gameMode.mode.availableOptions, option.levelOption.name)) {
 				gameMode.mode.availableOptions.Add(option.levelOption);
 			}

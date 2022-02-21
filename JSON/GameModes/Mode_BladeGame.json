@@ -3,8 +3,8 @@
 	"id": "bladegame",
 	"version": 3,
 	"excludeLevelIds": [],
-	"explicitOptions":  false,
-	"gameModeOptionIds": [],
+	"explicitOptions":  true,
+	"gameModeOptionIds": ["heavygravity", "hponkill","killslowmo","lunargravity","parryslowmo","superhot"],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Blade Game",
@@ -27,10 +27,18 @@
 			{ "$type": "GameModeLoader.Component.RemoveWeaponRack, GameModeLoader", "enable":  true },
 			{ "$type": "GameModeLoader.Component.NoSpellWheel, GameModeLoader", "enable":  true },
 			{ "$type": "GameModeLoader.Component.NoTk, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.StartWave, GameModeLoader", "enable":  true, "waveId":  "MixedMeleeSpecial" },
 			{ "$type": "GameModeLoader.Component.Respawn, GameModeLoader", "enable":  true, "lives":  3, "behaviour": "ShowScores",
 				"delayBeforeLoad": 10.0, "disablePlayerLocomotion": true},
-			{ "$type": "GameModeLoader.GameMode.BladeGame, GameModeLoader", "enable":  true }
+			{
+				"$type": "GameModeLoader.GameMode.BladeGame, GameModeLoader", "enable":  true,
+				"excludeItemIds": [
+					"MMPLantern", "Torch", "BactaStim", "LightsaberTool", "MMPMagicBook",
+					"BlasterPowerCell_Blue","BlasterPowerCell_Cyan","BlasterPowerCell_Green",
+					"BlasterPowerCell_Orange","BlasterPowerCell_Pink","BlasterPowerCell_Purple",
+					"BlasterPowerCell_Red","BlasterPowerCell_Yellow"
+				],
+				"tierWaves":  ["BanditEndless", "GladiatorEndless", "KnightEndless", "MixedSpecial"]
+			}
 		],
 		"availableOptions": []
 	}

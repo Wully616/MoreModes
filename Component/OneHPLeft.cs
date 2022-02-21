@@ -17,9 +17,12 @@ namespace GameModeLoader.Component
 		{
 			//You must always call the following, so the IDs are setup for this LevelModuleOptional
 			SetId();
-			EventManager.onPossess += EventManager_onPossess;
-            EventManager.onUnpossess += EventManager_onUnpossess;
-			yield break;
+            if (IsEnabled())
+            {
+                EventManager.onPossess += EventManager_onPossess;
+                EventManager.onUnpossess += EventManager_onUnpossess;
+            }
+            yield break;
 		}
 
         private void EventManager_onUnpossess(Creature creature, EventTime eventTime)
@@ -44,9 +47,11 @@ namespace GameModeLoader.Component
 
         public override void OnUnload()
         {
-            base.OnUnload();
-			EventManager.onPossess -= EventManager_onPossess;
-			EventManager.onUnpossess -= EventManager_onUnpossess;
-		}
+            if (IsEnabled())
+            {
+                EventManager.onPossess -= EventManager_onPossess;
+                EventManager.onUnpossess -= EventManager_onUnpossess;
+            }
+        }
     }
 }

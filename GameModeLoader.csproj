@@ -33,6 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\BigHead.cs" />
+    <Compile Include="Component\Cleaner.cs" />
+    <Compile Include="Component\OneHPLeft.cs" />
     <Compile Include="GameMode\BowArrowOnly.cs" />
     <Compile Include="Component\StartWave.cs" />
     <Compile Include="Component\ExampleOption.cs" />
@@ -128,6 +130,7 @@
     <None Include="JSON\GameModeOptions\GameModeOption_HpOnKill.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_KillSlowMo.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_BigHead.json" />
+    <None Include="JSON\GameModeOptions\GameModeOption_OneHPLeft.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_ParrySlowMo.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsSpawn.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json_buggy" />
