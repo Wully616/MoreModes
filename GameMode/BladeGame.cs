@@ -13,6 +13,7 @@ namespace GameModeLoader.GameMode
     /// </summary>
     public class BladeGame : LevelModuleOptional
     {
+        public bool anyKillCounts = false;
         public float startDelay = 10f;
         public List<string> excludeItemIds;
         public List<string> tierWaves;
@@ -118,7 +119,10 @@ namespace GameModeLoader.GameMode
         private void EventManager_onCreatureKill(Creature creature, Player player, CollisionInstance collisionInstance,
             EventTime eventTime)
         {
-            if (eventTime == EventTime.OnStart || player || !collisionInstance.IsDoneByPlayer())
+            if (eventTime == EventTime.OnStart) return;
+            if (player) return;
+
+            if (!anyKillCounts && !collisionInstance.IsDoneByPlayer())
                 return;
 
             //only arm if there is a new index to go to, once were at the end, no more arming
@@ -206,13 +210,11 @@ namespace GameModeLoader.GameMode
 
         private IEnumerator ArmCoroutine(RagdollHand hand)
         {
-            yield return DisarmCoroutine();
-            yield return waitFor0_5Second;
-
             Catalog.GetData<ItemData>(itemIds[idx])?.SpawnAsync(item => {
                 //if the weapon spawned is of the next tier, stop the wave and spawn the next tier
                 if (item.data.tier != currentTier)
                 {
+                    currentTier++;
                     waveSpawner.StopWave(true);
                     level.StartCoroutine(LevelLoadedCoroutine());
                 }
@@ -220,6 +222,7 @@ namespace GameModeLoader.GameMode
                 hand.Grab(item.GetMainHandle(GameManager.options.twoHandedDominantHand), true);
                 rewardFxData?.Spawn(hand.transform.position, hand.transform.rotation).Play();
             });
+            yield break;
         }
     }
 }

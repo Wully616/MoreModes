@@ -120,7 +120,8 @@ namespace GameModeLoader.Module {
 			}
 
 			//Add the level module for this option to the gamemode, but not if it already has it
-			if (!DoesModuleExist(gameMode.mode.modules, option.levelOption.levelModuleOptional)) {
+			//If its explicitly selected then add it no matter what, multiple levelModuleOption types can have different option configs
+			if (gameMode.explicitOptions || !DoesModuleExist(gameMode.mode.modules, option.levelOption.levelModuleOptional) ) {
 				gameMode.mode.modules.Add(option.levelOption.levelModuleOptional);
 			}
 
@@ -139,7 +140,6 @@ namespace GameModeLoader.Module {
 
 			return gameMode;
 		}
-
 
 		private void AddModesToMaps() {
 			//Get the gamemodes from the catalog

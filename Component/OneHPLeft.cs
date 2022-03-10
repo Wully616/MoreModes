@@ -12,7 +12,9 @@ namespace GameModeLoader.Component
 {
     public class OneHPLeft : LevelModuleOptional
     {
-		private short healthOri;
+		private short originalHealth;
+        private float originalMaxHealth;
+
 		public override IEnumerator OnLoadCoroutine()
 		{
 			//You must always call the following, so the IDs are setup for this LevelModuleOptional
@@ -29,17 +31,19 @@ namespace GameModeLoader.Component
         {
 			if (eventTime == EventTime.OnStart)
 			{
-				Player.local.creature.data.health = healthOri;
-			}
+				Player.local.creature.data.health = originalHealth;
+                Player.local.creature.maxHealth = originalMaxHealth;
+            }
 		}
 
         private void EventManager_onPossess(Creature creature, EventTime eventTime)
 		{
 			if (eventTime == EventTime.OnEnd)
 			{
-				healthOri = Player.local.creature.data.health;
+                originalHealth = Player.local.creature.data.health;
 				Player.local.creature.data.health = 1;
-				Player.local.creature.maxHealth = 1f;
+                originalMaxHealth = Player.local.creature.maxHealth;
+                Player.local.creature.maxHealth = 1f;
 				Player.local.creature.currentHealth = 1f;
 				return;
 			}
@@ -49,6 +53,8 @@ namespace GameModeLoader.Component
         {
             if (IsEnabled())
             {
+                Player.local.creature.data.health = originalHealth;
+                Player.local.creature.maxHealth = originalMaxHealth;
                 EventManager.onPossess -= EventManager_onPossess;
                 EventManager.onUnpossess -= EventManager_onUnpossess;
             }

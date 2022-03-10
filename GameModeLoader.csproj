@@ -35,6 +35,7 @@
     <Compile Include="Component\BigHead.cs" />
     <Compile Include="Component\Cleaner.cs" />
     <Compile Include="Component\OneHPLeft.cs" />
+    <Compile Include="Component\KillChain.cs" />
     <Compile Include="GameMode\BowArrowOnly.cs" />
     <Compile Include="Component\StartWave.cs" />
     <Compile Include="Component\ExampleOption.cs" />
@@ -121,6 +122,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="JSON\Effects\Effect_KillReward.json" />
     <None Include="JSON\Effects\Effect_Reward.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_BowArrowOnly.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_ExampleOption.json" />
@@ -133,12 +135,15 @@
     <None Include="JSON\GameModeOptions\GameModeOption_OneHPLeft.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_ParrySlowMo.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsSpawn.json" />
-    <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json_buggy" />
+    <None Include="JSON\GameModeOptions\GameModeOption_FreeClimb.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_SuperHot.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_Respawn.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoSpellWheel.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsInventory.json" />
     <None Include="JSON\GameModeOptions\GameModeOption_NoHealthPotionsBook.json_buggy" />
+    <None Include="JSON\GameModes\Mode_BladeGameSectory.json" />
+    <None Include="JSON\GameModes\Mode_KillChain.json" />
+    <None Include="JSON\GameModes\Mode_KillChain_easy.json" />
     <None Include="JSON\GameModes\Mode_Empty.json_example" />
     <None Include="JSON\GameModes\Mode_Sandbox_BowArrowOnly.json" />
     <None Include="JSON\GameModes\Mode_Sandbox_NoHealthPotions.json" />
@@ -146,6 +151,10 @@
     <None Include="JSON\GameModes\Mode_SurvivalAnywhere.json" />
     <None Include="JSON\Level_Master.json" />
     <None Include="JSON\manifest.json" />
+    <None Include="JSON\Waves\Wave_BGBanditEndless.json" />
+    <None Include="JSON\Waves\Wave_BGGladiatorEndless.json" />
+    <None Include="JSON\Waves\Wave_BGKnightEndless.json" />
+    <None Include="JSON\Waves\Wave_BGMixedSpecial.json" />
     <None Include="LICENSE" />
     <None Include="packages.config" />
     <None Include="README.md" />

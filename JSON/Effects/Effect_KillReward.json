@@ -1,6 +1,6 @@
 ﻿{
 	"$type": "ThunderRoad.EffectData, ThunderRoad",
-	"id": "SurvivalMode.RewardFx",
+	"id": "KillChain.RewardFx",
 	"saveFolder": "Bas",
 	"version": 0,
 	"groupId": "Material",
@@ -9,15 +9,15 @@
 		{
 			"$type": "ThunderRoad.EffectModuleAudio, ThunderRoad",
 			"effectLink": "Intensity",
-			"audioContainerAddress": "GameModeLoader.Survival.Audio.Reward",
+			"audioContainerAddress": "Bas.AudioGroup.Collision.MetalOnPlate",
 			"loopFadeDelay": 0.0,
 			"audioMixer": "Effect",
-			"volumeDb": 0.0,
+			"volumeDb": 0.6,
 			"volumeCurve": {
 				"keys": [
 					{
 						"time": 0.1,
-						"value": 0.5,
+						"value": 1.0,
 						"inTangent": 0.0,
 						"outTangent": 0.0,
 						"inWeight": 0.0,

@@ -1,0 +1,38 @@
+﻿{
+	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"id": "killchain_easy",
+	"version": 3,
+	"excludeLevelIds": ["Greenland"],
+	"explicitOptions":  false,
+	"gameModeOptionIds": [],
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Kill Chain Easy",
+		"displayName": "Kill Chain Easy",
+		"description": "Keep killing to stay alive! (20s)",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 1,
+		"difficultyMultipliers": [],
+		"modules": [
+			{
+				"$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad",
+				"cleanerRate": 5.0
+			},
+			{
+				"$type": "ThunderRoad.LevelModuleDeath, ThunderRoad",
+				"behaviour": "ShowScores",
+				"delayBeforeLoad": 20.0,
+				"disablePlayerLocomotion": true
+			},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{
+				"$type": "GameModeLoader.Component.KillChain, GameModeLoader", "enable": true,
+				"timeBetweenKill": 20.0
+			}
+		],
+		"availableOptions": []
+	}
+}

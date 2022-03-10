@@ -1,15 +1,15 @@
 ﻿{
 	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
-	"id": "bladegame",
+	"id": "bladegamesectory",
 	"version": 3,
 	"excludeLevelIds": ["Greenland"],
 	"explicitOptions":  true,
 	"gameModeOptionIds": ["heavygravity", "hponkill","killslowmo","lunargravity","parryslowmo","superhot"],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
-		"name": "Blade Game",
-		"displayName": "Blade Game",
-		"description": "Gun Game? Now its time for Blade Game! Melee only. Each kill levels up your weapon. Can you survive?",
+		"name": "Blade Game Sectory",
+		"displayName": "Blade Game Sectory",
+		"description": "Gun Game? Now its time for Blade Game! Melee only. Each kill levels up your weapon. Can you survive? With Sectory compatability",
 		"allowGameModes": [
 			"Sandbox",
 			"Arcade"
@@ -38,7 +38,7 @@
 					"BlasterPowerCell_Red","BlasterPowerCell_Yellow"
 				],
 				"tierWaves":  ["BGBanditEndless", "BGGladiatorEndless", "BGKnightEndless", "BGMixedSpecial"],
-				"anyKillCounts": false
+				"anyKillCounts": true
 			}
 		],
 		"availableOptions": []

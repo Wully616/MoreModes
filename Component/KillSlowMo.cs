@@ -8,7 +8,7 @@ using Wully.Utils;
 namespace GameModeLoader.Component {
 	public class KillSlowMo : LevelModuleOptional {
 		public int slowMoTime = 1;
-
+        private Coroutine slowMoCoroutine;
 		public override IEnumerator OnLoadCoroutine() {
 			SetId();
 			if ( IsEnabled() ) {
@@ -19,13 +19,29 @@ namespace GameModeLoader.Component {
 		}
 		private void EventManager_onCreatureKill( Creature creature, Player player, CollisionInstance collisionInstance,
 			EventTime eventTime ) {
-			if ( eventTime == EventTime.OnStart || player || !collisionInstance.IsDoneByPlayer() )
+            if ( eventTime == EventTime.OnStart ) return;
+            if (player)
+            {
+                StopCoroutine();
 				return;
-			level.StartCoroutine(Utilities.SlowMo(slowMoTime));
+            }
+
+			if (!collisionInstance.IsDoneByPlayer() ) return;
+			slowMoCoroutine = level.StartCoroutine(Utilities.SlowMo(slowMoTime));
+		}
+
+        private void StopCoroutine()
+        {
+            if ( slowMoCoroutine != null )
+            {
+                level.StopCoroutine(slowMoCoroutine);
+            }
 		}
 
 		public override void OnUnload() {
-			if ( IsEnabled() ) {
+			if ( IsEnabled() )
+            {
+                StopCoroutine();
 				EventManager.onCreatureKill -= EventManager_onCreatureKill;
 			}
 
