@@ -6,7 +6,7 @@ namespace GameModeLoader.Component
 {
     public class Gravity : LevelModuleOptional
     {
-        public float gravity = -9.8f;
+        public float gravity = -9.81f;
         private Vector3 gravityForce;
 
         public override IEnumerator OnLoadCoroutine()
