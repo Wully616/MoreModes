@@ -3,38 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GameModeLoader.Data;
-using HarmonyLib;
 using ThunderRoad;
 using UnityEngine;
 using Extensions = Wully.Utils.Extensions;
 
-namespace GameModeLoader.Module {
-	public class GameModeLoader : LevelModule {
-		public static GameModeLoader local;
-		public static Harmony Patch;
+namespace Wully.MoreModes {
+	public class Loader : CustomData {
+		public static Loader local;
 
-		private void Setup() {
-			try {
-				if (local == null) {
-					local = this;
-					Debug.Log("Manifest: " + Extensions.GetManifest(typeof(GameModeLoader)));
-					Debug.Log("Enabling GameModeLoader");
-					Patch = new Harmony("Wully.GameModeLoader");
-					Patch.PatchAll();
-				}
-			}
-			catch (Exception exception) {
-				Debug.Log($"Error patching Wully.GameModeLoader: {exception}");
-			}
-		}
-
-		public override IEnumerator OnLoadCoroutine() {
-			Setup();
+		public override void OnCatalogRefresh()
+		{
 			EventManager.onLevelLoad += EventManager_onLevelLoad;
 			//In the master level, update the catalog LevelData's to add the custom gamemodes
 			AddModesToMaps();
-
-			yield return base.OnLoadCoroutine();
+;
 		}
 
 		private void EventManager_onLevelLoad(LevelData levelData, EventTime eventTime) {
@@ -143,10 +125,10 @@ namespace GameModeLoader.Module {
 
 		private void AddModesToMaps() {
 			//Get the gamemodes from the catalog
-			var gameModes = GetLevelDataModeList();
-			var options = GetLevelOptionList();
+			var gameModes = Catalog.GetDataList<LevelDataModeCatalog>();
+			var options = Catalog.GetDataList<LevelOptionCatalog>();
 
-			List<LevelData> levelList = GetLevelDataList();
+			List<LevelData> levelList = Catalog.GetDataList<LevelData>();
 
 			//Add customOptions to our custom gamemodes
 			foreach (var gameMode in gameModes) {
@@ -197,25 +179,6 @@ namespace GameModeLoader.Module {
 				}
 			}
 		}
-
-		public static List<LevelData> GetLevelDataList() {
-			return (
-				from item in Catalog.GetDataList(Catalog.Category.Level)
-				select (LevelData) item).ToList();
-		}
-
-		public static List<LevelDataModeCatalog> GetLevelDataModeList() {
-			return (
-				from interactable in Catalog.GetDataList(Catalog.Category.Interactable)
-				where interactable is LevelDataModeCatalog
-				select (LevelDataModeCatalog) interactable).ToList();
-		}
-
-		public static List<LevelOptionCatalog> GetLevelOptionList() {
-			return (
-				from interactable in Catalog.GetDataList(Catalog.Category.Interactable)
-				where interactable is LevelOptionCatalog
-				select (LevelOptionCatalog) interactable).ToList();
-		}
+		
 	}
 }

@@ -108,15 +108,14 @@ namespace GameModeLoader.GameMode {
 			}
 
 			yield return new WaitForSeconds(startDelay);
-			DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textNextWaveId}", 10, DisplayMessage.TextType.INFORMATION,
-				1f,1f));
+			DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textNextWaveId}", null, null, null, ));
 			for (int i = 3; i > 0; --i) {
-				DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
+				DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
 					1f,1f));
 				yield return new WaitForSeconds(2f);
 			}
 
-			DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textFightId}",
+			DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textFightId}",
 				10, DisplayMessage.TextType.INFORMATION, 1f,1f));
 			yield return new WaitForSeconds(1f);
 			WaveData data = Catalog.GetData<WaveData>(waves[waveIndex].waveID);

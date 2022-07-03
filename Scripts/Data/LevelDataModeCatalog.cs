@@ -4,7 +4,7 @@ using ThunderRoad;
 
 namespace GameModeLoader.Data {
 	[Serializable]
-	public class LevelDataModeCatalog : InteractableData {
+	public class LevelDataModeCatalog : CustomData {
 		//This class is a dumb wrapper around the Interactable class so it can be loaded into the catalog
 		//This is instead of using LevelData since we dont want a fake level to appear on the map
 		public List<string> excludeLevelIds;
