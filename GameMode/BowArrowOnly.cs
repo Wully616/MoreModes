@@ -49,7 +49,7 @@ namespace GameModeLoader.GameMode
                 creature.handRight.OnGrabEvent += OnGrabEvent;
  
 				creature.handLeft.caster.allowCasting = false;
-				creature.handLeft.caster.allowSpellWheel = false;
+				creature.handLeft.caster.DisableSpellWheel(this);
 				// This works for the no TK, it's still active but unusable
 				SpellTelekinesis.showHighlighter = false;
 				creature.handLeft.caster.telekinesis.maxCatchDistance = 0.0f;
@@ -57,14 +57,14 @@ namespace GameModeLoader.GameMode
 				creature.handLeft.caster.telekinesis.maxAngle = 0.0f;
 				
 				creature.handRight.caster.allowCasting = false;
-				creature.handRight.caster.allowSpellWheel = false;
+				creature.handRight.caster.DisableSpellWheel(this);
 				creature.handRight.caster.telekinesis.maxCatchDistance = 0.0f;
 				creature.handRight.caster.telekinesis.radius = 0.0f;
 				creature.handRight.caster.telekinesis.maxAngle = 0.0f;
 				return;
 			}
 		}
-		private void OnGrabEvent(Side side, Handle handle, float axisPosition, HandleOrientation orientation, EventTime eventTime)
+		private void OnGrabEvent(Side side, Handle handle, float axisPosition, HandlePose orientation, EventTime eventTime)
 		{
 			UngrabUnallowedItems(handle, eventTime);
 		}

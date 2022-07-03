@@ -30,7 +30,7 @@ namespace GameModeLoader.Component
             if (WaveSpawner.instances.Count > 0)
             {
                 waveSpawner = WaveSpawner.instances[0];
-                waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
+                waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
                 level.StartCoroutine(LevelLoadedCoroutine());
                 yield break;
             }
@@ -46,8 +46,8 @@ namespace GameModeLoader.Component
         private IEnumerator WaveEndedCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            DisplayText.ShowText(new DisplayText.TextPriority("Wave complete!: " + waveId,
-                10, TutorialData.TextType.INFORMATION, 3f));
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Wave complete!: " + waveId,
+                10, DisplayMessage.TextType.INFORMATION, 3f));
         }
 
         private IEnumerator LevelLoadedCoroutine()
@@ -59,13 +59,13 @@ namespace GameModeLoader.Component
             yield return new WaitForSeconds(startDelay);
             for (int i = 3; i > 0; --i)
             {
-                DisplayText.ShowText(new DisplayText.TextPriority(i.ToString(), 10, TutorialData.TextType.INFORMATION,
+                DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
                     1f));
                 yield return new WaitForSeconds(2f);
             }
 
-            DisplayText.ShowText(new DisplayText.TextPriority("Starting wave: " + waveId,
-                10, TutorialData.TextType.INFORMATION, 3f));
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Starting wave: " + waveId,
+                10, DisplayMessage.TextType.INFORMATION, 3f));
             yield return new WaitForSeconds(1f);
             WaveData data = Catalog.GetData<WaveData>(waveId);
             if (data != null)
@@ -81,7 +81,7 @@ namespace GameModeLoader.Component
             if (WaveSpawner.instances.Count > 0)
             {
                 waveSpawner = WaveSpawner.instances[0];
-                waveSpawner.OnWaveEndEvent.RemoveListener(OnWaveEnded);
+                waveSpawner.OnWaveAnyEndEvent.RemoveListener(OnWaveEnded);
             }
 
         }

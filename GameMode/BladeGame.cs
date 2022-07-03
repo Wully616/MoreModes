@@ -66,7 +66,7 @@ namespace GameModeLoader.GameMode
             if (WaveSpawner.instances.Count > 0)
             {
                 waveSpawner = WaveSpawner.instances[0];
-                waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
+                waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
                 level.StartCoroutine(LevelLoadedCoroutine());
             }
 
@@ -80,8 +80,8 @@ namespace GameModeLoader.GameMode
         private IEnumerator WaveEndedCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            DisplayText.ShowText(new DisplayText.TextPriority($"Tier {currentTier} complete!: {tierWaves[currentTier]}",
-                10, TutorialData.TextType.INFORMATION, 3f));
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Tier {currentTier} complete!: {tierWaves[currentTier]}",
+                10, DisplayMessage.TextType.INFORMATION, 3f));
         }
 
 
@@ -94,13 +94,13 @@ namespace GameModeLoader.GameMode
             yield return new WaitForSeconds(startDelay);
             for (int i = 3; i > 0; --i)
             {
-                DisplayText.ShowText(new DisplayText.TextPriority(i.ToString(), 10, TutorialData.TextType.INFORMATION,
+                DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
                     1f));
                 yield return new WaitForSeconds(2f);
             }
 
-            DisplayText.ShowText(new DisplayText.TextPriority($"Starting Tier {currentTier} wave: " + tierWaves[currentTier],
-                10, TutorialData.TextType.INFORMATION, 3f));
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Starting Tier {currentTier} wave: " + tierWaves[currentTier],
+                10, DisplayMessage.TextType.INFORMATION, 3f));
             yield return new WaitForSeconds(1f);
             WaveData data = Catalog.GetData<WaveData>(tierWaves[currentTier]);
             if (data != null)
@@ -137,8 +137,8 @@ namespace GameModeLoader.GameMode
                 if (!complete)
                 {
                     allowStealing = true;
-                    DisplayText.ShowText(new DisplayText.TextPriority($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!", 10,
-                        TutorialData.TextType.INFORMATION,
+                    DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!", 10,
+                        DisplayMessage.TextType.INFORMATION,
                         6f));
                     complete = true;
                 }
@@ -156,8 +156,8 @@ namespace GameModeLoader.GameMode
             }
             if (idx == 0)
             {
-                DisplayText.ShowText(new DisplayText.TextPriority($"Welcome to Blade Game! Kill to level up your weapon!", 10,
-                    TutorialData.TextType.INFORMATION,
+                DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Welcome to Blade Game! Kill to level up your weapon!", 10,
+                    DisplayMessage.TextType.INFORMATION,
                     6f));
             }
             Arm();
@@ -171,7 +171,7 @@ namespace GameModeLoader.GameMode
             creature.handRight.OnGrabEvent -= OnGrabEvent;
         }
 
-        private void OnGrabEvent(Side side, Handle handle, float axisPosition, HandleOrientation orientation, EventTime eventTime)
+        private void OnGrabEvent(Side side, Handle handle, float axisPosition, HandlePose orientation, EventTime eventTime)
         {
             var item = handle.item;
             if (allowStealing || item == null)

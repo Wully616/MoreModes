@@ -33,7 +33,7 @@ namespace GameModeLoader.Module {
 			EventManager.onLevelLoad += EventManager_onLevelLoad;
 			//In the master level, update the catalog LevelData's to add the custom gamemodes
 			AddModesToMaps();
-
+            
 			yield return base.OnLoadCoroutine();
 		}
 
@@ -43,7 +43,7 @@ namespace GameModeLoader.Module {
 					$"Level loaded. Map: {Level.current.data.id}. Mode: {Level.current.mode.name}\nModules:";
 
 				if ( Level.current.options == null ) {
-					Level.current.options = new Dictionary<string, double>();
+					Level.current.options = new Dictionary<string, string>();
 				}
 
 				foreach ( LevelModule levelModule in Level.current.mode.modules ) {
@@ -54,9 +54,7 @@ namespace GameModeLoader.Module {
 				foreach (var currentOption in Level.current.options) {
 					modules += $"{currentOption.Key}:{currentOption.Value}, ";
 				}
-				
-
-				Debug.Log(modules);
+                Debug.Log(modules);
 			}
 		}
 

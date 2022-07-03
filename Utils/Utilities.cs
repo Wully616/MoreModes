@@ -25,7 +25,7 @@ namespace GameModeLoader.Utils {
 			if ( active ) {
 				GameManager.slowMotionState = GameManager.SlowMotionState.Starting;
 				if ( effectData != null ) {
-					GameManager.slowTimeEffectInstance = effectData.Spawn(gameManager.transform, true, (System.Type[])Array.Empty<System.Type>());
+					GameManager.slowTimeEffectInstance = effectData.Spawn(gameManager.transform, true);
 					GameManager.slowTimeEffectInstance.Play();
 				}
 				while ( (double)Time.timeScale > (double)scale ) {

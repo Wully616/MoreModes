@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\BigHead.cs" />
-    <Compile Include="Component\Cleaner.cs" />
     <Compile Include="Component\OneHPLeft.cs" />
     <Compile Include="Component\KillChain.cs" />
     <Compile Include="GameMode\BowArrowOnly.cs" />

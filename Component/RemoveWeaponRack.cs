@@ -8,11 +8,17 @@ namespace GameModeLoader.Component {
 		public override IEnumerator OnLoadCoroutine() {
 			SetId();
 			if (IsEnabled()) {
-				var weaponRacks = Object.FindObjectsOfType<WeaponRack>();
-				foreach (var weaponRack in weaponRacks) {
-					weaponRack.transform.gameObject.SetActive(false);
-				}
-			}
+                foreach (Level.CustomReference customReference in level.customReferences)
+                {
+                    if (customReference.name == "Rack")
+                    {
+                        foreach (Transform transform in customReference.transforms)
+                        {
+                            transform.gameObject.SetActive(false);
+                        }
+                    }
+                }
+            }
 
 			yield break;
 		}

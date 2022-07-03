@@ -22,7 +22,7 @@ namespace GameModeLoader.Component {
 				GameManager.slowMotionState = GameManager.SlowMotionState.Disabled;
 				if (WaveSpawner.instances.Count > 0) {
 					var waveSpawner = WaveSpawner.instances[0];
-					waveSpawner.OnWaveEndEvent.AddListener(OnWaveEnded);
+					waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
 				}
 			}
 
@@ -49,13 +49,13 @@ namespace GameModeLoader.Component {
 
 		private IEnumerator WaveEndedCoroutine() {
 			GameManager.SetSlowMotion(false, 1, spellPowerSlowTime.exitCurve);
-			DisplayText.ShowText(new DisplayText.TextPriority("Super", 10,
-				TutorialData.TextType.INFORMATION,
+			DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Super", 10,
+				DisplayMessage.TextType.INFORMATION,
 				0.5f));
 
 			yield return new WaitForSeconds(0.5f);
-			DisplayText.ShowText(new DisplayText.TextPriority("HOT", 10,
-				TutorialData.TextType.INFORMATION,
+			DisplayMessage.ShowMessage(new DisplayMessage.MessageData("HOT", 10,
+				DisplayMessage.TextType.INFORMATION,
 				0.5f));
 		}
 
@@ -66,7 +66,7 @@ namespace GameModeLoader.Component {
 				EventManager.onUnpossess -= EventManager_onUnpossess;
 				enableSloMo = false;
 				if (waveSpawner) {
-					waveSpawner.OnWaveEndEvent.RemoveListener(OnWaveEnded);
+					waveSpawner.OnWaveAnyEndEvent.RemoveListener(OnWaveEnded);
 				}
 			}
 

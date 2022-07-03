@@ -21,17 +21,18 @@ namespace Wully.Utils {
 				return false;
 			}
 			//if the config option is there,  enable/disable based on its value
-			if ( level.options != null && level.options.TryGetValue(optionId, out double num) ) {
-				return num > 0; //0 is off, 1 is on
-			}
+			if ( level.options != null && level.options.TryGetValue(optionId, out string num) && Boolean.TryParse(num, out bool result))
+            {
+                return result;
+            }
 
 			return false;
 		}
 
 		public static bool GetOptionAsBool(this Level level, string optionId, bool defaultValue) {
 			//if the config option is there,  enable/disable based on its value
-			if (level.options != null && level.options.TryGetValue(optionId, out double num)) {
-				defaultValue = num > 0; //0 is off, 1 is on
+			if (level.options != null && level.options.TryGetValue(optionId, out string num) && Boolean.TryParse(num, out bool result) ) {
+                return result;
 			}
 
 			return defaultValue;

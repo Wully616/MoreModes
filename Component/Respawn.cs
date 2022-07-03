@@ -61,8 +61,8 @@ namespace GameModeLoader.Component
                 return;
             CameraEffects.SetSepia(0.0f);
             Player.local.locomotion.enabled = false;
-            DisplayText.ShowText(new DisplayText.TextPriority($"{_lives} lives left!", 10,
-                TutorialData.TextType.INFORMATION,
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{_lives} lives left!", 10,
+                DisplayMessage.TextType.INFORMATION,
                 4f));
         }
 
@@ -130,7 +130,7 @@ namespace GameModeLoader.Component
             CameraEffects.DoTimedEffect(Color.black, CameraEffects.TimedEffect.FadeIn,
                 delayBeforeLoad * 0.5f);
             CameraEffects.SetSepia(1f);
-            DisplayText.ShowText(new DisplayText.TextPriority("You have died.", 10, TutorialData.TextType.INFORMATION,
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData("You have died.", 10, DisplayMessage.TextType.INFORMATION,
                 5f));
             yield return new WaitForSeconds(2f);
 
@@ -145,8 +145,8 @@ namespace GameModeLoader.Component
             player.SetCreature(creature);
             player.locomotion.enabled = true;
             CameraEffects.SetSepia(0.0f);
-            DisplayText.ShowText(new DisplayText.TextPriority($"{_lives} lives left!", 10,
-                TutorialData.TextType.INFORMATION,
+            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{_lives} lives left!", 10,
+                DisplayMessage.TextType.INFORMATION,
                 4f));
         }
 

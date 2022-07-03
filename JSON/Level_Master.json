@@ -8,9 +8,6 @@
 			"modules": [
 				{
 					"$type": "GameModeLoader.Module.GameModeLoader, GameModeLoader"
-				},
-				{
-					"$type": "GameModeLoader.Component.Cleaner, GameModeLoader"
 				}
 			]
 		}
