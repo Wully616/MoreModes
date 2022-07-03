@@ -43,7 +43,7 @@ namespace GameModeLoader.Module {
 					$"Level loaded. Map: {Level.current.data.id}. Mode: {Level.current.mode.name}\nModules:";
 
 				if ( Level.current.options == null ) {
-					Level.current.options = new Dictionary<string, double>();
+					Level.current.options = new Dictionary<string, string>();
 				}
 
 				foreach ( LevelModule levelModule in Level.current.mode.modules ) {

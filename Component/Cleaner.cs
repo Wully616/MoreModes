@@ -39,7 +39,7 @@ namespace GameModeLoader.Component
                 //call unload
                 levelModuleCleaner.OnUnload();
 				//remove
-                if (!levelDataMode.modules.IsNullOrEmpty())
+                if (!ThunderRoad.Utils.IsNullOrEmpty(levelDataMode.modules))
                 {
                     for (var i = levelDataMode.modules.Count - 1; i >= 0; i--)
                         if ( levelDataMode.modules[i] == levelModuleCleaner)

@@ -31,10 +31,10 @@ namespace GameModeLoader.Component
             if (IsEnabled())
             {
                 creature.handLeft.caster.allowCasting = true;
-                creature.handLeft.caster.allowSpellWheel = true;
+                creature.handLeft.caster.AllowSpellWheel(this);
 
                 creature.handRight.caster.allowCasting = true;
-                creature.handRight.caster.allowSpellWheel = true;
+                creature.handRight.caster.AllowSpellWheel(this);
             }
         }
 
@@ -48,10 +48,10 @@ namespace GameModeLoader.Component
             if (IsEnabled())
             {
                 creature.handLeft.caster.allowCasting = false;
-                creature.handLeft.caster.allowSpellWheel = false;
+                creature.handLeft.caster.DisableSpellWheel(this);
 
                 creature.handRight.caster.allowCasting = false;
-                creature.handRight.caster.allowSpellWheel = false;
+                creature.handRight.caster.DisableSpellWheel(this);
             }
         }
 
