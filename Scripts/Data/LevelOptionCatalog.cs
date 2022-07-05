@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameModeLoader.Module;
 using ThunderRoad;
 
 namespace GameModeLoader.Data {

@@ -43,9 +43,9 @@ namespace GameModeLoader.Component
                 yield return new WaitForSeconds(2f);
 
 
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Welcome to Kill Chain! Keep killing to stay alive using ANY means, you have {timeBetweenKill} seconds to kill your next target. The first timer will start after your first kill.", 10,
-                DisplayMessage.TextType.SUBTITLE,
-                6f,6f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Welcome to Kill Chain! Keep killing to stay alive using ANY means, you have {timeBetweenKill} seconds to kill your next target. The first timer will start after your first kill.", 10,
+            //     DisplayMessage.TextType.SUBTITLE,
+            //     6f,6f));
         }
 
         public override void OnUnload()
@@ -56,9 +56,9 @@ namespace GameModeLoader.Component
         private void OnWaveEnd()
         {
             string text = win ? "WIN" : "FAILED";
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"You {text}! You got {kills} kills. Please start a new wave to restart", 9,
-                 DisplayMessage.TextType.SUBTITLE,
-                6f,6f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"You {text}! You got {kills} kills. Please start a new wave to restart", 9,
+            //      DisplayMessage.TextType.SUBTITLE,
+            //     6f,6f));
             firstKill = false;
             win = true;
         }

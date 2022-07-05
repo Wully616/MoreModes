@@ -17,7 +17,7 @@ namespace GameModeLoader.Data {
 
 		public void SetId() {
 			//get the id of this LevelModuleOptionals Option data.
-			var options = Module.GameModeLoader.GetLevelOptionList();
+			var options = Catalog.GetDataList<LevelOptionCatalog>();
 			foreach (var option in options) {
 				if (option.levelOption.levelModuleOptional.GetType() == this.GetType()) {
 					this.id = option.levelOption.name;

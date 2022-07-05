@@ -108,24 +108,24 @@ namespace GameModeLoader.GameMode {
 			}
 
 			yield return new WaitForSeconds(startDelay);
-			DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textNextWaveId}", null, null, null, ));
+			// DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textNextWaveId}", null, null, null, ));
 			for (int i = 3; i > 0; --i) {
-				DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
-					1f,1f));
+				// DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
+				// 	1f,1f));
 				yield return new WaitForSeconds(2f);
 			}
 
-			DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textFightId}",
-				10, DisplayMessage.TextType.INFORMATION, 1f,1f));
+			// DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textFightId}",
+			// 	10, DisplayMessage.TextType.INFORMATION, 1f,1f));
 			yield return new WaitForSeconds(1f);
 			WaveData data = Catalog.GetData<WaveData>(waves[waveIndex].waveID);
 			if (data != null)
 				waveSpawner.StartWave(data, 5f);
 			else
 				Debug.LogError("Unable to find wave " + waves[waveIndex].waveID);
-			DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
-				$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
-				DisplayMessage.TextType.INFORMATION, 3f,3f));
+			// DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
+			// 	$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
+			// 	DisplayMessage.TextType.INFORMATION, 3f,3f));
 		}
 
 
@@ -180,9 +180,9 @@ namespace GameModeLoader.GameMode {
 							Debug.LogError("Wave " + waves[waves.Count - 1] + " Not found!");
 						} else {
 							waveSpawner.StartWave(data, 5f, false);
-							DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
-								$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
-								DisplayMessage.TextType.INFORMATION, 3f,3f));
+							// DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
+							// 	$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
+							// 	DisplayMessage.TextType.INFORMATION, 3f,3f));
 						}
 					} else {
 						Level.current.state = Level.State.Success;
@@ -197,9 +197,9 @@ namespace GameModeLoader.GameMode {
 						Debug.LogError("Wave " + waves[waveIndex] + " Not found!");
 					} else {
 						waveSpawner.StartWave(data, 5f, false);
-						DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
-							$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
-							DisplayMessage.TextType.INFORMATION, 3f,3f));
+						// DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
+						// 	$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
+						// 	DisplayMessage.TextType.INFORMATION, 3f,3f));
 					}
 				}
 			}
@@ -213,7 +213,7 @@ namespace GameModeLoader.GameMode {
 
 		public void SetId() {
 			//get the id of this LevelModuleOptionals Option data.
-			var options = Module.GameModeLoader.GetLevelOptionList();
+			var options = Catalog.GetDataList<LevelOptionCatalog>();
 			foreach ( var option in options ) {
 				if ( option.levelOption.levelModuleOptional.GetType() == this.GetType() ) {
 					this.id = option.levelOption.name;

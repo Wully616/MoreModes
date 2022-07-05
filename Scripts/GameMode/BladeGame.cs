@@ -80,8 +80,8 @@ namespace GameModeLoader.GameMode
         private IEnumerator WaveEndedCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Tier {currentTier} complete!: {tierWaves[currentTier]}",
-                10, DisplayMessage.TextType.INFORMATION, 3f,3f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Tier {currentTier} complete!: {tierWaves[currentTier]}",
+            //     10, DisplayMessage.TextType.INFORMATION, 3f,3f));
         }
 
 
@@ -94,13 +94,13 @@ namespace GameModeLoader.GameMode
             yield return new WaitForSeconds(startDelay);
             for (int i = 3; i > 0; --i)
             {
-                DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
-                    1f,1f));
+                // DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
+                //     1f,1f));
                 yield return new WaitForSeconds(2f);
             }
 
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Starting Tier {currentTier} wave: " + tierWaves[currentTier],
-                10, DisplayMessage.TextType.INFORMATION, 3f,3f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Starting Tier {currentTier} wave: " + tierWaves[currentTier],
+            //     10, DisplayMessage.TextType.INFORMATION, 3f,3f));
             yield return new WaitForSeconds(1f);
             WaveData data = Catalog.GetData<WaveData>(tierWaves[currentTier]);
             if (data != null)
@@ -137,9 +137,9 @@ namespace GameModeLoader.GameMode
                 if (!complete)
                 {
                     allowStealing = true;
-                    DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!", 10,
-                        DisplayMessage.TextType.INFORMATION,
-                        6f,6f));
+                    // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!", 10,
+                    //     DisplayMessage.TextType.INFORMATION,
+                    //     6f,6f));
                     complete = true;
                 }
                 return;
@@ -156,9 +156,9 @@ namespace GameModeLoader.GameMode
             }
             if (idx == 0)
             {
-                DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Welcome to Blade Game! Kill to level up your weapon!", 10,
-                    DisplayMessage.TextType.INFORMATION,
-                    6f,6f));
+                // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Welcome to Blade Game! Kill to level up your weapon!", 10,
+                //     DisplayMessage.TextType.INFORMATION,
+                //     6f,6f));
             }
             Arm();
 
