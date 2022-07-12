@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Linq;
-using GameModeLoader.Data;
+using Wully.MoreModes.Data;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
-namespace GameModeLoader.Component
+namespace Wully.MoreModes.Component
 {
     public class Respawn : LevelModuleOptional
     {
@@ -61,9 +61,9 @@ namespace GameModeLoader.Component
                 return;
             CameraEffects.SetSepia(0.0f);
             Player.local.locomotion.enabled = false;
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{_lives} lives left!", 10,
-                 DisplayMessage.TextType.INFORMATION,
-                4f, 4f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{_lives} lives left!", 10,
+            //      DisplayMessage.TextType.INFORMATION,
+            //     4f, 4f));
         }
 
         private void EventManager_onCreatureKill(Creature creature, Player player, CollisionInstance collisionInstance,
@@ -130,8 +130,8 @@ namespace GameModeLoader.Component
             CameraEffects.DoTimedEffect(Color.black, CameraEffects.TimedEffect.FadeIn,
                 delayBeforeLoad * 0.5f);
             CameraEffects.SetSepia(1f);
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData("You have died.", 10, DisplayMessage.TextType.INFORMATION,
-                5f, 5f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData("You have died.", 10, DisplayMessage.TextType.INFORMATION,
+            //     5f, 5f));
             yield return new WaitForSeconds(2f);
 
             while (Time.unscaledTime - killTime < delayBeforeLoad && Time.unscaledTime - killTime <= 2.0)
@@ -145,9 +145,9 @@ namespace GameModeLoader.Component
             player.SetCreature(creature);
             player.locomotion.enabled = true;
             CameraEffects.SetSepia(0.0f);
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{_lives} lives left!", 10,
-                DisplayMessage.TextType.INFORMATION,
-                4f, 4f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"{_lives} lives left!", 10,
+            //     DisplayMessage.TextType.INFORMATION,
+            //     4f, 4f));
         }
 
         public override void OnUnload()

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using Wully.Utils;
@@ -7,8 +6,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wully.MoreModes.Data;
 
-namespace GameModeLoader.GameMode
+namespace Wully.MoreModes.GameMode
 {
 	public class BowArrowOnly : LevelModuleOptional
 	{

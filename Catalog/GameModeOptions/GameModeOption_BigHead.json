@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "bighead",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "bighead_option",
 		"displayName": "BigHead",
 		"description": "Big Head Mode!",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.BigHead, GameModeLoader" }
+		"levelModuleOptional": { "$type": "MoreModes.Component.BigHead, MoreModes" }
 	}
 }

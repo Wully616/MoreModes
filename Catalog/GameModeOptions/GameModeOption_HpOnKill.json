@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "hponkill",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "hponkill",
 		"displayName": "Hp4Kill",
 		"description": "Get healed when you kill!",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.HpOnKill, GameModeLoader", "hpAmount":  10 }
+		"levelModuleOptional": { "$type": "MoreModes.Component.HpOnKill, MoreModes", "hpAmount":  10 }
 	}
 }

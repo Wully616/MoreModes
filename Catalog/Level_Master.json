@@ -1,18 +1,15 @@
 {
-	"$type": "ThunderRoad.LevelData, ThunderRoad",
-	"id": "Master",
-	"version": 3,
-	"modes": [
-		{
-			"name": "Default",
-			"modules": [
-				{
-					"$type": "GameModeLoader.Module.GameModeLoader, GameModeLoader"
-				},
-				{
-					"$type": "GameModeLoader.Component.Cleaner, GameModeLoader"
-				}
-			]
-		}
-	]
+  "$type": "ThunderRoad.LevelData, ThunderRoad",
+  "id": "Master",
+  "version": 3,
+  "modes": [
+    {
+      "name": "Default",
+      "modules": [
+        {
+          "$type": "Wully.MoreModes.LevelModuleModifier, MoreModes"
+        }
+      ]
+    }
+  ]
 }

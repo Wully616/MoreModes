@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
-using GameModeLoader.Data;
+using Wully.MoreModes.Data;
 using ThunderRoad;
 using Wully.Utils;
 
-namespace GameModeLoader.Component {
+namespace Wully.MoreModes.Component {
 	public class NoTk : LevelModuleOptional {
 		private bool showHighlighterTK;
 		public override IEnumerator OnLoadCoroutine() {

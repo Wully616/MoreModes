@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GameModeLoader.Data;
+using GameModeLoader.Utils;
 using Sirenix.Utilities;
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 
-namespace GameModeLoader.GameMode
+namespace Wully.MoreModes.GameMode
 {
     /// <summary>
     ///     This survival mode inherits from the base games survival game mode
@@ -80,8 +81,7 @@ namespace GameModeLoader.GameMode
         private IEnumerator WaveEndedCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Tier {currentTier} complete!: {tierWaves[currentTier]}",
-            //     10, DisplayMessage.TextType.INFORMATION, 3f,3f));
+            Utilities.Message($"Tier {currentTier} complete!: {tierWaves[currentTier]}");
         }
 
 
@@ -94,13 +94,12 @@ namespace GameModeLoader.GameMode
             yield return new WaitForSeconds(startDelay);
             for (int i = 3; i > 0; --i)
             {
-                // DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
-                //     1f,1f));
+                Utilities.Message($"{i}");
                 yield return new WaitForSeconds(2f);
             }
 
-            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Starting Tier {currentTier} wave: " + tierWaves[currentTier],
-            //     10, DisplayMessage.TextType.INFORMATION, 3f,3f));
+            Utilities.Message($"Starting Tier {currentTier} wave: {tierWaves[currentTier]}");
+            
             yield return new WaitForSeconds(1f);
             WaveData data = Catalog.GetData<WaveData>(tierWaves[currentTier]);
             if (data != null)
@@ -137,9 +136,7 @@ namespace GameModeLoader.GameMode
                 if (!complete)
                 {
                     allowStealing = true;
-                    // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!", 10,
-                    //     DisplayMessage.TextType.INFORMATION,
-                    //     6f,6f));
+                    Utilities.Message($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!");
                     complete = true;
                 }
                 return;
@@ -156,13 +153,9 @@ namespace GameModeLoader.GameMode
             }
             if (idx == 0)
             {
-                // DisplayMessage.ShowMessage(new DisplayMessage.MessageData($"Welcome to Blade Game! Kill to level up your weapon!", 10,
-                //     DisplayMessage.TextType.INFORMATION,
-                //     6f,6f));
+                Utilities.Message($"Welcome to Blade Game! Kill to level up your weapon!");
             }
             Arm();
-
-
         }
 
         private void EventManager_onUnpossess(Creature creature, EventTime eventTime)
@@ -181,7 +174,6 @@ namespace GameModeLoader.GameMode
                 if (item.data.type == itemType)
                     return;
             //If the player picked up a item they are not on right now, make em drop it
-
             if (idx == -1 || item.data.id != itemIds[idx]) Level.current.StartCoroutine(DisarmCoroutine());
         }
 
@@ -220,7 +212,8 @@ namespace GameModeLoader.GameMode
                 }
                 Disarm();
                 hand.Grab(item.GetMainHandle(GameManager.options.twoHandedDominantHand), true);
-                rewardFxData?.Spawn(hand.transform.position, hand.transform.rotation).Play();
+                Transform handTransform = hand.transform;
+                rewardFxData?.Spawn(handTransform.position, handTransform.rotation).Play();
             });
             yield break;
         }

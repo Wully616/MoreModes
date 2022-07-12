@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
+using Wully.MoreModes.Data;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
-namespace GameModeLoader.Component {
+namespace Wully.MoreModes.Component {
 	public class RemoveHealthPotionsInventory : LevelModuleOptional {
 		public override IEnumerator OnLoadCoroutine() {
 			SetId();

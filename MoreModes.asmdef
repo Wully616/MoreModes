@@ -2,7 +2,8 @@
     "name": "MoreModes",
     "rootNamespace": "",
     "references": [
-        "GUID:270d048a808d7de489542fd0df53923c"
+        "GUID:270d048a808d7de489542fd0df53923c",
+        "GUID:84651a3751eca9349aac36a66bba901b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

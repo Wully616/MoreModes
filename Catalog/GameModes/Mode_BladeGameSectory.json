@@ -1,5 +1,5 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelDataModeCatalog, MoreModes",
 	"id": "bladegamesectory",
 	"version": 3,
 	"excludeLevelIds": ["Greenland"],
@@ -22,15 +22,15 @@
 				"cleanerRate": 5.0
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
-			{ "$type": "GameModeLoader.Component.RemoveWaveBook, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.RemoveWeaponBook, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.RemoveWeaponRack, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.NoSpellWheel, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.NoTk, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.Respawn, GameModeLoader", "enable":  true, "lives":  3, "behaviour": "ShowScores",
+			{ "$type": "MoreModes.Component.RemoveWaveBook, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.RemoveWeaponBook, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.RemoveWeaponRack, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.NoSpellWheel, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.NoTk, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.Respawn, MoreModes", "enable":  true, "lives":  3, "behaviour": "ShowScores",
 				"delayBeforeLoad": 10.0, "disablePlayerLocomotion": true},
 			{
-				"$type": "GameModeLoader.GameMode.BladeGame, GameModeLoader", "enable":  true,
+				"$type": "MoreModes.GameMode.BladeGame, MoreModes", "enable":  true,
 				"excludeItemIds": [
 					"MMPLantern", "Torch", "BactaStim", "LightsaberTool", "MMPMagicBook",
 					"BlasterPowerCell_Blue","BlasterPowerCell_Cyan","BlasterPowerCell_Green",

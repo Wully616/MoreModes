@@ -9,7 +9,7 @@
 		{
 			"$type": "ThunderRoad.EffectModuleAudio, ThunderRoad",
 			"effectLink": "Intensity",
-			"audioContainerAddress": "GameModeLoader.Survival.Audio.Reward",
+			"audioContainerAddress": "MoreModes.Survival.Audio.Reward",
 			"loopFadeDelay": 0.0,
 			"audioMixer": "Effect",
 			"volumeDb": 0.0,

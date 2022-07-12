@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using GameModeLoader.Data;
+using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 using Wully.Utils;
 
-namespace GameModeLoader.GameMode {
+namespace Wully.MoreModes.GameMode {
 	/// <summary>
 	///     This survival mode inherits from the base games survival game mode
 	/// </summary>
@@ -20,10 +21,11 @@ namespace GameModeLoader.GameMode {
 			if (!IsEnabled()) { return;}
 			if (!(Player.currentCreature != null)) { return; }
 
-			var frontEyes = Player.local.head.transform.position + Player.local.head.transform.forward * 0.5f + Player.local.head.transform.up * -0.1f;
-			rewardsSpawnPosition[0].position = frontEyes + -Player.local.head.transform.right * 0.15f;
+			Transform headTransform = Player.local.head.transform;
+			var frontEyes = headTransform.position + headTransform.forward * 0.5f + headTransform.up * -0.1f;
+			rewardsSpawnPosition[0].position = frontEyes + -headTransform.right * 0.15f;
 			rewardsSpawnPosition[1].position = frontEyes;
-			rewardsSpawnPosition[2].position = frontEyes + Player.local.head.transform.right * 0.15f;
+			rewardsSpawnPosition[2].position = frontEyes + headTransform.right * 0.15f;
 		}
 
 		public override IEnumerator OnLoadCoroutine() {
@@ -108,24 +110,25 @@ namespace GameModeLoader.GameMode {
 			}
 
 			yield return new WaitForSeconds(startDelay);
-			// DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textNextWaveId}", null, null, null, ));
+			Utilities.Message($"{textGroupId} : {textNextWaveId}");
+			
 			for (int i = 3; i > 0; --i) {
-				// DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
-				// 	1f,1f));
+				Utilities.Message($"{i}");
 				yield return new WaitForSeconds(2f);
 			}
 
-			// DisplayMessage.instance.ShowMessage(new DisplayMessage.MessageData($"{textGroupId} : {textFightId}",
-			// 	10, DisplayMessage.TextType.INFORMATION, 1f,1f));
+			Utilities.Message($"{textGroupId} : {textFightId}");
 			yield return new WaitForSeconds(1f);
 			WaveData data = Catalog.GetData<WaveData>(waves[waveIndex].waveID);
 			if (data != null)
+			{
 				waveSpawner.StartWave(data, 5f);
+			}
 			else
-				Debug.LogError("Unable to find wave " + waves[waveIndex].waveID);
-			// DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
-			// 	$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
-			// 	DisplayMessage.TextType.INFORMATION, 3f,3f));
+			{
+				Debug.LogError($"Unable to find wave {waves[waveIndex].waveID}");
+			}
+			Utilities.Message($"{textGroupId} : {textWaveId} {waveIndex + 1}");
 		}
 
 
@@ -177,12 +180,10 @@ namespace GameModeLoader.GameMode {
 						yield return new WaitForSeconds(delayBetweenWave);
 						WaveData data = Catalog.GetData<WaveData>(waves[waves.Count - 1].waveID);
 						if (data == null) {
-							Debug.LogError("Wave " + waves[waves.Count - 1] + " Not found!");
+							Debug.LogError($"Wave {waves[waves.Count - 1]} Not found!");
 						} else {
 							waveSpawner.StartWave(data, 5f, false);
-							// DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
-							// 	$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
-							// 	DisplayMessage.TextType.INFORMATION, 3f,3f));
+							Utilities.Message($"{textGroupId} : {textWaveId} {waveIndex + 1}");
 						}
 					} else {
 						Level.current.state = Level.State.Success;
@@ -194,12 +195,10 @@ namespace GameModeLoader.GameMode {
 					yield return new WaitForSeconds(delayBetweenWave);
 					WaveData data = Catalog.GetData<WaveData>(waves[waveIndex].waveID);
 					if (data == null) {
-						Debug.LogError("Wave " + waves[waveIndex] + " Not found!");
+						Debug.LogError($"Wave {waves[waveIndex]} Not found!");
 					} else {
 						waveSpawner.StartWave(data, 5f, false);
-						// DisplayMessage.ShowMessage(new DisplayMessage.MessageData(
-						// 	$"{textGroupId} : {textWaveId} {waveIndex + 1}", 10,
-						// 	DisplayMessage.TextType.INFORMATION, 3f,3f));
+						Utilities.Message($"{textGroupId} : {textWaveId} {waveIndex + 1}");
 					}
 				}
 			}

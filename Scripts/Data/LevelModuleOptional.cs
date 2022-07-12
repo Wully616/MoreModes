@@ -1,7 +1,7 @@
 ﻿using ThunderRoad;
 using Wully.Utils;
 
-namespace GameModeLoader.Data {
+namespace Wully.MoreModes.Data {
 	/// <summary>
 	///     levelOption is temporarily added at run time, it contains a levelModule
 	/// </summary>

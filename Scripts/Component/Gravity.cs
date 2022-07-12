@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
 using UnityEngine;
+using Wully.MoreModes.Data;
 
-namespace GameModeLoader.Component
+namespace Wully.MoreModes.Component
 {
     public class Gravity : LevelModuleOptional
     {

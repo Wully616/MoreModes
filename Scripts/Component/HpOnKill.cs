@@ -1,10 +1,11 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
+
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 using Wully.Utils;
 
-namespace GameModeLoader.Component {
+namespace Wully.MoreModes.Component {
 	public class HpOnKill : LevelModuleOptional {
 		public int hpAmount = 10;
 

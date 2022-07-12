@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using ThunderRoad;
 
-namespace GameModeLoader.Data {
+namespace Wully.MoreModes.Data {
 	[Serializable]
 	public class LevelOptionCatalog : CustomData {
 		public List<string> excludeGameModeNames;
-
-		//This class is a dumb wrapper around the Interactable class so it can be loaded into the catalog
+		
 		public List<string> excludeLevelIds;
 		public LevelOption levelOption;
 

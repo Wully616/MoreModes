@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
+using Wully.MoreModes.Data;
 using ThunderRoad;
 using UnityEngine;
 
-namespace GameModeLoader.Component {
+namespace Wully.MoreModes.Component {
 	public class RemoveWeaponRack : LevelModuleOptional {
 		public override IEnumerator OnLoadCoroutine() {
 			/*SetId();

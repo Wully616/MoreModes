@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "only_bow_arrow",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames": [ "Blade Game" ],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "only_bow_arrow",
 		"displayName": "BowArrowOnly",
 		"description": "Bow and Arrow Only",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.GameMode.BowArrowOnly, GameModeLoader" }
+		"levelModuleOptional": { "$type": "MoreModes.GameMode.BowArrowOnly, MoreModes" }
 	}
 }

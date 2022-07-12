@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "heavygravity",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "heavygravity",
 		"displayName": "HeavyGravity",
 		"description": "If you could stand on Jupiter, this would be it!",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.Gravity, GameModeLoader", "gravity": -12.8 }
+		"levelModuleOptional": { "$type": "MoreModes.Component.Gravity, MoreModes", "gravity": -12.8 }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelDataModeCatalog, MoreModes",
 	"id": "SandboxBowArrowOnly",
 	"version": 3,
 	"excludeLevelIds": [],
@@ -27,7 +27,7 @@
 				"disablePlayerLocomotion": true
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
-			{ "$type": "GameModeLoader.GameMode.BowArrowOnly, GameModeLoader", "enable":  true }
+			{ "$type": "MoreModes.GameMode.BowArrowOnly, MoreModes", "enable":  true }
 		],
 		"availableOptions": []
 	}

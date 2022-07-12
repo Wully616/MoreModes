@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "notk",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "notk",
 		"displayName": "No TK",
 		"description": "Disables Telekinesis",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.NoTk, GameModeLoader" }
+		"levelModuleOptional": { "$type": "MoreModes.Component.NoTk, MoreModes" }
 	}
 }

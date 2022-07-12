@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "disable_healthpotions_spawn",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  ["Survival"],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "disable_healthpotions_spawn",
 		"displayName": "RemovePotionSpawns",
 		"description": "Prevent Health Potions from spawning in the map or in items that come with potions",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.RemoveSpawnedHealthPotions, GameModeLoader" }
+		"levelModuleOptional": { "$type": "MoreModes.Component.RemoveSpawnedHealthPotions, MoreModes" }
 	}
 }

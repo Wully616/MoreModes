@@ -6,8 +6,18 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace GameModeLoader.Utils {
-	public class Utilities {
+	public class Utilities
+	{
 
+		public static void Message(string text, int priority = 10, bool dismissAutomatically = true, float dismissTime = 2f)
+		{
+			ThunderRoad.DisplayMessage.instance.ShowMessage(
+				new DisplayMessage.MessageData(
+				text, null, null, null,
+				priority, 0f, null, null, false, 
+				false, ThunderRoad.DisplayMessage.AnchorType.Head, null, dismissAutomatically, dismissTime));
+		}
+		
 		public static IEnumerator SlowMo( float slowMoTime ) {
 			var spellPowerSlowTime = Catalog.GetData<SpellPowerSlowTime>("SlowTime");
 			yield return SlowMotionCoroutine(true, spellPowerSlowTime.scale, spellPowerSlowTime.enterCurve);

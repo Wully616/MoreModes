@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 using Extensions = Wully.Utils.Extensions;
 
 namespace Wully.MoreModes
@@ -15,10 +15,13 @@ namespace Wully.MoreModes
 
         public override void OnCatalogRefresh()
         {
+            //Only want one instance of the loader running
+            if (local != null) return;
+            local = this;
+            Debug.Log($"MoreModes Loader!");
             EventManager.onLevelLoad += EventManager_onLevelLoad;
-            //In the master level, update the catalog LevelData's to add the custom gamemodes
+            //update the catalog LevelData's to add the custom gamemodes
             AddModesToMaps();
-            ;
         }
 
         private void EventManager_onLevelLoad(LevelData levelData, EventTime eventTime)
@@ -27,12 +30,7 @@ namespace Wully.MoreModes
             {
                 string modules =
                     $"Level loaded. Map: {Level.current.data.id}. Mode: {Level.current.mode.name}\nModules:";
-
-                if (Level.current.options == null)
-                {
-                    Level.current.options = new Dictionary<string, string>();
-                }
-
+                
                 foreach (LevelModule levelModule in Level.current.mode.modules)
                 {
                     modules += $"{levelModule.type}, ";

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
-using GameModeLoader.Data;
 using ThunderRoad;
+using Wully.MoreModes.Data;
 using Wully.Utils;
 
-namespace GameModeLoader.Component
+namespace Wully.MoreModes.Component
 {
     public class NoSpellWheel : LevelModuleOptional
     {

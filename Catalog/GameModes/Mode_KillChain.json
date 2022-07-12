@@ -1,5 +1,5 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelDataModeCatalog, MoreModes",
 	"id": "killchain",
 	"version": 3,
 	"excludeLevelIds": ["Greenland"],
@@ -29,7 +29,7 @@
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
 			{
-				"$type": "GameModeLoader.Component.KillChain, GameModeLoader", "enable": true,
+				"$type": "MoreModes.Component.KillChain, MoreModes", "enable": true,
 				"timeBetweenKill": 10.0
 			}
 		],

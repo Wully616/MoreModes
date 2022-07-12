@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 using Wully.Utils;
 
-namespace GameModeLoader.Component
+namespace Wully.MoreModes.Component
 {
     /// <summary>
     /// Starts a particular wave on level start
@@ -46,8 +46,8 @@ namespace GameModeLoader.Component
         private IEnumerator WaveEndedCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Wave complete!: " + waveId,
-                10, DisplayMessage.TextType.INFORMATION, 3f,3f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Wave complete!: " + waveId,
+            //     10, DisplayMessage.TextType.INFORMATION, 3f,3f));
         }
 
         private IEnumerator LevelLoadedCoroutine()
@@ -59,13 +59,13 @@ namespace GameModeLoader.Component
             yield return new WaitForSeconds(startDelay);
             for (int i = 3; i > 0; --i)
             {
-                DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
-                    1f,1f));
-                yield return new WaitForSeconds(2f);
+                // DisplayMessage.ShowMessage(new DisplayMessage.MessageData(i.ToString(), 10, DisplayMessage.TextType.INFORMATION,
+                //     1f,1f));
+                // yield return new WaitForSeconds(2f);
             }
 
-            DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Starting wave: " + waveId,
-                10, DisplayMessage.TextType.INFORMATION, 3f,3f));
+            // DisplayMessage.ShowMessage(new DisplayMessage.MessageData("Starting wave: " + waveId,
+            //     10, DisplayMessage.TextType.INFORMATION, 3f,3f));
             yield return new WaitForSeconds(1f);
             WaveData data = Catalog.GetData<WaveData>(waveId);
             if (data != null)

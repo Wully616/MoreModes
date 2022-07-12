@@ -1,15 +1,15 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelOptionCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelOptionCatalog, MoreModes",
 	"id": "no_spell_wheel",
 	"version": 3,
 	"excludeLevelIds": [],
 	"excludeGameModeNames":  [],
 	"levelOption": {          
-		"$type": "GameModeLoader.Data.LevelOption, GameModeLoader",
+		"$type": "MoreModes.Data.LevelOption, MoreModes",
 		"name": "no_spell_wheel",
 		"displayName": "NoSpellWheel",
 		"description": "Disables the Players Spell Wheel",
 		"type": "Toggle",
-		"levelModuleOptional": { "$type": "GameModeLoader.Component.NoSpellWheel, GameModeLoader" }
+		"levelModuleOptional": { "$type": "MoreModes.Component.NoSpellWheel, MoreModes" }
 	}
 }

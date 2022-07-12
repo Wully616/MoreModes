@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ThunderRoad;
 
-namespace GameModeLoader.Data {
+namespace Wully.MoreModes.Data {
 	[Serializable]
 	public class LevelDataModeCatalog : CustomData {
 		//This class is a dumb wrapper around the Interactable class so it can be loaded into the catalog

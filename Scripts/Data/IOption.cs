@@ -1,4 +1,4 @@
-﻿namespace GameModeLoader.Data {
+﻿namespace Wully.MoreModes.Data {
 	
 	public interface IOption {
 		void SetId();

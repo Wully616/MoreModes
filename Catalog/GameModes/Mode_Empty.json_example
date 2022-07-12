@@ -1,5 +1,5 @@
 ﻿{
-	"$type": "GameModeLoader.Data.LevelDataModeCatalog, GameModeLoader",
+	"$type": "MoreModes.Data.LevelDataModeCatalog, MoreModes",
 	"id": "empty",
 	"version": 3,
 	"excludeLevelIds": [],
@@ -29,9 +29,9 @@
 			{
 				"$type": "ThunderRoad.LevelModuleXP, ThunderRoad"
 			},
-			{ "$type": "GameModeLoader.Component.RemoveWaveBook, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.RemoveWeaponBook, GameModeLoader", "enable":  true },
-			{ "$type": "GameModeLoader.Component.RemoveWeaponRack, GameModeLoader", "enable":  true }
+			{ "$type": "MoreModes.Component.RemoveWaveBook, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.RemoveWeaponBook, MoreModes", "enable":  true },
+			{ "$type": "MoreModes.Component.RemoveWeaponRack, MoreModes", "enable":  true }
 		],
 		"availableOptions": []
 	}

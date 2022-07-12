@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 using Wully.Utils;
 
-namespace GameModeLoader.Component {
+namespace Wully.MoreModes.Component {
 	public class KillSlowMo : LevelModuleOptional {
 		public int slowMoTime = 1;
         private Coroutine slowMoCoroutine;

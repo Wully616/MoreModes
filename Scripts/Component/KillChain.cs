@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using GameModeLoader.Data;
 using ThunderRoad;
 using UnityEngine;
+using Wully.MoreModes.Data;
 
-namespace GameModeLoader.Component
+namespace Wully.MoreModes.Component
 {
     public class KillChain : LevelModuleOptional
     {
