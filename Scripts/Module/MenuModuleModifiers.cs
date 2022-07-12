@@ -19,9 +19,8 @@ namespace Wully.MoreModes
             page1Content = menu.customReferences[0].transform;
             page2Content = menu.customReferences[1].transform;
             
-            Catalog.InstantiateAsync(buttonPrefab, Vector3.zero, Quaternion.identity, menu.transform, button => {
+            Catalog.LoadAssetAsync<GameObject>(buttonPrefab,  button => {
                 buttonGameObject = button;
-                buttonGameObject.SetActive(false);
                 CreateButtons();
             }, "buttonPrefab");
 
