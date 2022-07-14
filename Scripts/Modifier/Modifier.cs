@@ -5,31 +5,27 @@ namespace Wully.MoreModes
 {
     public abstract class Modifier : CustomData
     {
+        /// <summary>
+        /// Description of this modifier which appears in the book
+        /// </summary>
         public string description;
         
-        public Modifier local;
-        public Modifier Local => local;
+        // A local variable which should only be non-null for the real instance of this modifier
+        protected Modifier local;
+        
         private bool isEnabled;
-
+        /// <summary>
+        /// Returns true if this modifier is enabled
+        /// </summary>
         public bool IsEnabled => local.isEnabled;
-
-        public override void Init()
-        {
-            base.Init();
-            //there can only be one valid instance of a modifier
-            if (Local != null)
-            {
-                Debug.LogError($"There is a duplicate Modifier with the id of {id} and type {this.GetType()}. There can only be one instance of each Modifier");
-            }
-            else
-            {
-                local = this;
-            }
-        }
-
+        /// <summary>
+        /// Returns true if this modifier has been setup
+        /// </summary>
+        public bool IsSetup => local != null;
+        
         public void Toggle()
         {
-            Debug.Log($"Toggling {this.Local.id}");
+            if (!IsSetup) return;
             if (IsEnabled)
             {
                 local.Disable();
@@ -41,10 +37,10 @@ namespace Wully.MoreModes
                 local.isEnabled = true;
             }
         }
-
         
         public void Enable()
         {
+            if (!IsSetup) return;
             OnEnable();
             LevelModuleModifier.local.AddModifier(this);
             EventManager.onLevelLoad += OnLevelLoad;
@@ -55,6 +51,7 @@ namespace Wully.MoreModes
         
         public void Disable()
         {
+            if (!IsSetup) return;
             OnDisable();
             LevelModuleModifier.local.RemoveModifier(this);
             EventManager.onLevelLoad -= OnLevelLoad;
@@ -73,6 +70,7 @@ namespace Wully.MoreModes
             
         }
 
+        // Called each frame
         public virtual void Update()
         {
             

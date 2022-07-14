@@ -28,13 +28,17 @@ namespace Wully.MoreModes
 
         public bool AddModifier(Modifier modifier)
         {
-            var modifiersCount = modifiers.Count;
-            for (int i = 0; i < modifiersCount; i++)
+            if (modifier.IsSetup) //dont add the modifier if it hasnt been setup
             {
-                if(modifiers[i] == modifier) return false;
+                var modifiersCount = modifiers.Count;
+                for (int i = 0; i < modifiersCount; i++)
+                {
+                    if (modifiers[i] == modifier) return false;
+                }
+                modifiers.Add(modifier);
+                return true;
             }
-            modifiers.Add(modifier);
-            return true;
+            return false;
         }
         
         public bool RemoveModifier(Modifier modifier)
@@ -48,7 +52,9 @@ namespace Wully.MoreModes
             var modifiersCount = modifiers.Count;
             for (int i = 0; i < modifiersCount; i++)
             {
-                modifiers[i].Local.Update();
+                var modifier = modifiers[i];
+                modifier.Update();
+                
             }
         }
     }

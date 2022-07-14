@@ -15,7 +15,6 @@ namespace Wully.MoreModes.Component
             {
                 EventManager.onPossess += EventManager_onPossess;
                 EventManager.onUnpossess += EventManager_onUnpossess;
-                ;
             }
 
             yield break;

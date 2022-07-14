@@ -6,14 +6,24 @@ using Wully.Utils;
 
 namespace Wully.MoreModes {
 	
-	public class SuperHot : Modifier {
+	public class SuperHot : Modifier
+	{
+		
 		private SpellPowerSlowTime spellPowerSlowTime;
 		private bool superHotEnabled;
 		
+		public static SuperHot Instance;
+
 		public override void Init()
 		{
-			base.Init();
-			spellPowerSlowTime = Catalog.GetData<SpellPowerSlowTime>("SlowTime");
+			if (Instance == null)
+			{
+				base.Init();
+				Instance = this;
+				// bit hacky, but we only one 1 modifier, if local isnt set, this modifier isnt Setup
+				local = this; 
+				spellPowerSlowTime = Catalog.GetData<SpellPowerSlowTime>("SlowTime");
+			}
 		}
 		
 		//Remove slowmo and enable superhot
@@ -28,7 +38,7 @@ namespace Wully.MoreModes {
 		private void AddSlowMo()
 		{
 			superHotEnabled = false;
-			Player.local.creature.container.RemoveContent("SpellSlowTime");
+			Player.local.creature.container.AddContent("SpellSlowTime");
 			GameManager.SetSlowMotion(false, 1, spellPowerSlowTime.exitCurve);
 		}
 		
