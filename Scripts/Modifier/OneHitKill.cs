@@ -1,12 +1,4 @@
-﻿using System.Collections;
-using Wully.MoreModes.Data;
-using GameModeLoader.Utils;
-using ThunderRoad;
-using Wully.Utils;
-using UnityEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ThunderRoad;
 
 namespace Wully.MoreModes
 {
@@ -39,7 +31,8 @@ namespace Wully.MoreModes
         
         private void OnCreatureSpawn(Creature creature)
         {
-	        creature.data.health = 1;
+	        creature.currentHealth = 1;
+	        creature.maxHealth = 1;
         }
 
     }

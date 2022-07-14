@@ -6,7 +6,7 @@ namespace Wully.MoreModes
 {
     public class HighGravity : Modifier
     {
-        public float gravity = -4.9f;
+        public float gravity = -14.7f;
         private Vector3 gravityForce;
 
         public static HighGravity Instance;

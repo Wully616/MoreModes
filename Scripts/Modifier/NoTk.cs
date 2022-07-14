@@ -4,9 +4,9 @@ using Wully.MoreModes.Data;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class NoMagic : Modifier {
+	public class NoTk : Modifier {
 		
-		public static NoMagic Instance;
+		public static NoTk Instance;
         
 		public override void Init()
 		{
@@ -46,24 +46,12 @@ namespace Wully.MoreModes {
 		
 		private void AddMagic()
 		{
-			Player.currentCreature.container.AddContent("SpellSlowTime");
 			Player.currentCreature.container.AddContent("SpellTelekinesis");
-			Player.currentCreature.handLeft.caster.allowCasting = true;
-			Player.currentCreature.handLeft.caster.AllowSpellWheel(this);
-			Player.currentCreature.handRight.caster.allowCasting = true;
-			Player.currentCreature.handRight.caster.AllowSpellWheel(this);
 		}
 		
 		private void RemoveMagic()
 		{
-			Player.currentCreature.mana.casterLeft.UnloadSpell();
-			Player.currentCreature.mana.casterRight.UnloadSpell();
-			Player.currentCreature.container.RemoveContent("SpellSlowTime");
 			Player.currentCreature.container.RemoveContent("SpellTelekinesis");
-			Player.currentCreature.handLeft.caster.allowCasting = true;
-			Player.currentCreature.handLeft.caster.AllowSpellWheel(this);
-			Player.currentCreature.handRight.caster.allowCasting = true;
-			Player.currentCreature.handRight.caster.AllowSpellWheel(this);
 		}
 	}
 }
