@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
 	
-	public class SuperHot : Modifier
+	public class SuperHot : ModifierData
 	{
 		
 		private SpellPowerSlowTime spellPowerSlowTime;

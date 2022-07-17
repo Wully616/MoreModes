@@ -1,10 +1,8 @@
 ﻿{
-	"$type": "MoreModes.Data.LevelDataModeCatalog, MoreModes",
+	"$type": "Wully.MoreModes.GameModeData, MoreModes",
 	"id": "survivalanywhere",
-	"version": 3,
 	"excludeLevelIds": ["Dungeon"],
 	"explicitOptions":  false,
-	"gameModeOptionIds": [],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Survival Anywhere",
@@ -28,11 +26,11 @@
 				"disablePlayerLocomotion": true
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
-			{ "$type": "MoreModes.Component.RemoveWaveBook, MoreModes", "enable":  true },
-			{ "$type": "MoreModes.Component.RemoveWeaponBook, MoreModes", "enable":  true },
-			{ "$type": "MoreModes.Component.RemoveWeaponRack, MoreModes", "enable":  true },
+			{ "$type": "Wully.MoreModes.Component.RemoveWaveBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWeaponBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWeaponRack, MoreModes" },
 			{
-				"$type": "MoreModes.GameMode.SurvivalMode, MoreModes",
+				"$type": "Wully.MoreModes.GameMode.SurvivalMode, MoreModes",
 				"enable":  true,
 				"waves": [
 					{

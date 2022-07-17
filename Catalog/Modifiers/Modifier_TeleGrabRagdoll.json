@@ -1,0 +1,5 @@
+﻿{
+	"$type": "Wully.MoreModes.TeleGrabRagdoll, MoreModes",
+	"id": "TeleGrabRagdoll",
+	"description": "Telekinesis Grab ragdolls without requiring Gravity"
+}

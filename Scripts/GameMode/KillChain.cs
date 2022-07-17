@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 
-namespace Wully.MoreModes.Component
+namespace Wully.MoreModes.GameMode
 {
-    public class KillChain : LevelModuleOptional
+    public class KillChain : LevelModule
     {
         public float timeBetweenKill = 15f;
         private float lastKillTime;
@@ -19,8 +19,6 @@ namespace Wully.MoreModes.Component
 
         public override IEnumerator OnLoadCoroutine()
         {
-            SetId();
-            if (!IsEnabled()) yield break;
             EventManager.onCreatureKill += EventManager_onCreatureKill;
 
             rewardFxData = Catalog.GetData<EffectData>(rewardFxId);
@@ -36,6 +34,7 @@ namespace Wully.MoreModes.Component
             }
 
             level.StartCoroutine(LevelLoadedCoroutine());
+            yield break;
         }
         private IEnumerator LevelLoadedCoroutine()
         {

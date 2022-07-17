@@ -1,10 +1,8 @@
 ﻿{
-	"$type": "MoreModes.Data.LevelDataModeCatalog, MoreModes",
+	"$type": "Wully.MoreModes.GameModeData, MoreModes",
 	"id": "killchain_easy",
-	"version": 3,
 	"excludeLevelIds": ["Greenland"],
 	"explicitOptions":  false,
-	"gameModeOptionIds": [],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Kill Chain Easy",
@@ -29,7 +27,7 @@
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
 			{
-				"$type": "MoreModes.Component.KillChain, MoreModes", "enable": true,
+				"$type": "Wully.MoreModes.GameMode.KillChain, MoreModes",
 				"timeBetweenKill": 20.0
 			}
 		],

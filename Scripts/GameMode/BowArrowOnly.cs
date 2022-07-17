@@ -6,27 +6,22 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 
 namespace Wully.MoreModes.GameMode
 {
-	public class BowArrowOnly : LevelModuleOptional
+	public class BowArrowOnly : LevelModule
 	{
 		private List<ItemData.Type> allowedItemTypes = new List<ItemData.Type> { ItemData.Type.Quiver, ItemData.Type.Prop };
 		private bool showHighlighterTK;
 		public override IEnumerator OnLoadCoroutine()
 		{
-			//You must always call the following, so the IDs are setup for this LevelModuleOptional
-			SetId();
 
-			//Use IsEnabled around functionality so it only runs if this LevelModuleOptional is enabled
-			if (IsEnabled())
-			{
-				Utilities.BowArrowOnlyItem();
-				EventManager.onPossess += EventManager_onPossess;
-                EventManager.onUnpossess += EventManager_onUnpossess;
-				showHighlighterTK = SpellTelekinesis.showHighlighter;
-			}
+			Utilities.BowArrowOnlyItem();
+			EventManager.onPossess += EventManager_onPossess;
+            EventManager.onUnpossess += EventManager_onUnpossess;
+			showHighlighterTK = SpellTelekinesis.showHighlighter;
+			
 			yield break;
 		}
 
@@ -74,11 +69,10 @@ namespace Wully.MoreModes.GameMode
 		{
 			base.OnUnload();
 			//Remember to unsubscribe to any events you might be listening to
-			if (IsEnabled())
-			{
-				// Revert back to the original showHighlighter
-				SpellTelekinesis.showHighlighter = showHighlighterTK;
-			}
+
+			// Revert back to the original showHighlighter
+			SpellTelekinesis.showHighlighter = showHighlighterTK;
+			
 		}
 
 		public void UngrabUnallowedItems(Handle handle, EventTime eventTime)

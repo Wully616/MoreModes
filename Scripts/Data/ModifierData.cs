@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Wully.MoreModes
 {
-    public abstract class Modifier : CustomData
+    public abstract class ModifierData : CustomData
     {
         /// <summary>
         /// Description of this modifier which appears in the book
@@ -11,7 +11,7 @@ namespace Wully.MoreModes
         public string description;
         
         // A local variable which should only be non-null for the real instance of this modifier
-        protected Modifier local;
+        protected ModifierData local;
         
         private bool isEnabled;
         /// <summary>

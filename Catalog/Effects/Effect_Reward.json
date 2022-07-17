@@ -1,6 +1,6 @@
 ﻿{
 	"$type": "ThunderRoad.EffectData, ThunderRoad",
-	"id": "SurvivalMode.RewardFx",
+	"id": "Wully.SurvivalMode.RewardFx",
 	"saveFolder": "Bas",
 	"version": 0,
 	"groupId": "Material",

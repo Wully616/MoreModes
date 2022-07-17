@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes.Component
@@ -9,7 +9,7 @@ namespace Wully.MoreModes.Component
     /// <summary>
     /// Starts a particular wave on level start
     /// </summary>
-    public class StartWave : LevelModuleOptional
+    public class StartWave : LevelModule
     {
         public float startDelay = 10f;
         public string waveId = "Bandit1";
@@ -21,12 +21,6 @@ namespace Wully.MoreModes.Component
         /// </summary>
         public override IEnumerator OnLoadCoroutine()
         {
-            SetId();
-            if (!IsEnabled())
-            {
-                yield break;
-            }
-
             if (WaveSpawner.instances.Count > 0)
             {
                 waveSpawner = WaveSpawner.instances[0];

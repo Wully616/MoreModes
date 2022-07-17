@@ -1,21 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using ThunderRoad;
 using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class MagicOnly : ModifierData {
+	public class TouchImbue : ModifierData {
 		
-		public static MagicOnly Instance;
-		
+		public static TouchImbue Instance;
+        
 		public override void Init()
 		{
 			if (Instance == null)
 			{
 				base.Init();
 				Instance = this;
-				// bit hacky, but we only one 1 modifier, if local isnt set, this modifier isnt Setup
 				local = this;
 			}
 		}
@@ -55,14 +53,27 @@ namespace Wully.MoreModes {
 			Item item = handle.item;
 			if (item != null)
 			{
-				// pick up staffs only and anything else that isnt a weapon
-				if (!item.itemId.Contains("Staff") && item.data.type == ItemData.Type.Weapon)
+				Imbue(side, item);	
+			}
+		}
+
+		private void Imbue(Side side, Item item)
+		{
+			var hand = Player.currentCreature.mana.casterLeft;
+			if (side == Side.Right) hand = Player.currentCreature.mana.casterRight;
+			//get the spell
+			if (hand.spellInstance != null && hand.spellInstance is SpellCastCharge spellCastCharge)
+			{
+				foreach (var imbue in item.imbues)
 				{
-					for (int i = item.handlers.Count - 1; i >= 0; --i)
+					if (imbue.spellCastBase != null && imbue.spellCastBase.hashId != spellCastCharge.hashId)
 					{
-						item.handlers[i].UnGrab(false);
-					}
+						imbue.UnloadCurrentSpell();
+					} 
+					imbue.Transfer(spellCastCharge, float.MaxValue);
+					
 				}
+				
 			}
 		}
 	}

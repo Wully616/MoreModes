@@ -1,18 +1,18 @@
 ﻿using System.Collections;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using Wully.Utils;
 
-namespace Wully.MoreModes.Component {
-	public class RemoveHealthPotionsBook : LevelModuleOptional {
-		public override IEnumerator OnLoadCoroutine() {
-			SetId();
-			if ( IsEnabled() ) {
-				Utilities.RemoveHealthPotionsFromBook();
-			}
+namespace Wully.MoreModes.Component
+{
+    public class RemoveHealthPotionsBook : LevelModule
+    {
+        public override IEnumerator OnLoadCoroutine()
+        {
+            Utilities.RemoveHealthPotionsFromBook();
 
-			yield break;
-		}
-	}
+            yield break;
+        }
+    }
 }

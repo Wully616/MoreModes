@@ -2,7 +2,7 @@
 
 namespace Wully.MoreModes
 {
-    public class OneHitKill : Modifier
+    public class OneHitKill : ModifierData
     {
         public static OneHitKill Instance;
         
@@ -20,6 +20,10 @@ namespace Wully.MoreModes
         protected override void OnEnable()
         {
 	        base.OnEnable();
+	        foreach (Creature creature in Creature.all) {
+		        creature.currentHealth = 1;
+		        creature.maxHealth = 1;
+	        }
 	        EventManager.onCreatureSpawn += OnCreatureSpawn;
         }
 
@@ -27,10 +31,16 @@ namespace Wully.MoreModes
         {
 	        base.OnDisable();
 	        EventManager.onCreatureSpawn -= OnCreatureSpawn;
+	        foreach (Creature creature in Creature.all) {
+		        creature.maxHealth = creature.currentHealth = creature.data.health;
+	        }
+	        
         }
         
         private void OnCreatureSpawn(Creature creature)
         {
+	        //TODO: works for player but not for all creatures?
+	        //maybe need to do it on wave spawn
 	        creature.currentHealth = 1;
 	        creature.maxHealth = 1;
         }

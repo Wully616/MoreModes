@@ -2,11 +2,11 @@
 
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class HpOnKill : Modifier {
+	public class HpOnKill : ModifierData {
 		public int hpAmount = 10;
 		public static HpOnKill Instance;
 

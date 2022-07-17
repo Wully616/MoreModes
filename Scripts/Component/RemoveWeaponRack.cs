@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using ThunderRoad;
 using UnityEngine;
 
 namespace Wully.MoreModes.Component {
-	public class RemoveWeaponRack : LevelModuleOptional {
+	public class RemoveWeaponRack : LevelModule {
 		public override IEnumerator OnLoadCoroutine() {
 			/*SetId();
 			if (IsEnabled()) {

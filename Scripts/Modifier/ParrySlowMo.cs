@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class ParrySlowMo : Modifier {
+	public class ParrySlowMo : ModifierData {
 		public int slowMoTime = 1;
         private Coroutine slowMoCoroutine;
         

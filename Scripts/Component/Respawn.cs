@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Linq;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using ThunderRoad;
 using UnityEngine;
 using Wully.Utils;
 
 namespace Wully.MoreModes.Component
 {
-    public class Respawn : LevelModuleOptional
+    public class Respawn : LevelModule
     {
         private int _lives = 3;
         public LevelModuleDeath.Behaviour behaviour = LevelModuleDeath.Behaviour.ShowScores;
@@ -20,39 +20,36 @@ namespace Wully.MoreModes.Component
 
         public override IEnumerator OnLoadCoroutine()
         {
-            SetId();
-            if (IsEnabled())
-            {
-                _lives = lives;
 
-                EventManager.onCreatureKill += EventManager_onCreatureKill;
-                EventManager.onPossess += EventManager_onPossess;
-                level.OnLevelEvent += Level_OnLevelEvent;
-            }
+            _lives = lives;
+
+            EventManager.onCreatureKill += EventManager_onCreatureKill;
+            EventManager.onPossess += EventManager_onPossess;
+            level.OnLevelEvent += Level_OnLevelEvent;
+            
 
             yield break;
         }
 
         private void Level_OnLevelEvent()
         {
-            if (IsEnabled())
+    
+            //Unload LevelModuleDeath
+            var levelModuleDeath = level?.mode?.modules?.FirstOrDefault(d => d.type == typeof(LevelModuleDeath));
+            if (levelModuleDeath != null)
             {
-                //Unload LevelModuleDeath
-                var levelModuleDeath = level?.mode?.modules?.FirstOrDefault(d => d.type == typeof(LevelModuleDeath));
-                if (levelModuleDeath != null)
+                //call unload
+                levelModuleDeath.OnUnload();
+                //remove
+                for (int i = level.mode.modules.Count - 1; i >= 0; i--)
                 {
-                    //call unload
-                    levelModuleDeath.OnUnload();
-                    //remove
-                    for (int i = level.mode.modules.Count - 1; i >= 0; i--)
+                    if (level.mode.modules[i] == levelModuleDeath)
                     {
-                        if (level.mode.modules[i] == levelModuleDeath)
-                        {
-                            level.mode.modules.RemoveAt(i);
-                        }
+                        level.mode.modules.RemoveAt(i);
                     }
                 }
             }
+            
         }
 
         private void EventManager_onPossess(Creature creature, EventTime eventTime)
@@ -152,17 +149,16 @@ namespace Wully.MoreModes.Component
 
         public override void OnUnload()
         {
-            if (IsEnabled())
-            {
-                level.OnLevelEvent -= Level_OnLevelEvent;
-                EventManager.onCreatureKill -= EventManager_onCreatureKill;
-                EventManager.onPossess -= EventManager_onPossess;
-                if (deathCoroutine != null)
-                    level.StopCoroutine(deathCoroutine);
-                if (slowMotionDurationCoroutine != null)
-                    level.StopCoroutine(slowMotionDurationCoroutine);
-                CameraEffects.SetSepia(0.0f);
-            }
+
+            level.OnLevelEvent -= Level_OnLevelEvent;
+            EventManager.onCreatureKill -= EventManager_onCreatureKill;
+            EventManager.onPossess -= EventManager_onPossess;
+            if (deathCoroutine != null)
+                level.StopCoroutine(deathCoroutine);
+            if (slowMotionDurationCoroutine != null)
+                level.StopCoroutine(slowMotionDurationCoroutine);
+            CameraEffects.SetSepia(0.0f);
+            
         }
     }
 }

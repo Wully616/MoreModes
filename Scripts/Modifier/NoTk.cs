@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using ThunderRoad;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class NoTk : Modifier {
+	public class NoTk : ModifierData {
 		
 		public static NoTk Instance;
         
@@ -41,7 +41,7 @@ namespace Wully.MoreModes {
 		{
 			base.OnUnPossess(creature, eventTime);
 			if (eventTime == EventTime.OnEnd) return;
-			AddMagic(); // need to add it back to the creature when unpossed
+			AddMagic(); // need to add it back to the creature when unpossessedd
 		}
 		
 		private void AddMagic()
@@ -51,7 +51,13 @@ namespace Wully.MoreModes {
 		
 		private void RemoveMagic()
 		{
+			SpellCaster manaCasterLeft = Player.currentCreature.mana.casterLeft;
+			SpellCaster manaCasterRight = Player.currentCreature.mana.casterRight;
 			Player.currentCreature.container.RemoveContent("SpellTelekinesis");
+			manaCasterLeft.telekinesis.Unload();
+			manaCasterLeft.telekinesis = null;
+			manaCasterRight.telekinesis.Unload();
+			manaCasterRight.telekinesis = null;
 		}
 	}
 }

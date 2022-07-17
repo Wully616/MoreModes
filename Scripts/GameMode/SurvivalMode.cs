@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using GameModeLoader.Utils;
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes.GameMode {
 	/// <summary>
 	///     This survival mode inherits from the base games survival game mode
 	/// </summary>
-	public class SurvivalMode : LevelModuleSurvival, IOption {
+	public class SurvivalMode : LevelModuleSurvival {
 		public string id;
 		public bool enable;
 		private EffectData rewardFxData;
 
-		public string rewardFxId = "SurvivalMode.RewardFx";
+		public string rewardFxId = "Wully.SurvivalMode.RewardFx";
 
 		public override void Update() {
-			if (!IsEnabled()) { return;}
 			if (!(Player.currentCreature != null)) { return; }
 
 			Transform headTransform = Player.local.head.transform;
@@ -29,8 +28,7 @@ namespace Wully.MoreModes.GameMode {
 		}
 
 		public override IEnumerator OnLoadCoroutine() {
-			SetId();
-			if ( !IsEnabled() ) { yield break; }
+			
 			spawnPositionHeight = 0f;
 			rewardFxData = Catalog.GetData<EffectData>(rewardFxId);
 
@@ -39,6 +37,9 @@ namespace Wully.MoreModes.GameMode {
 				new GameObject().transform,
 				new GameObject().transform
 			};
+			
+			DisableSandboxItems();
+
 			foreach (var rewardTransform in rewardsSpawnPosition) {
 				var go = new GameObject("SpawnPosition");
 				go.transform.SetParent(rewardTransform);
@@ -49,19 +50,54 @@ namespace Wully.MoreModes.GameMode {
 			waitingToChooseReward = false;
 			currentWaveNumberForReward = 0;
 			waveIndex = 0;
-
-			foreach (var component in Object.FindObjectsOfType<UIWaveSpawner>()) {
-				component.gameObject.SetActive(false);
-			}
-
-			if (WaveSpawner.instances.Count > 0) {
+			if (WaveSpawner.instances.Count > 0)
+			{
 				waveSpawner = WaveSpawner.instances[0];
-				waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
-                level.StartCoroutine(LevelLoadedCoroutine());
+				waveSpawner.OnWaveWinEvent.AddListener(OnWaveEnded);
+				waveSpawner.OnWaveLossEvent.AddListener(OnWaveEnded);
+				waveSpawner.OnWaveCancelEvent.AddListener(OnWaveEnded);
+			}
+			else
+			{
+				Debug.LogError("No wave spawner available for survival module!");
 				yield break;
 			}
+			level.StartCoroutine(LevelLoadedCoroutine());
 
-			Debug.LogError("No wave spawner available for survival module!");
+			yield break;
+		}
+		
+		private void DisableSandboxItems()
+		{
+			foreach (UIWaveSpawner uiWaveSpawner in GameObject.FindObjectsOfType<UIWaveSpawner>())
+			{
+				uiWaveSpawner.gameObject.SetActive(false);
+			}
+
+			foreach (Level.CustomReference customReference in level.customReferences)
+			{
+				if (customReference.name == "WaveSelector")
+				{
+					foreach (Transform transform in customReference.transforms)
+					{
+						transform.gameObject.SetActive(false);
+					}
+				}
+				if (customReference.name == "Rack")
+				{
+					foreach (Transform transform in customReference.transforms)
+					{
+						transform.gameObject.SetActive(false);
+					}
+				}
+				if (customReference.name == "WeaponSelector")
+				{
+					foreach (Transform transform in customReference.transforms)
+					{
+						transform.gameObject.SetActive(false);
+					}
+				}
+			}
 		}
 
 		protected new void OnWaveEnded() {
@@ -71,7 +107,18 @@ namespace Wully.MoreModes.GameMode {
 		private IEnumerator LevelLoadedCoroutine() {
 			while (!Player.local || !Player.local.creature)
 				yield return new WaitForSeconds(2f);
-
+			
+			//Remove all of the items in the players holders
+			var holders = Player.local.creature.GetComponentsInChildren<Holder>();
+			foreach (Holder holder in holders)
+			{
+				for (int i = holder.items.Count - 1; i >= 0; i--)
+				{
+					Item item = holder.items[i];
+					holder.UnSnap(item, true, false);
+					item.Despawn();
+				}
+			}
 			for (int i = 0; i < rewardsSpawnPosition.Count; i++) {
 				rewardFxData?.Spawn(rewardsSpawnPosition[i].position, rewardsSpawnPosition[i].rotation).Play();
 			}
@@ -203,22 +250,6 @@ namespace Wully.MoreModes.GameMode {
 				}
 			}
 		}
-
-		public bool IsEnabled() {
-			//the enable bool is like the master switch, so it can be forcefully enabled for gamemodes
-			//the option check is to check if it should be enabled or not on a per map/gamemode basis
-			return enable || Level.current.GetOptionAsBool(id);
-		}
-
-		public void SetId() {
-			//get the id of this LevelModuleOptionals Option data.
-			var options = Catalog.GetDataList<LevelOptionCatalog>();
-			foreach ( var option in options ) {
-				if ( option.levelOption.levelModuleOptional.GetType() == this.GetType() ) {
-					this.id = option.levelOption.name;
-					break;
-				}
-			}
-		}
+		
 	}
 }

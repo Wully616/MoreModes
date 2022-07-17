@@ -5,14 +5,14 @@ using GameModeLoader.Utils;
 using Sirenix.Utilities;
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 
 namespace Wully.MoreModes.GameMode
 {
     /// <summary>
     ///     This survival mode inherits from the base games survival game mode
     /// </summary>
-    public class BladeGame : LevelModuleOptional
+    public class BladeGame : LevelModule
     {
         public bool anyKillCounts = false;
         public float startDelay = 10f;
@@ -41,8 +41,6 @@ namespace Wully.MoreModes.GameMode
 
         public override IEnumerator OnLoadCoroutine()
         {
-            SetId();
-            if (!IsEnabled()) yield break;
             EventManager.onCreatureKill += EventManager_onCreatureKill;
             EventManager.onPossess += EventManager_onPossess;
             EventManager.onUnpossess += EventManager_onUnpossess;
@@ -70,7 +68,7 @@ namespace Wully.MoreModes.GameMode
                 waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
                 level.StartCoroutine(LevelLoadedCoroutine());
             }
-
+            yield break;
         }
 
         protected void OnWaveEnded()

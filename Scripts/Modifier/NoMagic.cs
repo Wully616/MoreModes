@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using ThunderRoad;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class NoMagic : Modifier {
+	public class NoMagic : ModifierData {
 		
 		public static NoMagic Instance;
         
@@ -48,22 +48,44 @@ namespace Wully.MoreModes {
 		{
 			Player.currentCreature.container.AddContent("SpellSlowTime");
 			Player.currentCreature.container.AddContent("SpellTelekinesis");
-			Player.currentCreature.handLeft.caster.allowCasting = true;
+			Player.currentCreature.handLeft.caster.AllowCasting(this);
 			Player.currentCreature.handLeft.caster.AllowSpellWheel(this);
-			Player.currentCreature.handRight.caster.allowCasting = true;
+			Player.currentCreature.handRight.caster.AllowCasting(this);
 			Player.currentCreature.handRight.caster.AllowSpellWheel(this);
 		}
 		
 		private void RemoveMagic()
 		{
-			Player.currentCreature.mana.casterLeft.UnloadSpell();
-			Player.currentCreature.mana.casterRight.UnloadSpell();
+
+			SpellCaster manaCasterLeft = Player.currentCreature.mana.casterLeft;
+			SpellCaster manaCasterRight = Player.currentCreature.mana.casterRight;
+			
+			manaCasterLeft.UnloadSpell();
+			manaCasterRight.UnloadSpell();
+			
+			manaCasterLeft.DisallowCasting(this);
+			manaCasterLeft.DisableSpellWheel(this);
+			manaCasterRight.DisallowCasting(this);
+			manaCasterRight.DisableSpellWheel(this);
+			
+			
+			//There is a bug in the base game for removing SpellPowerInstances and Telekinesis so we need to do those manually
 			Player.currentCreature.container.RemoveContent("SpellSlowTime");
+			for (int i = Player.currentCreature.mana.spellPowerInstances.Count - 1; i >= 0; i--)
+			{
+				if (Player.currentCreature.mana.spellPowerInstances[i].id == "SpellSlowTime")
+				{
+					Player.currentCreature.mana.spellPowerInstances[i].Unload();
+					Player.currentCreature.mana.spellPowerInstances.RemoveAt(i);
+				}
+			}
 			Player.currentCreature.container.RemoveContent("SpellTelekinesis");
-			Player.currentCreature.handLeft.caster.allowCasting = true;
-			Player.currentCreature.handLeft.caster.AllowSpellWheel(this);
-			Player.currentCreature.handRight.caster.allowCasting = true;
-			Player.currentCreature.handRight.caster.AllowSpellWheel(this);
+			manaCasterLeft.telekinesis.Unload();
+			manaCasterLeft.telekinesis = null;
+			manaCasterRight.telekinesis.Unload();
+			manaCasterRight.telekinesis = null;
+			
+			
 		}
 	}
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 
 namespace Wully.MoreModes
 {
-    public class HighGravity : Modifier
+    public class HighGravity : ModifierData
     {
         public float gravity = -14.7f;
         private Vector3 gravityForce;

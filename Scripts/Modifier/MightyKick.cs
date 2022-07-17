@@ -4,9 +4,9 @@ using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class FreeClimb : ModifierData {
-		
-		public static FreeClimb Instance;
+	public class MightyKick : ModifierData {
+		//TODO: doesnt really work as hoped
+		public static MightyKick Instance;
         
 		public override void Init()
 		{
@@ -21,12 +21,14 @@ namespace Wully.MoreModes {
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			RagdollHandClimb.climbFree = true;
+			Player.local.footLeft.kickExtendDuration = 0.001f;
+			Player.local.footRight.kickExtendDuration = 0.001f;
 		}
 		
 		protected override void OnDisable() {
 			base.OnDisable();
-			RagdollHandClimb.climbFree = false;
+			Player.local.footLeft.kickExtendDuration = 0.2f;
+			Player.local.footRight.kickExtendDuration = 0.2f;
 		}
 		
 	}

@@ -1,0 +1,5 @@
+﻿{
+	"$type": "Wully.MoreModes.InstantCasting, MoreModes",
+	"id": "InstantCasting",
+	"description": "Instant Spell Casting and Merging"
+}

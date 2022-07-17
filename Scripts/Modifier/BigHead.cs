@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes.Data;
+using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
-	public class BigHead : Modifier {
+	public class BigHead : ModifierData {
 		public float headScale = 2f;
 		private List<Ragdoll> ragdolls;
 		
@@ -21,6 +21,7 @@ namespace Wully.MoreModes {
 				Instance = this;
 				// bit hacky, but we only one 1 modifier, if local isnt set, this modifier isnt Setup
 				local = this;
+				ragdolls = new List<Ragdoll>();
 			}
 		}
 
@@ -30,6 +31,7 @@ namespace Wully.MoreModes {
 			EventManager.onCreatureSpawn += OnCreatureSpawn;
 			foreach (Creature creature in Creature.all) {
 				if ( creature.ragdoll.headPart.transform.parent.localScale == Vector3.one ) {
+					if(creature == Player.currentCreature) continue;
 					creature.ragdoll.headPart.transform.parent.SetGlobalScale(Vector3.one * headScale);
 				}
 			}
