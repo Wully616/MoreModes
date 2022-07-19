@@ -1,0 +1,5 @@
+﻿{
+	"$type": "Wully.MoreModes.AirDash, MoreModes",
+	"id": "AirDash",
+	"description": "Air Dash - Jump then press jump again to Air Dash"
+}

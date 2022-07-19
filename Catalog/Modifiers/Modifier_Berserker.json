@@ -1,0 +1,6 @@
+﻿{
+	"$type": "Wully.MoreModes.Beserker, MoreModes",
+	"id": "Beserker",
+	"description": "Beserker - Doing damage or kills makes you invincible for a short time",
+	"berserkerTime": 1
+}

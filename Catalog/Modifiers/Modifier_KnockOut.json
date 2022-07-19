@@ -1,0 +1,6 @@
+﻿{
+	"$type": "Wully.MoreModes.KnockOut, MoreModes",
+	"id": "KnockOut",
+	"description": "Knock Out - Doing blunt damage to an enemy will knock them out for some time",
+	"knockOutTime": 30
+}

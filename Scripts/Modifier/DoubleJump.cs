@@ -9,6 +9,8 @@ namespace Wully.MoreModes {
 		
 		public static DoubleJump Instance;
 		private bool isDoubleJumping;
+		public bool IsDoubleJumping => isDoubleJumping;
+		
 		public override void Init()
 		{
 			if (Instance == null)
