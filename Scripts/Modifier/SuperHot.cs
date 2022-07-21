@@ -39,7 +39,7 @@ namespace Wully.MoreModes {
 		{
 			superHotEnabled = false;
 			Player.local.creature.container.AddContent("SpellSlowTime");
-			GameManager.SetSlowMotion(false, 1, spellPowerSlowTime.exitCurve);
+			GameManager.StopSlowMotion();
 		}
 		
 		protected override void OnEnable()
