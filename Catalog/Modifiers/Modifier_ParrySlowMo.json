@@ -1,0 +1,5 @@
+﻿{
+	"$type": "Wully.MoreModes.ParrySlowMo, MoreModes",
+	"id": "parrySlowMo",
+	"description": "Slow motion Parry - Time slows down after a successful parry"
+}

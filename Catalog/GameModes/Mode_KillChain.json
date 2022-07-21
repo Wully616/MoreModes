@@ -1,0 +1,36 @@
+﻿{
+	"$type": "Wully.MoreModes.GameModeData, MoreModes",
+	"id": "killchain",
+	"excludeLevelIds": ["Greenland"],
+	"explicitOptions":  false,
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Kill Chain",
+		"displayName": "Kill Chain",
+		"description": "Keep killing to stay alive! (10s)",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 1,
+		"difficultyMultipliers": [],
+		"modules": [
+			{
+				"$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad",
+				"cleanerRate": 5.0
+			},
+			{
+				"$type": "ThunderRoad.LevelModuleDeath, ThunderRoad",
+				"behaviour": "ShowScores",
+				"delayBeforeLoad": 20.0,
+				"disablePlayerLocomotion": true
+			},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{
+				"$type": "Wully.MoreModes.GameMode.KillChain, MoreModes",
+				"timeBetweenKill": 10.0
+			}
+		],
+		"availableOptions": []
+	}
+}

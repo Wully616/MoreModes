@@ -1,0 +1,132 @@
+﻿{
+	"$type": "Wully.MoreModes.GameModeData, MoreModes",
+	"id": "survivalanywhere",
+	"excludeLevelIds": ["Dungeon"],
+	"explicitOptions":  false,
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Survival Anywhere",
+		"displayName": "Survival Anywhere",
+		"description": "Survive as long as possible against waves of enemies! Grab weapons from your foes, or from the rewards after every wave!\n\nBooks and weapon racks disabled!",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 1,
+		"difficultyMultipliers": [],
+		"modules": [
+			{
+				"$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad",
+				"cleanerRate": 5.0
+			},
+			{
+				"$type": "ThunderRoad.LevelModuleDeath, ThunderRoad",
+				"behaviour": "ShowScores",
+				"delayBeforeLoad": 20.0,
+				"disablePlayerLocomotion": true
+			},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWaveBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWeaponBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWeaponRack, MoreModes" },
+			{
+				"$type": "Wully.MoreModes.GameMode.SurvivalMode, MoreModes",
+				"enable":  true,
+				"waves": [
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Recruit1",
+						"containerID": "WeaponRewards1"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Recruit2",
+						"containerID": "WeaponRewards1"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Recruit3",
+						"containerID": "WeaponRewards1"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Gladiator1",
+						"containerID": "WeaponRewards2"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Gladiator2",
+						"containerID": "WeaponRewards3"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Gladiator3",
+						"containerID": "WeaponRewards4"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Bandit1",
+						"containerID": "WeaponRewards5"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Bandit2",
+						"containerID": "WeaponRewards6"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Bandit3",
+						"containerID": "WeaponRewards7"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Knight1",
+						"containerID": "WeaponRewards8"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Knight2",
+						"containerID": "WeaponRewards9"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Knight3",
+						"containerID": "WeaponRewards10"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Knight2",
+						"containerID": "WeaponRewards9"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "Knight3",
+						"containerID": "WeaponRewards10"
+					},
+					{
+						"$type": "ThunderRoad.LevelModuleSurvival+Waves, ThunderRoad",
+						"waveID": "MixedSpecial",
+						"containerID": "WeaponRewards10"
+					}
+				],
+				"textGroupId": "Survival",
+				"textNextWaveId": "NextWave",
+				"textFightId": "Fight",
+				"textWaveId": "Wave",
+				"startDelay": 3.0,
+				"delayBetweenWave": 10.0,
+				"disallowHealthPotions": true,
+				"repeatLastWaveIndefinitly": true,
+				"rewardsToSpawn": 3,
+				"drivePositionSpring": 100.0,
+				"drivePositionDamper": 2.0,
+				"slerpPositionSpring": 200.0,
+				"slerpPositionDamper": 0.0,
+				"spawnPositionHeight": 2.0,
+				"wavesNumberForReward": 1,
+				"firstRewardscontainerID": "WeaponRewards1"
+			}
+		],
+		"availableOptions": []
+	}
+}

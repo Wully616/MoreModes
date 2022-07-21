@@ -1,0 +1,14 @@
+{
+  "$type": "ThunderRoad.MenuData, ThunderRoad",
+  "id": "Modifiers",
+  "sensitiveContent": "None",
+  "sensitiveFilterBehaviour": "Discard",
+  "version": 1,
+  "order": 9.0,
+  "isDefault": false,
+  "iconAddress": "Bas.Icon.stars-stack",
+  "prefabAddress": "Wully.MoreModes.Menu",
+  "module": {
+    "$type": "Wully.MoreModes.MenuModuleModifiers, MoreModes"
+  }
+}

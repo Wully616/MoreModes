@@ -1,0 +1,7 @@
+﻿{
+	"$type": "Wully.MoreModes.HealthRegen, MoreModes",
+	"id": "HealthRegen",
+	"description": "Health Regen over time when not taking damage",
+	"healthPerSecond": 5,
+	"damageCooldown": 5
+}
