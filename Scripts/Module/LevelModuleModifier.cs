@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using ThunderRoad;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Wully.MoreModes;
 
 namespace Wully.MoreModes
@@ -17,7 +19,16 @@ namespace Wully.MoreModes
             if (local != null) yield break;
             local = this;
             modifiers = new List<ModifierData>();
+            EventManager.onLevelLoad += OnLevelLoad;
             yield return base.OnLoadCoroutine();
+        }
+        private void OnLevelLoad(LevelData leveldata, EventTime eventTime)
+        {
+            if(eventTime == EventTime.OnStart) return;
+            var scrollRect = MenuBook.local.navBar.AddComponent<ScrollRect>();
+            scrollRect.vertical = false;
+            scrollRect.viewport = MenuBook.local.navBar.GetComponent<RectTransform>();
+            scrollRect.content = scrollRect.transform.GetChild(2).GetComponent<RectTransform>();
         }
 
         public override void Update()

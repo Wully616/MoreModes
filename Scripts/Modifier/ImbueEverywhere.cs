@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using ThunderRoad;
+using UnityEngine;
 using Wully.MoreModes;
 using Wully.Utils;
 
@@ -7,7 +9,7 @@ namespace Wully.MoreModes {
 	public class ImbueEverywhere : ModifierData {
 		
 		public static ImbueEverywhere Instance;
-        
+		private bool enabled;
 		public override void Init()
 		{
 			if (Instance == null)
@@ -21,56 +23,71 @@ namespace Wully.MoreModes {
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			EnableImbueEverywhere();
+			enabled = true;
 		}
 		
 		protected override void OnDisable() {
 			base.OnDisable();
-			DisableImbueEverywhere();
+			enabled = false;
 		}
 
-		protected override void OnUnPossess(Creature creature, EventTime eventTime)
-		{
-			base.OnUnPossess(creature, eventTime);
-			if(eventTime == EventTime.OnEnd) return;
-			DisableImbueEverywhere();
-		}
-		
 		protected override void OnPossess(Creature creature, EventTime eventTime)
 		{
 			base.OnPossess(creature, eventTime);
 			if(eventTime == EventTime.OnStart) return;
-			EnableImbueEverywhere();
+			enabled = true;
 		}
 		
-		private void DisableImbueEverywhere()
+		protected override void OnUnPossess(Creature creature, EventTime eventTime)
 		{
-			if(!Player.currentCreature) return;
-			var spellsCount = Player.currentCreature.mana.spells.Count;
-			for (var i = 0; i < spellsCount; i++)
+			base.OnUnPossess(creature, eventTime);
+			if(eventTime == EventTime.OnEnd) return;
+			enabled = false;
+		}
+		
+		
+
+		public override void Update()
+		{
+			if (!enabled) return;
+			if (!Player.local) return;
+			SpellCaster caster;
+			if (IsChargingSpell(Side.Left, out caster))
 			{
-				SpellData spellData = Player.currentCreature.mana.spells[i];
-				if (spellData is SpellCastCharge { imbueEnabled: true } spellCastCharge)
+				MassImbue(caster);
+			}
+			if (IsChargingSpell(Side.Right, out caster))
+			{
+				MassImbue(caster);
+			}
+		}
+
+		private void MassImbue(SpellCaster caster)
+		{
+			var spellCastCharge = (SpellCastCharge)caster.spellInstance;
+			int allActiveCount = Item.allActive.Count;
+			for (var i = 0; i < allActiveCount; i++)
+			{
+				Item item = Item.allActive[i];
+				int imbuesCount = item.imbues.Count;
+				for (var index = 0; index < imbuesCount; index++)
 				{
-					var originalSpellData = Catalog.GetData<SpellCastCharge>(spellData.id);
-					spellCastCharge.imbueRadius = originalSpellData.imbueRadius;
+					var imbue = item.imbues[index];
+					if (imbue.spellCastBase != null && imbue.spellCastBase.hashId != spellCastCharge.hashId)
+					{
+						imbue.UnloadCurrentSpell();
+					}
+					imbue.Transfer(spellCastCharge, ((spellCastCharge.imbueRate * spellCastCharge.currentCharge)) * Time.deltaTime);
 				}
 			}
 		}
 		
-		private void EnableImbueEverywhere()
+		private bool IsChargingSpell(Side side, out SpellCaster caster)
 		{
-			if(!Player.currentCreature) return;
-			var spellsCount = Player.currentCreature.mana.spells.Count;
-			for (var i = 0; i < spellsCount; i++)
-			{
-				SpellData spellData = Player.currentCreature.mana.spells[i];
-				if (spellData is SpellCastCharge  { imbueEnabled: true } spellCastCharge)
-				{
-					//this doesnt work because the spell data is cloned, the original catalog needs to be edited
-					spellCastCharge.imbueRadius = 1000;
-				}
-			}
+			caster = Player.local.creature.mana.casterLeft;
+			if (side == Side.Right) caster = Player.local.creature.mana.casterRight;
+			return caster.isFiring && !caster.isMerging && !caster.isSpraying && caster.spellInstance is SpellCastCharge castCharge;
+
 		}
 	}
 }

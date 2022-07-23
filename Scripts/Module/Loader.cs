@@ -45,6 +45,7 @@ namespace Wully.MoreModes
                     {
                         if (gameMode.excludeLevelIds != null && !gameMode.excludeLevelIds.Contains(levelData.id, StringComparer.OrdinalIgnoreCase))
                         {
+                            if (levelData.modes == null) levelData.modes = new List<LevelData.Mode>();
                             levelData.modes.Add(gameMode.mode);
                         }
                     }
