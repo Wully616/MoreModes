@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.DoubleJump, MoreModes",
 	"id": "DoubleJump",
-	"description": "Double Jump!"
+	"description": "Double Jump!",
+	"category": "Movement"
 }

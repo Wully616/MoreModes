@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.ImbueEverywhere, MoreModes",
 	"id": "ImbueEverywhere",
-	"description": "Imbue everything - Everything is imbued when you cast spells"
+	"description": "Imbue everything - Everything is imbued when you cast spells",
+	"category": "Magic"
 }

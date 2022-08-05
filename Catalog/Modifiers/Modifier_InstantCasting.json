@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.InstantCasting, MoreModes",
 	"id": "InstantCasting",
-	"description": "Instant Spell Casting and Merging"
+	"description": "Instant Casting - Spell charging is instant!",
+	"category": "Magic"
 }

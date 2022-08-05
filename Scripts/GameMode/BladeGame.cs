@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameModeLoader.Utils;
-using Sirenix.Utilities;
+
 using ThunderRoad;
 using UnityEngine;
-using Wully.MoreModes;
+using Wully.Utils;
 
 namespace Wully.MoreModes.GameMode
 {
-    /// <summary>
-    ///     This survival mode inherits from the base games survival game mode
-    /// </summary>
     public class BladeGame : LevelModule
     {
         public bool anyKillCounts = false;
+        public bool reverseOrderWeapons;
+        public bool randomizeOrder;
+        
         public float startDelay = 10f;
         public List<string> excludeItemIds;
         public List<string> tierWaves;
         public bool allowStealing = false;
-        private WaitForSeconds waitFor0_5Second = new WaitForSeconds(0.5f);
         private int idx = 0;
         private int currentTier = 0;
         private string[] itemIds;
 
         private EffectData rewardFxData;
         private bool complete;
-        public string rewardFxId = "SurvivalMode.RewardFx";
+        public string rewardFxId = "KillChain.RewardFx";
         protected Coroutine waveEndedCoroutine;
 
         protected WaveSpawner waveSpawner;
@@ -45,28 +44,49 @@ namespace Wully.MoreModes.GameMode
             EventManager.onPossess += EventManager_onPossess;
             EventManager.onUnpossess += EventManager_onUnpossess;
             rewardFxData = Catalog.GetData<EffectData>(rewardFxId);
+
+            anyKillCounts = level.GetOptionAsBool("anykill", false);
+            allowStealing = level.GetOptionAsBool("allowsteal", false);
+            reverseOrderWeapons = level.GetOptionAsBool("reverseOrder", false);
+            randomizeOrder = level.GetOptionAsBool("randomizeOrder", false);
+            
             System.Random rnd = new System.Random();
 
             List<ItemData> itemData = Catalog.GetDataList(Catalog.Category.Item)
                 .Cast<ItemData>()
-                .Where(d => d.type == ItemData.Type.Weapon && d.mass >= 0.1f && d.purchasable == true && d.slot != "Arrow" && d.slot != "Bow" && d.damagers.Count > 0 && !(d.damagers.Count == 1 && d.damagers[0].damagerID == "Handle1H") && !excludeItemIds.Contains(d.id))
+                .Where(d => d.type == ItemData.Type.Weapon && d.mass >= 0.1f && d.slot != "Arrow" && d.slot != "Bow" && d.damagers.Count > 0 && !(d.damagers.Count == 1 && d.damagers[0].damagerID == "Handle1H") && !excludeItemIds.Contains(d.id))
                 .ToList();
 
             // get each tier and randomise them
-            itemIds = itemData
-                .Where(d => d.tier == 0).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray()
-                .Concat(itemData.Where(d => d.tier == 1).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray())
-                .Concat(itemData.Where(d => d.tier == 2).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray())
-                .Concat(itemData.Where(d => d.tier == 3).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray())
-                .ToArray();
+            if (randomizeOrder)
+            {
+                itemIds = itemData.OrderBy(d => rnd.Next()).Select(d => d.id).ToArray();
+            }
+            else
+            {
+                itemIds = itemData
+                    .Where(d => d.tier == 0).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray()
+                    .Concat(itemData.Where(d => d.tier == 1).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray())
+                    .Concat(itemData.Where(d => d.tier == 2).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray())
+                    .Concat(itemData.Where(d => d.tier == 3).OrderBy(d => rnd.Next()).Select(d => d.id).ToArray())
+                    .ToArray();
+            }
+            
+            if (reverseOrderWeapons)
+            {
+                itemIds = itemIds.Reverse().ToArray();
+            }
 
 
             Debug.Log(string.Join(", ", itemIds));
-            if (WaveSpawner.instances.Count > 0)
+            if (!level.dungeon)
             {
-                waveSpawner = WaveSpawner.instances[0];
-                waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
-                level.StartCoroutine(LevelLoadedCoroutine());
+                if (WaveSpawner.instances.Count > 0)
+                {
+                    waveSpawner = WaveSpawner.instances[0];
+                    waveSpawner.OnWaveAnyEndEvent.AddListener(OnWaveEnded);
+                    level.StartCoroutine(LevelLoadedCoroutine());
+                }
             }
             yield break;
         }
@@ -78,7 +98,7 @@ namespace Wully.MoreModes.GameMode
 
         private IEnumerator WaveEndedCoroutine()
         {
-            yield return new WaitForSeconds(2f);
+            yield return Yielders.ForSeconds(2f);
             Utilities.Message($"Tier {currentTier} complete!: {tierWaves[currentTier]}");
         }
 
@@ -86,19 +106,19 @@ namespace Wully.MoreModes.GameMode
         private IEnumerator LevelLoadedCoroutine()
         {
             while (!Player.local || !Player.local.creature)
-                yield return new WaitForSeconds(2f);
+                yield return Yielders.ForSeconds(2f);
 
 
             yield return new WaitForSeconds(startDelay);
             for (int i = 3; i > 0; --i)
             {
                 Utilities.Message($"{i}");
-                yield return new WaitForSeconds(2f);
+                yield return Yielders.ForSeconds(2f);
             }
 
             Utilities.Message($"Starting Tier {currentTier} wave: {tierWaves[currentTier]}");
             
-            yield return new WaitForSeconds(1f);
+            yield return Yielders.ForSeconds(1f);
             WaveData data = Catalog.GetData<WaveData>(tierWaves[currentTier]);
             if (data != null)
                 waveSpawner.StartWave(data, 5f);
@@ -119,15 +139,13 @@ namespace Wully.MoreModes.GameMode
             if (eventTime == EventTime.OnStart) return;
             if (player) return;
 
-            if (!anyKillCounts && !collisionInstance.IsDoneByPlayer())
-                return;
-
+            if (!anyKillCounts && !collisionInstance.IsDoneByPlayer()) return;
             //only arm if there is a new index to go to, once were at the end, no more arming
             if (idx != itemIds.Length - 1)
             {
-                Arm();
                 idx++;
                 idx = Mathf.Clamp(idx, 0, itemIds.Length - 1);
+                Arm();
             }
             else
             {
@@ -137,7 +155,6 @@ namespace Wully.MoreModes.GameMode
                     Utilities.Message($"You killed with the final weapon! You have completed Blade Game with {idx} weapons!");
                     complete = true;
                 }
-                return;
             }
         }
 
@@ -164,23 +181,22 @@ namespace Wully.MoreModes.GameMode
 
         private void OnGrabEvent(Side side, Handle handle, float axisPosition, HandlePose orientation, EventTime eventTime)
         {
+            if(eventTime == EventTime.OnStart) return;
             var item = handle.item;
             if (allowStealing || item == null)
                 return;
 
-            foreach (var itemType in allowedItemTypes)
-                if (item.data.type == itemType)
-                    return;
-            //If the player picked up a item they are not on right now, make em drop it
-            if (idx == -1 || item.data.id != itemIds[idx]) Level.current.StartCoroutine(DisarmCoroutine());
+            if (item.data.type == ItemData.Type.Weapon)
+            {
+                //If the player picked up a item they are not on right now, make em drop it
+                if (idx == -1 || item.data.id != itemIds[idx])
+                {
+                    if(side == Side.Left) Player.local.creature.handLeft.TryRelease();
+                    if(side == Side.Right) Player.local.creature.handRight.TryRelease();
+                }     
+            }
         }
-
-        private IEnumerator DisarmCoroutine()
-        {
-            yield return waitFor0_5Second;
-            Disarm();
-        }
-
+        
         private void Disarm()
         {
             Player.local.creature.handLeft.TryRelease();
@@ -195,25 +211,23 @@ namespace Wully.MoreModes.GameMode
             var hand = Player.currentCreature.handRight;
             if (GameManager.options.twoHandedDominantHand == Side.Left) hand = Player.currentCreature.handLeft;
 
-            Level.current.StartCoroutine(ArmCoroutine(hand));
-        }
-
-        private IEnumerator ArmCoroutine(RagdollHand hand)
-        {
             Catalog.GetData<ItemData>(itemIds[idx])?.SpawnAsync(item => {
                 //if the weapon spawned is of the next tier, stop the wave and spawn the next tier
                 if (item.data.tier != currentTier)
                 {
                     currentTier++;
-                    waveSpawner.StopWave(true);
-                    level.StartCoroutine(LevelLoadedCoroutine());
-                }
+                    if (!level.dungeon)
+                    {
+                        waveSpawner.StopWave(true);
+                        level.StartCoroutine(LevelLoadedCoroutine());
+                    }
+                }                
                 Disarm();
                 hand.Grab(item.GetMainHandle(GameManager.options.twoHandedDominantHand), true);
                 Transform handTransform = hand.transform;
                 rewardFxData?.Spawn(handTransform.position, handTransform.rotation).Play();
             });
-            yield break;
         }
+        
     }
 }

@@ -1,0 +1,136 @@
+﻿{
+	"$type": "Wully.MoreModes.GameModeData, MoreModes",
+	"id": "bladegamedungeon",
+	"onlyLevelids": ["Dungeon"],
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Blade Game",
+		"displayName": "Blade Game",
+		"description": "Gun Game? Now its time for Blade Game! Melee only. Each kill levels up your weapon. Can you survive?",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 0,
+		"difficultyMultipliers": [
+			{
+				"$type": "ThunderRoad.LevelData+Mode+DifficultyMultipliers, ThunderRoad",
+				"playerHealthMultiplier": 1.0,
+				"playerDamageMultiplier": 1.0,
+				"creatureDamageMultiplier": 1.0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Mode+DifficultyMultipliers, ThunderRoad",
+				"playerHealthMultiplier": 1.0,
+				"playerDamageMultiplier": 1.0,
+				"creatureDamageMultiplier": 1.0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Mode+DifficultyMultipliers, ThunderRoad",
+				"playerHealthMultiplier": 0.75,
+				"playerDamageMultiplier": 0.75,
+				"creatureDamageMultiplier": 1.5
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Mode+DifficultyMultipliers, ThunderRoad",
+				"playerHealthMultiplier": 0.5,
+				"playerDamageMultiplier": 0.5,
+				"creatureDamageMultiplier": 2.0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Mode+DifficultyMultipliers, ThunderRoad",
+				"playerHealthMultiplier": 1.0,
+				"playerDamageMultiplier": 0.5,
+				"creatureDamageMultiplier": 3.0
+			}
+		],
+		"modules": [
+			{
+				"$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad",
+				"cleanerRate": 5.0
+			},
+			{
+				"$type": "ThunderRoad.LevelModuleMusic, ThunderRoad",
+				"dynamicMusic": "TestMusic"
+			},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWaveBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWeaponBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWeaponRack, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.Respawn, MoreModes", "lives":  3,
+				"delayBeforeLoad": 10.0, "disablePlayerLocomotion": true},
+			{
+				"$type": "Wully.MoreModes.GameMode.BladeGame, MoreModes", 
+				"excludeItemIds": [
+					"MMPLantern", "Torch", "BactaStim", "LightsaberTool", "MMPMagicBook",
+					"BlasterPowerCell_Blue","BlasterPowerCell_Cyan","BlasterPowerCell_Green",
+					"BlasterPowerCell_Orange","BlasterPowerCell_Pink","BlasterPowerCell_Purple",
+					"BlasterPowerCell_Red","BlasterPowerCell_Yellow"
+				],
+				"tierWaves":  ["BGBanditEndless", "BGGladiatorEndless", "BGKnightEndless", "BGMixedSpecial"]
+			}
+		],
+		"availableOptions": [
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "Difficulty",
+				"displayName": "Difficulty",
+				"description": "DifficultyDescription",
+				"type": "Stars",
+				"minValue": 1,
+				"maxValue": 3,
+				"defaultValue": 2
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "DungeonLength",
+				"displayName": "Length",
+				"description": "LengthDescription",
+				"type": "Stars",
+				"minValue": 0,
+				"maxValue": 2,
+				"defaultValue": 1
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "anykill",
+				"displayName": "Any kill counts",
+				"description": "You don't need to kill with the current weapon (Sectory compatible)",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "allowsteal",
+				"displayName": "Allow Stealing",
+				"description": "You can pickup enemies weapons",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "reverseOrder",
+				"displayName": "Reverse Order",
+				"description": "Start with highest tier weapons and get weaker ones as you progress",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "randomizeOrder",
+				"displayName": "Randomize Order",
+				"description": "Weapons are in random order",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			}
+		]
+	}
+}

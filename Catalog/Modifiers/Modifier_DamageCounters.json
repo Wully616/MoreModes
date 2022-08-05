@@ -1,0 +1,6 @@
+﻿{
+	"$type": "Wully.MoreModes.DamageCounters, MoreModes",
+	"id": "DamageCounters",
+	"description": "Damage Counters - Show damager numbers on hits",
+	"category": "UI"
+}

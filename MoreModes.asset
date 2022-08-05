@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MoreModes
+  m_EditorClassIdentifier: 
+  m_GroupName: MoreModes
+  m_Data:
+    m_SerializedData: []
+  m_GUID: add182fe6a14e9a48916651f9321cb76
+  m_SerializeEntries:
+  - m_GUID: 5878ffd66b70a24448d855d933111ec1
+    m_Address: Wully.MoreModes.Menu.Button
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Windows
+  - m_GUID: 407b17d7ea6cfd54ea4f60e6f5b3ead0
+    m_Address: Wully.MoreModes.Menu
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Windows
+  - m_GUID: 91315a3edd1bc2348bf8ff31f99177b7
+    m_Address: MoreModes.Survival.Audio.Reward
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Windows
+  - m_GUID: bee3b437adb5ca24a97051a6bb822308
+    m_Address: Wully.MoreModes.Menu.Category
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Windows
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b14c4d9d8b63f3247be008fe8b53d3ae, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1f1b58831a8284c4181ad36a9af5902b, type: 2}
+    - {fileID: 11400000, guid: c55bb7e6e128dbe4ab88a2943286b4af, type: 2}

@@ -7,6 +7,7 @@ using Wully.MoreModes;
 using Wully.Utils;
 
 namespace Wully.MoreModes {
+	//TODO: broke
 	public class BigHead : ModifierData {
 		public float headScale = 2f;
 		private List<Ragdoll> ragdolls;
@@ -41,6 +42,12 @@ namespace Wully.MoreModes {
 		{
 			base.OnDisable();
 			EventManager.onCreatureSpawn -= OnCreatureSpawn;
+			foreach (Creature creature in Creature.all) {
+				if ( creature.ragdoll.headPart.transform.parent.localScale == Vector3.one ) {
+					if(creature == Player.currentCreature) continue;
+					creature.ragdoll.headPart.transform.parent.SetGlobalScale(Vector3.one);
+				}
+			}
 		}
 
 		private void OnCreatureSpawn( Creature creature ) {

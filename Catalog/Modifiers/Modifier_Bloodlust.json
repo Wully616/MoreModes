@@ -1,0 +1,7 @@
+﻿{
+	"$type": "Wully.MoreModes.Bloodlust, MoreModes",
+	"id": "Bloodlust",
+	"description": "Bloodlust - Start HP regen after killing enemy. Parrying or taking damage interrupts regen",
+	"healthPerSecond": 5,
+	"category": "Health"
+}

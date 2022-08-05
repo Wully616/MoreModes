@@ -1,6 +1,7 @@
 ﻿{
 	"$type": "Wully.MoreModes.HpOnKill, MoreModes",
 	"id": "HpOnKill",
-	"description": "Health for kills - Regain health when you kill",
-	"hpAmount": 10
+	"description": "Health for kills - Regain some HP when you kill",
+	"hpAmount": 10,
+	"category": "Health"
 }

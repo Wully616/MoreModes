@@ -3,8 +3,21 @@ using UnityEngine;
 
 namespace Wully.MoreModes
 {
+    
     public abstract class ModifierData : CustomData
     {
+        public enum Category
+        {
+            GamePlay,
+            Health,
+            Magic,
+            Movement,
+            Player,
+            UI
+        }
+        
+        public Category category;
+        
         /// <summary>
         /// Description of this modifier which appears in the book
         /// </summary>
@@ -23,21 +36,6 @@ namespace Wully.MoreModes
         /// </summary>
         public bool IsSetup => local != null;
         
-        public void Toggle()
-        {
-            if (!IsSetup) return;
-            if (IsEnabled)
-            {
-                local.Disable();
-                local.isEnabled = false;
-            }
-            else
-            {
-                local.Enable();
-                local.isEnabled = true;
-            }
-        }
-        
         public void Enable()
         {
             if (!IsSetup) return;
@@ -47,6 +45,7 @@ namespace Wully.MoreModes
             EventManager.onLevelUnload += OnLevelUnload;
             EventManager.onPossess += OnPossess;
             EventManager.onUnpossess += OnUnPossess;
+            local.isEnabled = true;
         }
         
         public void Disable()
@@ -58,6 +57,7 @@ namespace Wully.MoreModes
             EventManager.onLevelUnload -= OnLevelUnload;
             EventManager.onPossess -= OnPossess;
             EventManager.onUnpossess -= OnUnPossess;
+            local.isEnabled = false;
         }
                 
         protected virtual void OnEnable()

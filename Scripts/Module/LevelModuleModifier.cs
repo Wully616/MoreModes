@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ThunderRoad;
@@ -20,15 +21,31 @@ namespace Wully.MoreModes
             local = this;
             modifiers = new List<ModifierData>();
             EventManager.onLevelLoad += OnLevelLoad;
+            PlayerControl.local.comboButton = PlayerControl.ComboButton.ExternalViewLock;
             yield return base.OnLoadCoroutine();
+            
         }
         private void OnLevelLoad(LevelData leveldata, EventTime eventTime)
         {
-            if(eventTime == EventTime.OnStart) return;
-            var scrollRect = MenuBook.local.navBar.AddComponent<ScrollRect>();
-            scrollRect.vertical = false;
-            scrollRect.viewport = MenuBook.local.navBar.GetComponent<RectTransform>();
-            scrollRect.content = scrollRect.transform.GetChild(2).GetComponent<RectTransform>();
+            if(eventTime == EventTime.OnStart ) return;
+            Level.current.StartCoroutine(AddScroll());
+        }
+        
+
+        private IEnumerator AddScroll()
+        {
+            while (MenuBook.local == null && MenuBook.local.navBar == null)
+            {
+                yield return null;
+            }
+            if (!MenuBook.local.navBar.TryGetComponent(out ScrollRect scrollRect))
+            {
+                scrollRect = MenuBook.local.navBar.AddComponent<ScrollRect>();
+                scrollRect.vertical = false;
+                scrollRect.viewport = MenuBook.local.navBar.GetComponent<RectTransform>();
+                scrollRect.content = scrollRect.transform.GetChild(2).GetComponent<RectTransform>();
+            }
+            
         }
 
         public override void Update()

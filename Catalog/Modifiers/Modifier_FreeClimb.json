@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.FreeClimb, MoreModes",
 	"id": "freeclimb",
-	"description": "Free climb - Climb any surface!"
+	"description": "Free climb - Climb any surface!",
+	"category": "Movement"
 }

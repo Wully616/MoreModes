@@ -28,8 +28,8 @@ namespace Wully.MoreModes
             if (HighGravity.Instance.IsEnabled)
             {
                 //Disable HighGravity first
-                HighGravity.Instance.Toggle();
-                MenuModuleModifiers.local.RefreshColour(HighGravity.Instance);
+                HighGravity.Instance.Disable();
+                MenuModuleModifiers.local.RefreshToggle(HighGravity.Instance);
             }
             gravityForce = Physics.gravity;
             Physics.gravity = new Vector3(0f, gravity, 0f);

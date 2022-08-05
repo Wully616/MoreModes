@@ -46,19 +46,20 @@ namespace Wully.MoreModes {
 			ShowDamage(collisionInstance);
 		}
 
+	
 		private void ShowDamage(CollisionInstance collisionInstance)
 		{
 			if (collisionInstance?.damageStruct.damage > 0)
 			{
 				var holder = new GameObject();
 				var text = holder.AddComponent<TextMesh>();
-				var damage = (int)collisionInstance.damageStruct.damage;
+				var damage = (int)Mathf.Clamp(collisionInstance.damageStruct.damage, 1, 999999);
 				text.text = damage.ToString();
 				text.anchor = TextAnchor.MiddleCenter;
 				text.transform.position = collisionInstance.contactPoint;
 				text.characterSize = 0.03f;
 				text.fontSize = 100;
-				text.color = Color.Lerp(Color.yellow, Color.red, damage / 50);
+				text.color = Color.Lerp(Color.yellow, Color.red, damage / 50f);
 				Level.current.StartCoroutine(MoveText(text, -collisionInstance.contactNormal));
 			}
 		}

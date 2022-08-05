@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.BigHead, MoreModes",
 	"id": "BigHead",
-	"description": "Big Head Mode - Buggy"
+	"description": "Big Head Mode - Buggy",
+	"category": "GamePlay"
 }

@@ -25,14 +25,23 @@ namespace Wully.MoreModes {
 		{
 			base.OnEnable();
 			PlayerControl.local.OnJumpButtonEvent += OnJumpButtonEvent;
+			Debug.Log($"DoubleJumpEnabled");
+			//Force airdash to be enabled after double jump so it gets the jump events in the right order
+			if (AirDash.Instance.IsEnabled)
+			{
+				AirDash.Instance.Disable();
+				AirDash.Instance.Enable();
+			}
 		}
 		
 		protected override void OnDisable() {
 			base.OnDisable();
 			PlayerControl.local.OnJumpButtonEvent -= OnJumpButtonEvent;
+			Debug.Log($"DoubleJumpDisabled");
 		}
 		
-		private void OnJumpButtonEvent(bool active, EventTime eventTime)
+
+		public void OnJumpButtonEvent(bool active, EventTime eventTime)
 		{
 			if(eventTime == EventTime.OnStart) return;
 			if(!active) return;
@@ -48,11 +57,11 @@ namespace Wully.MoreModes {
 				//if the player isnt jumping and not grounded
 				if (!isDoubleJumping && !lm.isJumping && !lm.isGrounded)
 				{
+					Debug.Log($"double jumping");
 					Vector3 velocity = lm.rb.velocity;
 					velocity.y = 0f;
 					lm.rb.velocity = velocity;
 					isDoubleJumping = true;
-					
 					//tell the locomotion its not jumping and is on the ground, so it will execute a normal jump
 					lm.isGrounded = true;
 					//Then do the double jump

@@ -1,0 +1,27 @@
+﻿{
+	"$type": "Wully.MoreModes.GameModeData, MoreModes",
+	"id": "targetpractice",
+	"excludeLevelIds": ["Dungeon"],
+	"mode": {
+		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
+		"name": "Target Practice",
+		"displayName": "Target Practice",
+		"description": "Randomly spawning targets to help you train bows, fireballs or throwing weapons!",
+		"allowGameModes": [
+			"Sandbox",
+			"Arcade"
+		],
+		"mapOrder": 1,
+		"difficultyMultipliers": [],
+		"modules": [
+			{ "$type": "ThunderRoad.LevelModuleCleaner, ThunderRoad", "cleanerRate": 5.0},
+			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
+			{ "$type": "Wully.MoreModes.Component.RemoveWaveBook, MoreModes" },
+			{ "$type": "Wully.MoreModes.Component.Respawn, MoreModes", "lives": 3, "delayBeforeLoad": 10.0, "disablePlayerLocomotion": true},
+			{
+				"$type": "Wully.MoreModes.GameMode.TargetPractice, MoreModes"
+			}
+		],
+		"availableOptions": []
+	}
+}

@@ -42,6 +42,8 @@ namespace Wully.MoreModes {
 			{
 				creature.ragdoll.SetState(Ragdoll.State.Inert, true);
 				creature.brain.AddNoStandUpModifier(this);
+				creature.brain.currentTarget = null;
+				creature.spawnGroup = null;
 				Level.current.StartCoroutine(WakeUp(creature));
 			}
 		}

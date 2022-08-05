@@ -2,7 +2,6 @@
 	"$type": "Wully.MoreModes.GameModeData, MoreModes",
 	"id": "survivalanywhere",
 	"excludeLevelIds": ["Dungeon"],
-	"explicitOptions":  false,
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Survival Anywhere",

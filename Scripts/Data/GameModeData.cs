@@ -7,6 +7,7 @@ namespace Wully.MoreModes {
 	/// </summary>
 	public class GameModeData : CustomData {
 		public List<string> excludeLevelIds;
+		public List<string> onlyLevelids;
 		public LevelData.Mode mode;
 	}
 }

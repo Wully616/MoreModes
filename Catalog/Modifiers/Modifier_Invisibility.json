@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.Invisibility, MoreModes",
 	"id": "Invisibility",
-	"description": "Invisibility - Enemies cannot see you"
+	"description": "Invisibility - Enemies cannot see you",
+	"category": "GamePlay"
 }

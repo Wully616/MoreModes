@@ -1,13 +1,12 @@
 ﻿{
 	"$type": "Wully.MoreModes.GameModeData, MoreModes",
 	"id": "killchain",
-	"excludeLevelIds": ["Greenland"],
-	"explicitOptions":  false,
+	"excludeLevelIds": ["Dungeon"],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Kill Chain",
 		"displayName": "Kill Chain",
-		"description": "Keep killing to stay alive! (10s)",
+		"description": "Keep killing to stay alive!",
 		"allowGameModes": [
 			"Sandbox",
 			"Arcade"
@@ -27,10 +26,20 @@
 			},
 			{ "$type": "ThunderRoad.LevelModuleXP, ThunderRoad" },
 			{
-				"$type": "Wully.MoreModes.GameMode.KillChain, MoreModes",
-				"timeBetweenKill": 10.0
+				"$type": "Wully.MoreModes.GameMode.KillChain, MoreModes"
 			}
 		],
-		"availableOptions": []
+		"availableOptions": [
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "difficulty",
+				"displayName": "Difficulty",
+				"description": "Decreases the amount of time between kills",
+				"type": "Stars",
+				"minValue": 1,
+				"maxValue": 4,
+				"defaultValue": 3
+			}
+		]
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using ThunderRoad;
+using UnityEngine;
 using Wully.MoreModes;
 using Wully.Utils;
 
@@ -21,14 +22,36 @@ namespace Wully.MoreModes {
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			Player.local.footLeft.kickExtendDuration = 0.001f;
-			Player.local.footRight.kickExtendDuration = 0.001f;
+			foreach (var damager in Player.local.footLeft.ragdollFoot.collisionHandler.damagers)
+			{
+				damager.data.addForce *= 100;
+				damager.data.addForceRagdollOtherMultiplier *= 2f;
+				damager.data.addForceMode = ForceMode.VelocityChange;
+			}
+			foreach (var damager in Player.local.footRight.ragdollFoot.collisionHandler.damagers)
+			{
+				damager.data.addForce *= 100;
+				damager.data.addForceRagdollOtherMultiplier *= 2f;
+				damager.data.addForceMode = ForceMode.VelocityChange;
+			}
+
 		}
 		
 		protected override void OnDisable() {
 			base.OnDisable();
-			Player.local.footLeft.kickExtendDuration = 0.2f;
-			Player.local.footRight.kickExtendDuration = 0.2f;
+			foreach (var damager in Player.local.footLeft.ragdollFoot.collisionHandler.damagers)
+			{
+				damager.data.addForce /= 100;
+				damager.data.addForceRagdollOtherMultiplier /= 2f;
+				damager.data.addForceMode = ForceMode.Acceleration;
+			}
+			foreach (var damager in Player.local.footRight.ragdollFoot.collisionHandler.damagers)
+			{
+				damager.data.addForce /= 100;
+				damager.data.addForceRagdollOtherMultiplier /= 2f;
+				damager.data.addForceMode = ForceMode.Acceleration;
+			}
+
 		}
 		
 	}

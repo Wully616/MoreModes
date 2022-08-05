@@ -1,0 +1,7 @@
+﻿{
+	"$type": "Wully.MoreModes.Swimming, MoreModes",
+	"id": "Swimming",
+	"description": "Swimming - Swim by moving your hands in water",
+	"swimForce": 20,
+	"category": "Movement"
+}

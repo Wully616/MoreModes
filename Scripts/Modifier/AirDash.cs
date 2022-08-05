@@ -25,12 +25,14 @@ namespace Wully.MoreModes
         {
             base.OnEnable();
             PlayerControl.local.OnJumpButtonEvent += OnJumpButtonEvent;
+            Debug.Log($"AirDashEnabled");
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             PlayerControl.local.OnJumpButtonEvent -= OnJumpButtonEvent;
+            Debug.Log($"AirDashDisabled");
         }
 
         private void OnJumpButtonEvent(bool active, EventTime eventTime)
@@ -47,10 +49,23 @@ namespace Wully.MoreModes
                 }
 
                 //if the player isnt jumping and not grounded
-                if (!lm.isJumping && !lm.isGrounded)
+                if (!lm.isJumping && !lm.isGrounded && !isAirDashing)
                 {
-                    //check if doublejump is enabled, we only want to airdash after the double jump
-                    if(DoubleJump.Instance.IsEnabled && !DoubleJump.Instance.IsDoubleJumping ) return;
+                    //check if doublejump is enabled, and its not double jumped yet, call that first
+                    //We do this because depending on the order air dash and double jump are enabled, one will get the event before the other.
+                    //We need to guarantee double jump happens first
+                    //Then next time the player presses the jump button, they will air dash
+                    Debug.Log($"air dashing");
+                    if (DoubleJump.Instance.IsEnabled)
+                    {
+                        //we just double jumped this frame, so wait until the next time the player presses jump
+                        if (!DoubleJump.Instance.IsDoubleJumping)
+                        {
+                            Debug.Log($"Not airdashing because we haven't double jumped yet");
+                            return;
+                        }
+                        
+                    };
                     
                     //Zero off velocity
                     Vector3 velocity = lm.rb.velocity;

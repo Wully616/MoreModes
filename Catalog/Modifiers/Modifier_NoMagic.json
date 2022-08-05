@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.NoMagic, MoreModes",
 	"id": "NoMagic",
-	"description": "No Magic - You can't cast spells or use TK or slow mo"
+	"description": "No Magic - You can't cast spells or use TK or slow mo",
+	"category": "Magic"
 }

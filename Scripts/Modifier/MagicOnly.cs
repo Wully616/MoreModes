@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ThunderRoad;
+using UnityEditor;
 using Wully.MoreModes;
 using Wully.Utils;
 
@@ -11,13 +12,10 @@ namespace Wully.MoreModes {
 		
 		public override void Init()
 		{
-			if (Instance == null)
-			{
-				base.Init();
-				Instance = this;
-				// bit hacky, but we only one 1 modifier, if local isnt set, this modifier isnt Setup
-				local = this;
-			}
+			if (Instance != null) return;
+			base.Init();
+			Instance = this;
+			local = this;
 		}
 		
 		protected override void OnEnable()

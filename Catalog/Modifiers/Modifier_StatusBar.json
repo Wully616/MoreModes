@@ -1,0 +1,6 @@
+﻿{
+	"$type": "Wully.MoreModes.StatusBar, MoreModes",
+	"id": "StatusBar",
+	"description": "Status Bar - See Health, Mana, Alertness of NPCs",
+	"category": "UI"
+}

@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.KillSlowMo, MoreModes",
 	"id": "killSlowMo",
-	"description": "Slow motion Kill - Time slows down when you kill"
+	"description": "Slow motion Kill - Time slows down when you kill",
+	"category": "GamePlay"
 }

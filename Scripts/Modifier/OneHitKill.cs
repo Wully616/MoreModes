@@ -18,6 +18,11 @@ namespace Wully.MoreModes
 	        base.OnEnable();
 	        EventManager.onCreatureHit += OnCreatureHit;
         }
+        protected override void OnDisable()
+        {
+	        base.OnEnable();
+	        EventManager.onCreatureHit -= OnCreatureHit;
+        }
         
         private void OnCreatureHit(Creature creature, CollisionInstance collisioninstance)
         {

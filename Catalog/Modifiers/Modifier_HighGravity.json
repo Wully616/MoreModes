@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.HighGravity, MoreModes",
 	"id": "highGravity",
-	"description": "High Gravity!"
+	"description": "High Gravity!",
+	"category": "GamePlay"
 }

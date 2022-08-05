@@ -64,17 +64,17 @@ namespace Wully.MoreModes {
 			statusBar = new GameObject("statusBar");
 			redT = new GameObject("red").transform;
 			redT.SetParent(statusBar.transform);
-			redT.localPosition = new Vector3(0, 0.03f, 0);
+			redT.localPosition = new Vector3(0, 0.075f, 0);
 			redT.localScale = new Vector3(1, 0.05f, 0.02f);
 			
 			blueT = new GameObject("blue").transform;
 			blueT.SetParent(statusBar.transform);
-			blueT.localPosition = new Vector3(0, -0.03f, 0);
+			blueT.localPosition = new Vector3(0, 0f, 0);
 			blueT.localScale = new Vector3(1, 0.05f, 0.02f);
 
 			detectionT = new GameObject("detection").transform;
 			detectionT.SetParent(statusBar.transform);
-			detectionT.localPosition = new Vector3(0, -0.09f, 0);
+			detectionT.localPosition = new Vector3(0, -0.075f, 0);
 			detectionT.localScale = new Vector3(1, 0.05f, 0.02f);
 			
 			blackT = new GameObject("black").transform;
@@ -91,13 +91,21 @@ namespace Wully.MoreModes {
 		public override void Update()
 		{
 			base.Update();
-			int allActiveCount = Creature.allActive.Count;
-			for (var i = 0; i < allActiveCount; i++)
+			if (statusBar)
 			{
-				var creature = Creature.allActive[i];
-				if (creature.isPlayer) continue;
+				int allActiveCount = Creature.allActive.Count;
+				for (var i = 0; i < allActiveCount; i++)
+				{
+					var creature = Creature.allActive[i];
+					if (creature.isPlayer) continue;
+					if (creature.isKilled) continue;
 
-				DrawCreatureStatusBar(creature);
+					DrawCreatureStatusBar(creature);
+				}
+			}
+			else
+			{
+				CreateBar();
 			}
 
 		}

@@ -28,8 +28,8 @@ namespace Wully.MoreModes
             if (LowGravity.Instance.IsEnabled)
             {
                 //Disable lowgravity first
-                LowGravity.Instance.Toggle();
-                MenuModuleModifiers.local.RefreshColour(LowGravity.Instance);
+                LowGravity.Instance.Disable();
+                MenuModuleModifiers.local.RefreshToggle(LowGravity.Instance);
             }
             
             gravityForce = Physics.gravity;

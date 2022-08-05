@@ -1,0 +1,6 @@
+﻿{
+	"$type": "Wully.MoreModes.LeachLife, MoreModes",
+	"id": "LeachLife",
+	"description": "Leach Life - Heal for 50% of damage done",
+	"category": "Health"
+}

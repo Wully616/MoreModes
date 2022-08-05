@@ -1,5 +1,6 @@
 ﻿{
 	"$type": "Wully.MoreModes.OneHitKill, MoreModes",
 	"id": "OneHitKill",
-	"description": "One Hit Kill - For you and enemies!"
+	"description": "One Hit Kill - For you and enemies!",
+	"category": "GamePlay"
 }

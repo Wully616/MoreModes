@@ -1,8 +1,7 @@
 ﻿{
 	"$type": "Wully.MoreModes.GameModeData, MoreModes",
 	"id": "bladegame",
-	"excludeLevelIds": ["Greenland"],
-	"explicitOptions":  true,
+	"excludeLevelIds": ["Dungeon"],
 	"mode": {
 		"$type": "ThunderRoad.LevelData+Mode, ThunderRoad",
 		"name": "Blade Game",
@@ -23,7 +22,7 @@
 			{ "$type": "Wully.MoreModes.Component.RemoveWaveBook, MoreModes" },
 			{ "$type": "Wully.MoreModes.Component.RemoveWeaponBook, MoreModes" },
 			{ "$type": "Wully.MoreModes.Component.RemoveWeaponRack, MoreModes" },
-			{ "$type": "Wully.MoreModes.Component.Respawn, MoreModes", "lives":  3, "behaviour": "ShowScores",
+			{ "$type": "Wully.MoreModes.Component.Respawn, MoreModes", "lives":  3,
 				"delayBeforeLoad": 10.0, "disablePlayerLocomotion": true},
 			{
 				"$type": "Wully.MoreModes.GameMode.BladeGame, MoreModes", 
@@ -33,10 +32,50 @@
 					"BlasterPowerCell_Orange","BlasterPowerCell_Pink","BlasterPowerCell_Purple",
 					"BlasterPowerCell_Red","BlasterPowerCell_Yellow"
 				],
-				"tierWaves":  ["BGBanditEndless", "BGGladiatorEndless", "BGKnightEndless", "BGMixedSpecial"],
-				"anyKillCounts": false
+				"tierWaves":  ["BGBanditEndless", "BGGladiatorEndless", "BGKnightEndless", "BGMixedSpecial"]
 			}
 		],
-		"availableOptions": []
+		"availableOptions": [
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "anykill",
+				"displayName": "Any kill counts",
+				"description": "You don't need to kill with the current weapon (Sectory compatible)",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "allowsteal",
+				"displayName": "Allow Stealing",
+				"description": "You can pickup enemies weapons",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "reverseOrder",
+				"displayName": "Reverse Order",
+				"description": "Start with highest tier weapons and get weaker ones as you progress",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			},
+			{
+				"$type": "ThunderRoad.LevelData+Option, ThunderRoad",
+				"name": "randomizeOrder",
+				"displayName": "Randomize Order",
+				"description": "Weapons are in random order",
+				"type": "Toggle",
+				"minValue": 0,
+				"maxValue": 1,
+				"defaultValue": 0
+			}
+		]
 	}
 }

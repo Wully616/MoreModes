@@ -1,5 +1,7 @@
 ﻿{
 	"$type": "Wully.MoreModes.SuperHot, MoreModes",
 	"id": "superhot",
-	"description": "SuperHot - Time moves when you move!"
+	"description": "SuperHot - Time moves when you move!",
+	"category": "Movement"
+	
 }
